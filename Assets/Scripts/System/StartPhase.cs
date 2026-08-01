@@ -18,6 +18,7 @@ namespace System
                 return;
 
             this.canvasObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.StartCanvas);
+            this.canvasObject.SetActive(false);
         }
 
         protected override void Start()
