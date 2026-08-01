@@ -1,3 +1,4 @@
+using Assets.Scripts.System;
 using UnityEngine;
 
 namespace System
@@ -7,7 +8,7 @@ namespace System
     /// </summary>
     public class BuyPhase : GamePhase
     {
-        public BuyPhase(GameManager gameManager) : base(gameManager) { }
+        public BuyPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour) { }
 
         protected override void Init()
         {

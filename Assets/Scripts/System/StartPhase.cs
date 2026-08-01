@@ -4,11 +4,11 @@ using UnityEngine;
 namespace System
 {
     /// <summary>
-    /// <para>リザルトのフェーズを定義する</para>
+    /// <para>スタートのフェーズを定義する</para>
     /// </summary>
-    public class ResultPhase : GamePhase
+    public class StartPhase : GamePhase
     {
-        public ResultPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour) { }
+        public StartPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour) { }
 
         protected override void Init()
         {

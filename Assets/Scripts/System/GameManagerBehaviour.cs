@@ -7,12 +7,12 @@ namespace Assets.Scripts.System
     {
         void Awake()
         {
-            GameManager.INSTANCE.Init();
+            GameManager.INSTANCE.Init(this);
         }
 
         void Update()
         {
-            GameManager.INSTANCE.Update();
+            GameManager.INSTANCE.Update(this);
         }
     }
 }
