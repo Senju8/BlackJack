@@ -1,7 +1,6 @@
 using Assets.Scripts.System;
 using Player;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 namespace System
@@ -39,7 +38,7 @@ namespace System
             this.Register("blackjack", new BlackjackPhase(this, gameManagerBehaviour));
             this.Register("result", new ResultPhase(this, gameManagerBehaviour));
 
-            this.Call("select");
+            this.Call("start");
         }
 
         /// <summary>
