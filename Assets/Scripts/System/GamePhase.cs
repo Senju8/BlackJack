@@ -6,7 +6,19 @@ namespace System
     /// </summary>
     public abstract class GamePhase
     {
+        private readonly GameManager gameManager;
+
         private PhaseState phaseState = PhaseState.PRE_INIT;
+
+        public GameManager GameManager
+        {
+            get { return this.gameManager; }
+        }
+
+        public GamePhase(GameManager gameManager)
+        {
+            this.gameManager = gameManager;
+        }
 
         /// <summary>
         /// <para>GamePhaseの初期化を定義する</para>

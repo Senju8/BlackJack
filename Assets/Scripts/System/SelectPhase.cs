@@ -5,6 +5,8 @@ namespace System
     /// </summary>
     public class SelectPhase : GamePhase
     {
+        public SelectPhase(GameManager gameManager) : base(gameManager) { }
+
         protected override void Init()
         {
         }

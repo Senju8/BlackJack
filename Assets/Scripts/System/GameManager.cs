@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 namespace System
 {
@@ -21,11 +22,16 @@ namespace System
         /// </summary>
         public void Init()
         {
+            // 入力の初期化
+            InputSystem.actions.
+
             // フェーズの登録
-            this.Register("select", new SelectPhase());
-            this.Register("buy", new BuyPhase());
-            this.Register("blackjack", new BlackjackPhase());
-            this.Register("result", new ResultPhase());
+            this.Register("select", new SelectPhase(this));
+            this.Register("buy", new BuyPhase(this));
+            this.Register("blackjack", new BlackjackPhase(this));
+            this.Register("result", new ResultPhase(this));
+
+            this.Call("select");
         }
 
         /// <summary>
