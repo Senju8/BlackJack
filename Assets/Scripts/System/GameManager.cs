@@ -1,4 +1,5 @@
 using Assets.Scripts.System;
+using Player;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
@@ -14,6 +15,9 @@ namespace System
 
         private readonly Dictionary<string, GamePhase> gamePhases = new();
 
+        public PlayerData playerData;
+        public DealerData dealerData;
+
         private string bindingGamePhaseId;
         private GamePhase bindingGamePhase;
 
@@ -24,6 +28,10 @@ namespace System
         /// </summary>
         public void Init(GameManagerBehaviour gameManagerBehaviour)
         {
+            // プレイヤー、ディーラーの初期化
+            this.playerData = new();
+            this.dealerData = new();
+
             // フェーズの登録
             this.Register("start", new StartPhase(this, gameManagerBehaviour));
             this.Register("select", new SelectPhase(this, gameManagerBehaviour));
