@@ -1,5 +1,6 @@
 using Cards;
 using Item;
+using System;
 using System.Collections.Generic;
 
 namespace Player
@@ -9,6 +10,8 @@ namespace Player
     /// </summary>
     public class PlayerData
     {
+        public readonly GameManager gameManager;
+
         /// <summary>
         /// プレイ全体用
         /// </summary>
@@ -29,7 +32,10 @@ namespace Player
         private bool isPlaying = true;
 
 
-        // 各変数のゲッター/セッター
+        public PlayerData(GameManager gameManager)
+        {
+            this.gameManager = gameManager;
+        }
 
         // プレイヤの所持金額
         public int GetValues()

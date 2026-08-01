@@ -20,17 +20,40 @@ namespace System
         private string bindingGamePhaseId;
         private GamePhase bindingGamePhase;
 
-        private GameManager() { }
+        private float difficulty = 1.0F;
+
+        /// <summary>
+        /// ゲームの難易度
+        /// </summary>
+        public float Difficulty
+        {
+            get { return this.difficulty; }
+            set
+            {
+                float old = this.difficulty;
+
+                this.difficulty = Mathf.Max(0.0F, value);
+
+                // デバッグ
+                if (old != this.difficulty)
+                {
+                    UnityEngine.Debug.Log($"難易度が変更されました！{old:0.00} → {this.difficulty:0.00}");
+                }
+            }
+        }
+
+        private GameManager()
+        {
+            // プレイヤー、ディーラーの初期化
+            this.playerData = new(this);
+            this.dealerData = new(this);
+        }
 
         /// <summary>
         /// <para>GameManagerの初期化</para>
         /// </summary>
         public void Init(GameManagerBehaviour gameManagerBehaviour)
         {
-            // プレイヤー、ディーラーの初期化
-            this.playerData = new();
-            this.dealerData = new();
-
             // フェーズの登録
             this.Register("start", new StartPhase(this, gameManagerBehaviour));
             this.Register("select", new SelectPhase(this, gameManagerBehaviour));

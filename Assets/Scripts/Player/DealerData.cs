@@ -1,4 +1,5 @@
 using Cards;
+using System;
 using System.Collections.Generic;
 
 namespace Player
@@ -8,6 +9,8 @@ namespace Player
     /// </summary>
     public class DealerData
     {
+        public readonly GameManager gameManager;
+
         /// <summary>
         /// ディーラーの札
         /// </summary>
@@ -23,7 +26,10 @@ namespace Player
         /// </summary>
         private bool isPlaying = true;
 
-        // 各変数のゲッター/セッター
+        public DealerData(GameManager gameManager)
+        {
+            this.gameManager = gameManager;
+        }
 
         // ディーラーの札
         public List<CardsManager.Card> GetCard()
