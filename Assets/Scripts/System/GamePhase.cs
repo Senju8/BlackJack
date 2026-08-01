@@ -1,3 +1,4 @@
+using Assets.Scripts.System;
 using UnityEngine;
 
 namespace System
@@ -8,18 +9,15 @@ namespace System
     /// </summary>
     public abstract class GamePhase
     {
-        private readonly GameManager gameManager;
+        public readonly GameManager gameManager;
+        public readonly GameManagerBehaviour gameManagerBehaviour;
 
         private PhaseState phaseState = PhaseState.PRE_INIT;
 
-        public GameManager GameManager
-        {
-            get { return this.gameManager; }
-        }
-
-        public GamePhase(GameManager gameManager)
+        public GamePhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour)
         {
             this.gameManager = gameManager;
+            this.gameManagerBehaviour = gameManagerBehaviour;
         }
 
         /// <summary>

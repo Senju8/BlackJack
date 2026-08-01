@@ -1,3 +1,4 @@
+using Assets.Scripts.System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
@@ -21,13 +22,14 @@ namespace System
         /// <summary>
         /// <para>GameManagerの初期化</para>
         /// </summary>
-        public void Init()
+        public void Init(GameManagerBehaviour gameManagerBehaviour)
         {
             // フェーズの登録
-            this.Register("select", new SelectPhase(this));
-            this.Register("buy", new BuyPhase(this));
-            this.Register("blackjack", new BlackjackPhase(this));
-            this.Register("result", new ResultPhase(this));
+            this.Register("start", new StartPhase(this, gameManagerBehaviour));
+            this.Register("select", new SelectPhase(this, gameManagerBehaviour));
+            this.Register("buy", new BuyPhase(this, gameManagerBehaviour));
+            this.Register("blackjack", new BlackjackPhase(this, gameManagerBehaviour));
+            this.Register("result", new ResultPhase(this, gameManagerBehaviour));
 
             this.Call("select");
         }
@@ -35,7 +37,7 @@ namespace System
         /// <summary>
         /// <para>GameManagerの更新</para>
         /// </summary>
-        public void Update()
+        public void Update(GameManagerBehaviour gameManagerBehaviour)
         {
 
             if (this.bindingGamePhase != null)
