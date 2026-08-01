@@ -10,18 +10,23 @@ namespace Cards
     public class PlayerCards : MonoBehaviour
     {
         [SerializeField]
+        private Deck deck;
+
+        [SerializeField]
         private HandView handView;
 
-        private PlayerData playerData;
-        private Deck deck;
+        //　デモ:一旦ここでPlayerDataを生成する
+        private PlayerData playerData = new PlayerData();
 
         /// <summary>
         /// プレイヤの札
         /// </summary>
         private List<CardsManager.Card> playerCards = new List<CardsManager.Card>();
 
-        public void Initialize()
+        public void Setup(PlayerData data,Deck deck)
         {
+            this.playerData = data;
+            this.deck = deck;
             playerCards.Clear();
             playerCards = playerData.GetCard();
         }
@@ -41,6 +46,15 @@ namespace Cards
             
             // データに適応
             playerData.SetCard(playerCards);
+
+            // スコアを計算してセット
+            int score = ScoreCalclator.CalculateScore(playerCards);
+            playerData.SetScore(score);
+
+            if(ScoreCalclator.IsBurst(playerCards))
+            {
+                playerData.SetIsPlaying(false);
+            }
         }
 
         public void Hit()

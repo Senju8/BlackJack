@@ -15,7 +15,7 @@ namespace Cards
         [SerializeField]
         private Transform cardParent;   //カードを並べる場所の親オブジェクト
         [SerializeField]
-        private float cardSpacing = 0.5f;   //カードの間隔
+        private float cardSpacing = 1f;   //カードの間隔
 
         private List<CardsView> spawnedViews = new List<CardsView>();
 
@@ -29,7 +29,7 @@ namespace Cards
 
             // カードの位置を調整
             int index = spawnedViews.Count;
-            obj.transform.localPosition = new Vector3(index * cardSpacing, 0f, -index * 0.01f);
+            obj.transform.localPosition = new Vector3(index * cardSpacing, 0f, 0f);
 
             spawnedViews.Add(view);
             return view;
