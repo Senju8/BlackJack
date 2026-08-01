@@ -1,3 +1,5 @@
+using Player;
+
 namespace Item
 {
     /// <summary>
@@ -5,6 +7,8 @@ namespace Item
     /// </summary>
     public interface ItemDefinition
     {
+        public string Name { get;  }
+
         /// <summary>
         /// <para>アイテムの値段</para>
         /// </summary>
@@ -13,11 +17,11 @@ namespace Item
         /// <summary>
         /// <para>アイテムを使用できるかどうか</para>
         /// </summary>
-        public bool CanUse(float rarity) { return true; }
+        public bool CanUse(PlayerData playerData, DealerData dealerData, float rarity) { return true; }
 
         /// <summary>
         /// <para>アイテムを使用する</para>
         /// </summary>
-        public void DoUse(float rarity);
+        public void DoUse(PlayerData playerData, DealerData dealerData, float rarity);
     }
 }

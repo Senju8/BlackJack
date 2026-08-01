@@ -54,6 +54,26 @@ namespace System
         {
             if (gameObject == null)
                 return;
+
+            switch (gameObject.name)
+            {
+                case "Easy":
+                    this.gameManager.Difficulty = 1.0F;
+
+                    break;
+                case "Normal":
+                    this.gameManager.Difficulty = 2.0F;
+
+                    break;
+                case "Hard":
+                    this.gameManager.Difficulty = 3.0F;
+
+                    break;
+                case "OK":
+                    this.gameManager.Call("buy");
+
+                    break;
+            }
         }
     }
 }
