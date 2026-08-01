@@ -45,11 +45,6 @@ namespace System
         /// </summary>
         protected abstract void Destroy();
 
-        /// <summary>
-        /// <para>GamePhaseのイベントを定義する</para>
-        /// </summary>
-        public abstract void Invoke(GameObject gameObject);
-
         public void DoInit()
         {
             // 初期化できるかチェック
@@ -107,6 +102,11 @@ namespace System
             // PhaseStateをPOST_DESTROYに遷移する
             this.phaseState = PhaseState.POST_DESTROY;
         }
+
+        /// <summary>
+        /// <para>GamePhaseのイベントを定義する</para>
+        /// </summary>
+        public virtual void Invoke(GameObject gameObject) { }
 
         /// <summary>
         /// GamePhaseの状態を定義する
