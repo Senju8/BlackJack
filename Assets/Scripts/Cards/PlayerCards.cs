@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Player;
+using System;
 
 namespace Cards
 {
@@ -16,7 +17,7 @@ namespace Cards
         private HandView handView;
 
         //　デモ:一旦ここでPlayerDataを生成する
-        private PlayerData playerData = new PlayerData();
+        private PlayerData playerData = GameManager.INSTANCE.playerData;
 
         /// <summary>
         /// プレイヤの札

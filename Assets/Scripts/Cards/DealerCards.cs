@@ -1,4 +1,5 @@
 using Player;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace Cards
         private HandView handView;
 
         // デモ:一旦ここでDealerDataを生成する
-        private DealerData dealerData = new DealerData();
+        private DealerData dealerData = GameManager.INSTANCE.dealerData;
 
         private List<CardsManager.Card> dealerCards = new List<CardsManager.Card>();
 
