@@ -9,12 +9,14 @@ namespace Cards
     /// </summary>
     public class PlayerCards : MonoBehaviour
     {
+        [SerializeField]
+        private HandView handView;
+
         private PlayerData playerData;
         private Deck deck;
 
         /// <summary>
         /// プレイヤの札
-        /// PlayerDataから持ってくる
         /// </summary>
         private List<CardsManager.Card> playerCards = new List<CardsManager.Card>();
 
@@ -34,6 +36,7 @@ namespace Cards
             {
                 CardsManager.Card card = deck.DrawCard();
                 playerCards.Add(card);
+                handView.AddCard(card);
             }
             
             // データに適応
@@ -49,7 +52,5 @@ namespace Cards
         {
             playerData.SetIsPlaying(false);
         }
-
-
     }
 }
