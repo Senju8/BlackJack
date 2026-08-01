@@ -22,9 +22,6 @@ namespace System
         /// </summary>
         public void Init()
         {
-            // 入力の初期化
-            InputSystem.actions.
-
             // フェーズの登録
             this.Register("select", new SelectPhase(this));
             this.Register("buy", new BuyPhase(this));
