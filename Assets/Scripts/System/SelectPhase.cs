@@ -69,6 +69,10 @@ namespace System
                     this.gameManager.Difficulty = 3.0F;
 
                     break;
+                case "OK":
+                    this.gameManager.Call("buy");
+
+                    break;
             }
         }
     }
