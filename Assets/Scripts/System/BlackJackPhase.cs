@@ -5,6 +5,10 @@ namespace System
     /// </summary>
     public class BlackjackPhase : GamePhase
     {
+        
+
+        public BlackjackPhase(GameManager gameManager) : base(gameManager) { }
+
         protected override void Init()
         {
         }

@@ -5,6 +5,8 @@ namespace System
     /// </summary>
     public class BuyPhase : GamePhase
     {
+        public BuyPhase(GameManager gameManager) : base(gameManager) { }
+
         protected override void Init()
         {
         }
