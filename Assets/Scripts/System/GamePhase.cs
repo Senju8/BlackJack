@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace System
 {
     /// <summary>
@@ -44,6 +46,11 @@ namespace System
         /// <para>GamePhaseの破棄を定義する</para>
         /// </summary>
         protected abstract void Destroy();
+
+        /// <summary>
+        /// <para>GamePhaseのイベントを定義する</para>
+        /// </summary>
+        public abstract void Invoke(GameObject gameObject);
 
         public void DoInit()
         {

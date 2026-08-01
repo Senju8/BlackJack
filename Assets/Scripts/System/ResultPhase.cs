@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace System
 {
     /// <summary>
@@ -24,6 +26,10 @@ namespace System
         }
 
         protected override void Destroy()
+        {
+        }
+
+        public override void Invoke(GameObject gameObject)
         {
         }
     }
