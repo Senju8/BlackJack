@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
+using System.Diagnostics;
+using UnityEngine;
 
 namespace System
 {
@@ -22,9 +23,6 @@ namespace System
         /// </summary>
         public void Init()
         {
-            // 入力の初期化
-            InputSystem.actions.
-
             // フェーズの登録
             this.Register("select", new SelectPhase(this));
             this.Register("buy", new BuyPhase(this));
@@ -66,6 +64,9 @@ namespace System
             // GamePhaseの初期化
             gamePhase.DoInit();
 
+            // デバッグ
+            UnityEngine.Debug.Log($"GamePhase（id: {id}）が登録されました！");
+
             return true;
         }
 
@@ -77,7 +78,11 @@ namespace System
             if (id == null || !this.gamePhases.ContainsKey(id))
                 return false;
 
+            // GamePhaseの破棄
             this.gamePhases[id]?.DoDestroy();
+
+            // デバッグ
+            UnityEngine.Debug.Log($"GamePhase（id: {id}）が削除されました！");
 
             return this.gamePhases.Remove(id);
         }
@@ -98,9 +103,25 @@ namespace System
 
             this.bindingGamePhaseId = id;
             this.bindingGamePhase = this.gamePhases[id];
+            
+            // フェーズを開始する
             this.bindingGamePhase.DoStart();
 
+            // デバッグ
+            UnityEngine.Debug.Log($"GamePhase（id: {id}）が呼び出されました！");
+
             return true;
+        }
+
+        /// <summary>
+        /// GamePhaseにイベントを発生させる
+        /// </summary>
+        public void Invoke(GameObject gameObject)
+        {
+            if (this.bindingGamePhase == null)
+                return;
+
+            this.bindingGamePhase.Invoke(gameObject);
         }
     }
 }
