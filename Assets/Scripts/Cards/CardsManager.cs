@@ -1,11 +1,10 @@
-using UnityEngine;
 
 namespace Cards
 {
     /// <summary>
     /// カード全部の管理を行うクラス
     /// </summary>
-    public class CardsManager : MonoBehaviour
+    public class CardsManager
     {
         /// <summary>
         /// カードのスートを持つ列挙型
