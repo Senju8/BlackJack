@@ -45,62 +45,72 @@ namespace System
         /// </summary>
         protected abstract void Destroy();
 
-        public void DoInit()
+        public bool DoInit()
         {
             // 初期化できるかチェック
             if (this.phaseState != PhaseState.PRE_INIT)
-                return;
+                return false;
 
             this.Init();
 
             // PhaseStateをPRE_STARTに遷移する
             this.phaseState = PhaseState.PRE_START;
+
+            return true;
         }
 
-        public void DoStart()
+        public bool DoStart()
         {
             // フェーズを開始できるかチェック
             if (this.phaseState != PhaseState.PRE_START)
-                return;
+                return false;
 
             this.Start();
 
             // PhaseStateをPOST_STARTに遷移する
             this.phaseState = PhaseState.POST_START;
+
+            return true;
         }
 
-        public void DoUpdate()
+        public bool DoUpdate()
         {
             // フェーズを更新できるかチェック
             if (this.phaseState != PhaseState.POST_START)
-                return;
+                return false;
 
             this.Update();
+
+            return true;
         }
 
-        public void DoFinish()
+        public bool DoFinish()
         {
             // フェーズを終了できるかチェック
             if (this.phaseState != PhaseState.POST_START)
-                return;
+                return false;
 
             this.Finish();
 
             // PhaseStateをPRE_STARTに遷移する
             this.phaseState = PhaseState.PRE_START;
+
+            return true;
         }
 
-        public void DoDestroy()
+        public bool DoDestroy()
         {
             // 破棄できるかチェック
             if (this.phaseState == PhaseState.PRE_INIT)
-                return;
+                return false;
 
             this.Finish();
             this.Destroy();
 
             // PhaseStateをPOST_DESTROYに遷移する
             this.phaseState = PhaseState.POST_DESTROY;
+
+            return true;
         }
 
         /// <summary>

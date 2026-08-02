@@ -109,10 +109,9 @@ namespace System
             {
                 gamePhase.DoInit();
             }
-            catch (Exception e)
+            catch
             {
                 UnityEngine.Debug.LogError($"GamePhase（ID: {id}）の初期化に失敗しました…");
-                UnityEngine.Debug.LogError(e.StackTrace);
 
                 gamePhase.DoDiscard();
             }
@@ -169,10 +168,14 @@ namespace System
             this.bindingGamePhase = this.gamePhases[id];
 
             // フェーズを開始する
-            this.bindingGamePhase.DoStart();
-
-            // デバッグ
-            UnityEngine.Debug.Log($"GamePhase（ID: {id}）が呼び出されました！");
+            if (this.bindingGamePhase.DoStart())
+            {
+                UnityEngine.Debug.Log($"GamePhase（ID: {id}）が呼び出されました！");
+            }
+            else
+            {
+                UnityEngine.Debug.LogError($"GamePhase（ID: {id}）の呼び出しに失敗しました…");
+            }
 
             return true;
         }
