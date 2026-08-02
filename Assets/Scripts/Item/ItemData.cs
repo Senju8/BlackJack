@@ -1,4 +1,5 @@
-using Player;
+﻿using Player;
+using System;
 using UnityEngine;
 
 namespace Item
@@ -36,6 +37,11 @@ namespace Item
 
         /// <summary>
         /// <para>アイテムのレア度</para>
+        /// <para>コモン: 1.0</para>
+        /// <para>アンコモン: 2.0</para>
+        /// <para>レア: 3.0</para>
+        /// <para>エピック: 4.0</para>
+        /// <para>レジェンド: 5.0</para>
         /// </summary>
         public float Rarity
         {
@@ -49,6 +55,7 @@ namespace Item
         public int Value
         {
             get { return this.value; }
+            set { this.value = Mathf.Max(0, value); }
         }
 
         /// <summary>
@@ -73,8 +80,38 @@ namespace Item
         {
             this.itemDefinition = itemDefinition;
             this.Rarity = rarity;
-            this.value = itemDefinition != null ? itemDefinition.Value : 0;
             this.Count = count;
+        }
+
+        /// <summary>
+        /// <para>ItemDataのクローンを返す</para>
+        /// </summary>
+        public ItemData Clone()
+        {
+            ItemData itemData = new ItemData(this.itemDefinition, this.rarity, this.count);
+
+            itemData.Value = this.Value;
+
+            return itemData;
+        }
+
+        public override bool Equals(object target)
+        {
+            if (target == this)
+            {
+                return true;
+            }
+            else if (target is ItemData itemData)
+            {
+                return itemData.Name == this.Name && itemData.rarity == this.rarity;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.Name, this.Rarity);
         }
 
         /// <summary>

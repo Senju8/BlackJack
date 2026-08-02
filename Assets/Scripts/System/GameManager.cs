@@ -1,7 +1,9 @@
-using Assets.Scripts.System;
+﻿using Assets.Scripts.System;
 using Item;
+using NUnit.Framework.Interfaces;
 using Player;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace System
@@ -21,9 +23,12 @@ namespace System
         private string bindingGamePhaseId;
         private GamePhase bindingGamePhase;
 
-        public float difficulty = 1.0F;
-
         private readonly Dictionary<string, ItemImageHolder> itemImageHolders = new();
+
+        private readonly List<ItemData> playerItemData = new();
+        
+        private float difficulty = 1.0F;
+        private bool infiniteMoneyMode = true;
 
         /// <summary>
         /// ゲームの難易度
@@ -33,14 +38,14 @@ namespace System
             get { return this.difficulty; }
             set
             {
-                float old = this.difficulty;
+                float old = this.Quata;
 
                 this.difficulty = Mathf.Max(0.0F, value);
 
                 // デバッグ
-                if (old != this.difficulty)
+                if (old != this.Quata)
                 {
-                    UnityEngine.Debug.Log($"難易度が変更されました！{old:0.00} → {this.difficulty:0.00}");
+                    UnityEngine.Debug.Log($"難易度が変更されました！（ノルマ額：{old} $ → {this.Quata} $）");
                 }
             }
         }
@@ -51,6 +56,15 @@ namespace System
         public int Quata
         {
             get { return (int) (600000.0D * this.difficulty); }
+        }
+
+        /// <summary>
+        /// 無限の所持金モード（デバッグ）
+        /// </summary>
+        public bool InfiniteMoneyMode
+        {
+            get { return this.infiniteMoneyMode; }
+            set { this.infiniteMoneyMode = value; }
         }
 
         private GameManager()
@@ -189,9 +203,9 @@ namespace System
             {
                 if (itemImageHolder != null && itemImageHolder.Name != null)
                 {
-                    this.itemImageHolders[itemImageHolder.Name] = itemImageHolder;
+                    this.itemImageHolders[ItemImageHolder.GetID(itemImageHolder)] = itemImageHolder;
 
-                    UnityEngine.Debug.Log($"新しいItemImageHolder（Name: {itemImageHolder.Name}）が登録されました！");
+                    UnityEngine.Debug.Log($"新しいItemImageHolder（Name: {itemImageHolder.Name}, Rarity: {itemImageHolder.Rarity}）が登録されました！");
                 }
             }
         }
@@ -199,25 +213,25 @@ namespace System
         /// <summary>
         /// <para>ItemImageHolderを削除する</para>
         /// </summary>
-        public bool DeleteItemImageHolder(string name)
+        public bool DeleteItemImageHolder(string name, float rarity)
         {
-            if (name == null || !this.itemImageHolders.ContainsKey(name))
+            if (name == null || !this.itemImageHolders.ContainsKey(ItemImageHolder.GetID(name, rarity)))
                 return false;
 
             // デバッグ
             UnityEngine.Debug.Log($"ItemImageHolder（Name: {name}）が削除されました！");
 
-            return this.itemImageHolders.Remove(name);
+            return this.itemImageHolders.Remove(ItemImageHolder.GetID(name, rarity));
         }
 
         /// <summary>
         /// <para>登録されたItemImageHolder</para>
         /// </summary>
-        public ItemImageHolder GetItemImageHolder(string name)
+        public ItemImageHolder GetItemImageHolder(string name, float rarity)
         {
-            if (this.itemImageHolders.ContainsKey(name))
+            if (this.itemImageHolders.ContainsKey(ItemImageHolder.GetID(name, rarity)))
             {
-                return this.itemImageHolders[name] ?? ItemImageHolder.EMPTY;
+                return this.itemImageHolders[ItemImageHolder.GetID(name, rarity)] ?? ItemImageHolder.EMPTY;
             }
 
             return ItemImageHolder.EMPTY;
@@ -232,6 +246,140 @@ namespace System
                 return;
 
             this.bindingGamePhase.Invoke(gameObject);
+        }
+
+        /// <summary>
+        /// GamePhaseにイベントを発生させる
+        /// </summary>
+        public void Invoke(GameObject gameObject, params object[] contexts)
+        {
+            if (this.bindingGamePhase == null)
+                return;
+
+            this.bindingGamePhase.Invoke(gameObject, contexts);
+        }
+
+        /// <summary>
+        /// <para>プレイヤーのItemDataを増やす</para>
+        /// </summary>
+        public void AddPlayerItemData(params ItemData[] itemData)
+        {
+            if (this.playerItemData == null || itemData == null)
+                return;
+
+            int totalCount = 0;
+            bool hasItemData;
+
+            foreach (ItemData itemDataToAdd in itemData)
+            {
+                if (itemDataToAdd == null)
+                    continue;
+
+                hasItemData = false;
+
+                foreach (ItemData havingItemData in this.playerItemData)
+                {
+                    if (havingItemData == null)
+                        continue;
+
+                    // プレイヤーがItemDataを持っているかどうかを確認する
+                    if (itemDataToAdd.Equals(havingItemData))
+                    {
+                        // ItemData.Countを加算する
+                        havingItemData.Count += itemDataToAdd.Count;
+
+                        totalCount = havingItemData.Count;
+                        hasItemData = true;
+
+                        break;
+                    }
+                }
+
+                // ItemDataのリストに追加する
+                if (!hasItemData)
+                {
+                    this.playerItemData.Add(itemDataToAdd);
+
+                    totalCount = itemDataToAdd.Count;
+                }
+
+                // デバッグ
+                if (itemDataToAdd.Count > 0)
+                {
+                    UnityEngine.Debug.Log($"プレイヤーにアイテム（Name: {itemDataToAdd.Name}, Rarity: {itemDataToAdd.Rarity:0.00}）を{itemDataToAdd.Count}コ追加しました！（合計：{totalCount}コ）");
+                }
+            }
+        }
+
+        /// <summary>
+        /// <para>プレイヤーのItemDataを増やす／減らす</para>
+        /// </summary>
+        public void IncreasePlayerItemData(ItemData itemData, int count = 1)
+        {
+            if (this.playerItemData == null || itemData == null || count <= 0)
+                return;
+
+            List<ItemData> itemDataToRemove = new(this.playerItemData.Count);
+
+            foreach (ItemData havingItemData in this.playerItemData)
+            {
+                if (havingItemData != null && havingItemData.Equals(itemData))
+                {
+                    havingItemData.Count -= count;
+
+                    UnityEngine.Debug.Log($"プレイヤーからアイテム（Name: {havingItemData.Name}, Rarity: {havingItemData.Rarity:0.00}）を{count - havingItemData.Count}コ削除しました！（合計：{havingItemData.Count}コ）");
+
+                    if (havingItemData.Count <= 0)
+                    {
+                        // 削除するItemDataをマークする
+                        itemDataToRemove.Add(havingItemData);
+                    }
+
+                    break;
+                }
+            }
+
+            // ItemDataを削除する
+            foreach (ItemData havngItemData in itemDataToRemove)
+            {
+                this.playerItemData.Remove(havngItemData);
+            }
+        }
+
+        /// <summary>
+        /// <para>プレイヤーからItemDataを取得する</para>
+        /// <para>存在しない場合はItemData.EMPTYを返す</para>
+        /// </summary>
+        public ItemData GetPlayerItemData(string name, float rarity)
+        {
+            if (this.playerItemData != null && name != null)
+            {
+                return this.playerItemData.Find(havingItemData => havingItemData != null && havingItemData.Name == name && havingItemData.Rarity == rarity) ?? ItemData.EMPTY;
+            }
+
+            return ItemData.EMPTY;
+        }
+
+        /// <summary>
+        /// <para>プレイヤーからItemDataを取得する</para>
+        /// <para>存在しない場合はItemData.EMPTYを返す</para>
+        /// </summary>
+        public ItemData GetPlayerItemData(ItemData itemData)
+        {
+            if (this.playerItemData != null && itemData != null)
+            {
+                return this.playerItemData.Find(havingItemData => havingItemData != null && havingItemData.Equals(itemData)) ?? ItemData.EMPTY;
+            }
+
+            return ItemData.EMPTY;
+        }
+
+        /// <summary>
+        /// <para>プレイヤーからItemDataのリストを取得する</para>
+        /// </summary>
+        public List<ItemData> GetAllPlayerItemData()
+        {
+            return new(this.playerItemData);
         }
     }
 }

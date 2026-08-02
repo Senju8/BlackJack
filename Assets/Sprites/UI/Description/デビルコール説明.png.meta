@@ -1,70 +1,70 @@
 fileFormatVersion: 2
-guid: 351a5f564f0de62459dc6b2c4e2744c3
+guid: 46e6a9ead4f513346b88ef9f22dc8f13
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1895942942571071781
-    second: devilcall_description_0
+      213: -5702894346319512147
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_0"
   - first:
-      213: -4577196457533248604
-    second: devilcall_description_1
+      213: -8215799295865151622
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_1"
   - first:
-      213: -2693924562767491259
-    second: devilcall_description_2
+      213: 8574425565936510685
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_2"
   - first:
-      213: -6035776239456553145
-    second: devilcall_description_3
+      213: -115129899088157246
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_3"
   - first:
-      213: -9206937310536730319
-    second: devilcall_description_4
+      213: 6390423026525448901
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_4"
   - first:
-      213: 3265210248315210712
-    second: devilcall_description_5
+      213: 7122414915545217394
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_5"
   - first:
-      213: -6286180636857830818
-    second: devilcall_description_6
+      213: -1657643601106440880
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_6"
   - first:
-      213: -2491125192721376965
-    second: devilcall_description_7
+      213: -3857275171167779762
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_7"
   - first:
-      213: 1093458142366554724
-    second: devilcall_description_8
+      213: -2434877262451285208
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_8"
   - first:
-      213: 3770158110740328392
-    second: devilcall_description_9
+      213: 6962682706025764159
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_9"
   - first:
-      213: 519265576606436503
-    second: devilcall_description_10
+      213: 3816611229439173061
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_10"
   - first:
-      213: -7428283543317641294
-    second: devilcall_description_11
+      213: 2563243298108388320
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_11"
   - first:
-      213: -7736009745762833034
-    second: devilcall_description_12
+      213: 1545556340210595348
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_12"
   - first:
-      213: -4301863881934238150
-    second: devilcall_description_13
+      213: 1265723576033214633
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_13"
   - first:
-      213: -7893739369073633595
-    second: devilcall_description_14
+      213: 5450202192228309921
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_14"
   - first:
-      213: 8257202195457506858
-    second: devilcall_description_15
+      213: 2340693472202291382
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_15"
   - first:
-      213: -8204882303200767247
-    second: devilcall_description_16
+      213: -7968684905722521890
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_16"
   - first:
-      213: 8682973163045071786
-    second: devilcall_description_17
+      213: -2067505571762434455
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_17"
   - first:
-      213: 3785507569754628889
-    second: devilcall_description_18
+      213: 6344159624707355820
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_18"
   - first:
-      213: 1929108380173795021
-    second: devilcall_description_19
+      213: 6492681526770392283
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_19"
   - first:
-      213: -5204994956337419243
-    second: devilcall_description_20
+      213: -5467212999480852802
+    second: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_20"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -156,24 +156,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: devilcall_description_0
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_0"
       rect:
         serializedVersion: 2
         x: 4
@@ -188,14 +175,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bd674a950f140b5e0800000000000000
-      internalID: -1895942942571071781
+      spriteID: dadba08aecf3bd0b0800000000000000
+      internalID: -5702894346319512147
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_1
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_1"
       rect:
         serializedVersion: 2
         x: 34
@@ -210,14 +197,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4abed89a2188a70c0800000000000000
-      internalID: -4577196457533248604
+      spriteID: a7f9d00d11e9bfd80800000000000000
+      internalID: -8215799295865151622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_2
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_2"
       rect:
         serializedVersion: 2
         x: 70
@@ -232,14 +219,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 54f4b8812e14d9ad0800000000000000
-      internalID: -2693924562767491259
+      spriteID: dd66caa7f9a7ef670800000000000000
+      internalID: 8574425565936510685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_3
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_3"
       rect:
         serializedVersion: 2
         x: 96
@@ -254,14 +241,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 747f2773d7d9c3ca0800000000000000
-      internalID: -6035776239456553145
+      spriteID: 2c5e2dd77f9f66ef0800000000000000
+      internalID: -115129899088157246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_4
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_4"
       rect:
         serializedVersion: 2
         x: 125
@@ -276,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 139fa28eb436a3080800000000000000
-      internalID: -9206937310536730319
+      spriteID: 5caa68c72e75fa850800000000000000
+      internalID: 6390423026525448901
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_5
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_5"
       rect:
         serializedVersion: 2
         x: 155
@@ -298,14 +285,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8db0bc7cb6b505d20800000000000000
-      internalID: 3265210248315210712
+      spriteID: 279340821a6e7d260800000000000000
+      internalID: 7122414915545217394
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_6
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_6"
       rect:
         serializedVersion: 2
         x: 187
@@ -320,14 +307,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e527622340003c8a0800000000000000
-      internalID: -6286180636857830818
+      spriteID: 05de9d76deddef8e0800000000000000
+      internalID: -1657643601106440880
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_7
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_7"
       rect:
         serializedVersion: 2
         x: 195
@@ -342,14 +329,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b39d0d4f5debd6dd0800000000000000
-      internalID: -2491125192721376965
+      spriteID: e444c952ba4387ac0800000000000000
+      internalID: -3857275171167779762
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_8
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_8"
       rect:
         serializedVersion: 2
         x: 218
@@ -364,14 +351,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 46a5488136ebc2f00800000000000000
-      internalID: 1093458142366554724
+      spriteID: 8236ae3c704953ed0800000000000000
+      internalID: -2434877262451285208
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_9
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_9"
       rect:
         serializedVersion: 2
         x: 251
@@ -386,14 +373,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8cf2cb993da425430800000000000000
-      internalID: 3770158110740328392
+      spriteID: f35db60080b60a060800000000000000
+      internalID: 6962682706025764159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_10
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_10"
       rect:
         serializedVersion: 2
         x: 274
@@ -408,14 +395,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 79c07bd6a4dc43700800000000000000
-      internalID: 519265576606436503
+      spriteID: 5c12d7021b357f430800000000000000
+      internalID: 3816611229439173061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_11
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_11"
       rect:
         serializedVersion: 2
         x: 305
@@ -430,14 +417,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2b70cad597f69e890800000000000000
-      internalID: -7428283543317641294
+      spriteID: 0e3b6a0f238729320800000000000000
+      internalID: 2563243298108388320
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_12
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_12"
       rect:
         serializedVersion: 2
         x: 337
@@ -452,14 +439,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 67da8d49f1c24a490800000000000000
-      internalID: -7736009745762833034
+      spriteID: 416fa9e7d4be27510800000000000000
+      internalID: 1545556340210595348
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_13
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_13"
       rect:
         serializedVersion: 2
         x: 345
@@ -474,14 +461,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3e0a357795bc44c0800000000000000
-      internalID: -4301863881934238150
+      spriteID: 9a00c45e2e0c09110800000000000000
+      internalID: 1265723576033214633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_14
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_14"
       rect:
         serializedVersion: 2
         x: 367
@@ -496,14 +483,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5c699dcddddc37290800000000000000
-      internalID: -7893739369073633595
+      spriteID: 1abd2d5740203ab40800000000000000
+      internalID: 5450202192228309921
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_15
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_15"
       rect:
         serializedVersion: 2
         x: 397
@@ -518,14 +505,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a2ef1d2f5a9779270800000000000000
-      internalID: 8257202195457506858
+      spriteID: 6b871babf40db7020800000000000000
+      internalID: 2340693472202291382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_16
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_16"
       rect:
         serializedVersion: 2
         x: 418
@@ -540,14 +527,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1f254dd3407622e80800000000000000
-      internalID: -8204882303200767247
+      spriteID: ed654635c4b896190800000000000000
+      internalID: -7968684905722521890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_17
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_17"
       rect:
         serializedVersion: 2
         x: 444
@@ -562,14 +549,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aab2d81661e108870800000000000000
-      internalID: 8682973163045071786
+      spriteID: 96e85f7f2aebe43e0800000000000000
+      internalID: -2067505571762434455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_18
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_18"
       rect:
         serializedVersion: 2
         x: 477
@@ -584,14 +571,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 913e6c50413d88430800000000000000
-      internalID: 3785507569754628889
+      spriteID: ca4be0dd09bfa0850800000000000000
+      internalID: 6344159624707355820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_19
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_19"
       rect:
         serializedVersion: 2
         x: 196
@@ -606,14 +593,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dcefc75d9d195ca10800000000000000
-      internalID: 1929108380173795021
+      spriteID: bdcd3eae273aa1a50800000000000000
+      internalID: 6492681526770392283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: devilcall_description_20
+      name: "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_20"
       rect:
         serializedVersion: 2
         x: 346
@@ -628,8 +615,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51ceec91aa424c7b0800000000000000
-      internalID: -5204994956337419243
+      spriteID: ebebb865ebe8024b0800000000000000
+      internalID: -5467212999480852802
       vertices: []
       indices: 
       edges: []
@@ -648,27 +635,27 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      devilcall_description_0: -1895942942571071781
-      devilcall_description_1: -4577196457533248604
-      devilcall_description_10: 519265576606436503
-      devilcall_description_11: -7428283543317641294
-      devilcall_description_12: -7736009745762833034
-      devilcall_description_13: -4301863881934238150
-      devilcall_description_14: -7893739369073633595
-      devilcall_description_15: 8257202195457506858
-      devilcall_description_16: -8204882303200767247
-      devilcall_description_17: 8682973163045071786
-      devilcall_description_18: 3785507569754628889
-      devilcall_description_19: 1929108380173795021
-      devilcall_description_2: -2693924562767491259
-      devilcall_description_20: -5204994956337419243
-      devilcall_description_3: -6035776239456553145
-      devilcall_description_4: -9206937310536730319
-      devilcall_description_5: 3265210248315210712
-      devilcall_description_6: -6286180636857830818
-      devilcall_description_7: -2491125192721376965
-      devilcall_description_8: 1093458142366554724
-      devilcall_description_9: 3770158110740328392
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_0": -5702894346319512147
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_1": -8215799295865151622
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_10": 3816611229439173061
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_11": 2563243298108388320
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_12": 1545556340210595348
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_13": 1265723576033214633
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_14": 5450202192228309921
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_15": 2340693472202291382
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_16": -7968684905722521890
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_17": -2067505571762434455
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_18": 6344159624707355820
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_19": 6492681526770392283
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_2": 8574425565936510685
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_20": -5467212999480852802
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_3": -115129899088157246
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_4": 6390423026525448901
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_5": 7122414915545217394
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_6": -1657643601106440880
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_7": -3857275171167779762
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_8": -2434877262451285208
+      "\u30C7\u30D3\u30EB\u30B3\u30FC\u30EB\u8AAC\u660E_9": 6962682706025764159
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

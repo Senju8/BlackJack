@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +18,9 @@ namespace Item
         [Header("アイテムの名前")]
         [SerializeField] private string name = "Unknown";
 
+        [Header("アイテムのレア度")]
+        [SerializeField] private float rarity = 1.0F;
+
         [Header("アイテムの画像")]
         [SerializeField] private Image itemImage;
 
@@ -33,6 +36,11 @@ namespace Item
         public string Name
         {
             get { return this.name; }
+        }
+
+        public float Rarity
+        {
+            get { return this.rarity; }
         }
 
         public Image ItemImage
@@ -62,6 +70,16 @@ namespace Item
             this.itemColor = itemColor;
             this.descriptionImage = descriptionImage;
             this.descriptionColor = descriptionColor;
+        }
+
+        public static String GetID(ItemImageHolder itemImageHolder)
+        {
+            return itemImageHolder != null ? ItemImageHolder.GetID(itemImageHolder.Name, itemImageHolder.Rarity) : ItemImageHolder.GetID("Unknown", 0.0F);
+        }
+
+        public static String GetID(string name, float rarity)
+        {
+            return $"{name ?? "Unknown"}:{rarity:0:00}";
         }
     }
 }

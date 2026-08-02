@@ -1,4 +1,4 @@
-using Player;
+﻿using Player;
 
 namespace Item
 {
@@ -23,5 +23,13 @@ namespace Item
         /// <para>アイテムを使用する</para>
         /// </summary>
         public void DoUse(PlayerData playerData, DealerData dealerData, float rarity);
+
+        /// <summary>
+        /// <para>レア度から計算した値段を返す</para>
+        /// </summary>
+        public int ComputeValue(float rarity)
+        {
+            return this.Value;
+        }
     }
 }
