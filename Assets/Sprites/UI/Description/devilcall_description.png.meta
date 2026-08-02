@@ -1,0 +1,676 @@
+fileFormatVersion: 2
+guid: 351a5f564f0de62459dc6b2c4e2744c3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1895942942571071781
+    second: devilcall_description_0
+  - first:
+      213: -4577196457533248604
+    second: devilcall_description_1
+  - first:
+      213: -2693924562767491259
+    second: devilcall_description_2
+  - first:
+      213: -6035776239456553145
+    second: devilcall_description_3
+  - first:
+      213: -9206937310536730319
+    second: devilcall_description_4
+  - first:
+      213: 3265210248315210712
+    second: devilcall_description_5
+  - first:
+      213: -6286180636857830818
+    second: devilcall_description_6
+  - first:
+      213: -2491125192721376965
+    second: devilcall_description_7
+  - first:
+      213: 1093458142366554724
+    second: devilcall_description_8
+  - first:
+      213: 3770158110740328392
+    second: devilcall_description_9
+  - first:
+      213: 519265576606436503
+    second: devilcall_description_10
+  - first:
+      213: -7428283543317641294
+    second: devilcall_description_11
+  - first:
+      213: -7736009745762833034
+    second: devilcall_description_12
+  - first:
+      213: -4301863881934238150
+    second: devilcall_description_13
+  - first:
+      213: -7893739369073633595
+    second: devilcall_description_14
+  - first:
+      213: 8257202195457506858
+    second: devilcall_description_15
+  - first:
+      213: -8204882303200767247
+    second: devilcall_description_16
+  - first:
+      213: 8682973163045071786
+    second: devilcall_description_17
+  - first:
+      213: 3785507569754628889
+    second: devilcall_description_18
+  - first:
+      213: 1929108380173795021
+    second: devilcall_description_19
+  - first:
+      213: -5204994956337419243
+    second: devilcall_description_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: devilcall_description_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 7
+        width: 29
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd674a950f140b5e0800000000000000
+      internalID: -1895942942571071781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_1
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 7
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4abed89a2188a70c0800000000000000
+      internalID: -4577196457533248604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_2
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 8
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54f4b8812e14d9ad0800000000000000
+      internalID: -2693924562767491259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 9
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 747f2773d7d9c3ca0800000000000000
+      internalID: -6035776239456553145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_4
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 6
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 139fa28eb436a3080800000000000000
+      internalID: -9206937310536730319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_5
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 7
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8db0bc7cb6b505d20800000000000000
+      internalID: 3265210248315210712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_6
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 10
+        width: 8
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e527622340003c8a0800000000000000
+      internalID: -6286180636857830818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_7
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 23
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b39d0d4f5debd6dd0800000000000000
+      internalID: -2491125192721376965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_8
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 8
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46a5488136ebc2f00800000000000000
+      internalID: 1093458142366554724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_9
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 8
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cf2cb993da425430800000000000000
+      internalID: 3770158110740328392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_10
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 7
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79c07bd6a4dc43700800000000000000
+      internalID: 519265576606436503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_11
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 7
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b70cad597f69e890800000000000000
+      internalID: -7428283543317641294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_12
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 10
+        width: 8
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67da8d49f1c24a490800000000000000
+      internalID: -7736009745762833034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_13
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 23
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3e0a357795bc44c0800000000000000
+      internalID: -4301863881934238150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_14
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 9
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c699dcddddc37290800000000000000
+      internalID: -7893739369073633595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_15
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 9
+        width: 9
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2ef1d2f5a9779270800000000000000
+      internalID: 8257202195457506858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_16
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 8
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f254dd3407622e80800000000000000
+      internalID: -8204882303200767247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_17
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 8
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aab2d81661e108870800000000000000
+      internalID: 8682973163045071786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_18
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 9
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 913e6c50413d88430800000000000000
+      internalID: 3785507569754628889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_19
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 11
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcefc75d9d195ca10800000000000000
+      internalID: 1929108380173795021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: devilcall_description_20
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 11
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51ceec91aa424c7b0800000000000000
+      internalID: -5204994956337419243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      devilcall_description_0: -1895942942571071781
+      devilcall_description_1: -4577196457533248604
+      devilcall_description_10: 519265576606436503
+      devilcall_description_11: -7428283543317641294
+      devilcall_description_12: -7736009745762833034
+      devilcall_description_13: -4301863881934238150
+      devilcall_description_14: -7893739369073633595
+      devilcall_description_15: 8257202195457506858
+      devilcall_description_16: -8204882303200767247
+      devilcall_description_17: 8682973163045071786
+      devilcall_description_18: 3785507569754628889
+      devilcall_description_19: 1929108380173795021
+      devilcall_description_2: -2693924562767491259
+      devilcall_description_20: -5204994956337419243
+      devilcall_description_3: -6035776239456553145
+      devilcall_description_4: -9206937310536730319
+      devilcall_description_5: 3265210248315210712
+      devilcall_description_6: -6286180636857830818
+      devilcall_description_7: -2491125192721376965
+      devilcall_description_8: 1093458142366554724
+      devilcall_description_9: 3770158110740328392
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

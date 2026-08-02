@@ -1,4 +1,5 @@
 using Assets.Scripts.System;
+using Item;
 using Player;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,13 +15,15 @@ namespace System
 
         private readonly Dictionary<string, GamePhase> gamePhases = new();
 
-        public PlayerData playerData;
-        public DealerData dealerData;
+        public readonly PlayerData playerData;
+        public readonly DealerData dealerData;
 
         private string bindingGamePhaseId;
         private GamePhase bindingGamePhase;
 
-        private float difficulty = 1.0F;
+        public float difficulty = 1.0F;
+
+        private readonly Dictionary<string, ItemImageHolder> itemImageHolders = new();
 
         /// <summary>
         /// ゲームの難易度
@@ -42,6 +45,14 @@ namespace System
             }
         }
 
+        /// <summary>
+        /// ゲームのノルマ（難易度依存）
+        /// </summary>
+        public int Quata
+        {
+            get { return (int) (600000.0D * this.difficulty); }
+        }
+
         private GameManager()
         {
             // プレイヤー、ディーラーの初期化
@@ -55,11 +66,11 @@ namespace System
         public void Init(GameManagerBehaviour gameManagerBehaviour)
         {
             // フェーズの登録
-            this.Register("start", new StartPhase(this, gameManagerBehaviour));
-            this.Register("select", new SelectPhase(this, gameManagerBehaviour));
-            this.Register("buy", new BuyPhase(this, gameManagerBehaviour));
-            this.Register("blackjack", new BlackjackPhase(this, gameManagerBehaviour));
-            this.Register("result", new ResultPhase(this, gameManagerBehaviour));
+            this.RegisterGamePhase("start", new StartPhase(this, gameManagerBehaviour));
+            this.RegisterGamePhase("select", new SelectPhase(this, gameManagerBehaviour));
+            this.RegisterGamePhase("shop", new ShopPhase(this, gameManagerBehaviour));
+            this.RegisterGamePhase("blackjack", new BlackjackPhase(this, gameManagerBehaviour));
+            this.RegisterGamePhase("result", new ResultPhase(this, gameManagerBehaviour));
 
             this.Call("start");
         }
@@ -79,7 +90,7 @@ namespace System
         /// <summary>
         /// <para>GamePhaseを登録する</para>
         /// </summary>
-        public bool Register(string id, GamePhase gamePhase)
+        public bool RegisterGamePhase(string id, GamePhase gamePhase)
         {
             if (id == null || gamePhase == null)
                 return false;
@@ -97,7 +108,7 @@ namespace System
             gamePhase.DoInit();
 
             // デバッグ
-            UnityEngine.Debug.Log($"GamePhase（id: {id}）が登録されました！");
+            UnityEngine.Debug.Log($"GamePhase（ID: {id}）が登録されました！");
 
             return true;
         }
@@ -105,7 +116,7 @@ namespace System
         /// <summary>
         /// <para>GamePhaseを削除する</para>
         /// </summary>
-        public bool Delete(string id)
+        public bool DeleteGamePhase(string id)
         {
             if (id == null || !this.gamePhases.ContainsKey(id))
                 return false;
@@ -114,9 +125,20 @@ namespace System
             this.gamePhases[id]?.DoDestroy();
 
             // デバッグ
-            UnityEngine.Debug.Log($"GamePhase（id: {id}）が削除されました！");
+            UnityEngine.Debug.Log($"GamePhase（ID: {id}）が削除されました！");
 
             return this.gamePhases.Remove(id);
+        }
+
+        /// <summary>
+        /// <para>登録されたGamePhaseを返す</para>
+        /// </summary>
+        public T GetPhase<T>(string id) where T : GamePhase
+        {
+            if (id == null || !this.gamePhases.ContainsKey(id))
+                return null;
+
+            return this.gamePhases[id] as T;
         }
 
         /// <summary>
@@ -135,14 +157,57 @@ namespace System
 
             this.bindingGamePhaseId = id;
             this.bindingGamePhase = this.gamePhases[id];
-            
+
             // フェーズを開始する
             this.bindingGamePhase.DoStart();
 
             // デバッグ
-            UnityEngine.Debug.Log($"GamePhase（id: {id}）が呼び出されました！");
+            UnityEngine.Debug.Log($"GamePhase（ID: {id}）が呼び出されました！");
 
             return true;
+        }
+
+        /// <summary>
+        /// <para>ItemImageHolderを登録する</para>
+        /// </summary>
+        public void RegisterItemImageHolders(ItemImageHolder[] itemImageHolders)
+        {
+            foreach (ItemImageHolder itemImageHolder in itemImageHolders)
+            {
+                if (itemImageHolder != null && itemImageHolder.Name != null)
+                {
+                    this.itemImageHolders[itemImageHolder.Name] = itemImageHolder;
+
+                    UnityEngine.Debug.Log($"新しいItemImageHolder（Name: {itemImageHolder.Name}）が登録されました！");
+                }
+            }
+        }
+
+        /// <summary>
+        /// <para>ItemImageHolderを削除する</para>
+        /// </summary>
+        public bool DeleteItemImageHolder(string name)
+        {
+            if (name == null || !this.itemImageHolders.ContainsKey(name))
+                return false;
+
+            // デバッグ
+            UnityEngine.Debug.Log($"ItemImageHolder（Name: {name}）が削除されました！");
+
+            return this.itemImageHolders.Remove(name);
+        }
+
+        /// <summary>
+        /// <para>登録されたItemImageHolder</para>
+        /// </summary>
+        public ItemImageHolder GetItemImageHolder(string name)
+        {
+            if (this.itemImageHolders.ContainsKey(name))
+            {
+                return this.itemImageHolders[name] ?? ItemImageHolder.EMPTY;
+            }
+
+            return ItemImageHolder.EMPTY;
         }
 
         /// <summary>

@@ -14,6 +14,9 @@ namespace Assets.Scripts.System
         [Header("アイテム購入画面")]
         [SerializeField] private GameObject buyCanvas;
 
+        [Header("アイテム購入画面のアイテムスロット")]
+        [SerializeField] private GameObject buyCanvasItemDisplaySlot;
+
         [Header("ブラックジャック画面")]
         [SerializeField] private GameObject blackjackCanvas;
 
@@ -33,6 +36,11 @@ namespace Assets.Scripts.System
         public GameObject BuyCanvas
         {
             get { return this.buyCanvas; }
+        }
+
+        public GameObject BuyCanvasItemDisplaySlot
+        {
+            get { return this.buyCanvasItemDisplaySlot; }
         }
 
         public GameObject BlackjackCanvas
