@@ -36,6 +36,11 @@ namespace Item
 
         /// <summary>
         /// <para>アイテムのレア度</para>
+        /// <para>コモン: 1.0</para>
+        /// <para>アンコモン: 2.0</para>
+        /// <para>レア: 3.0</para>
+        /// <para>エピック: 4.0</para>
+        /// <para>レジェンド: 5.0</para>
         /// </summary>
         public float Rarity
         {
@@ -49,6 +54,7 @@ namespace Item
         public int Value
         {
             get { return this.value; }
+            set { this.value = Mathf.Max(0, value); }
         }
 
         /// <summary>
@@ -69,12 +75,17 @@ namespace Item
             set { this.sprite = value; }
         }
 
-        public ItemData(ItemDefinition itemDefinition, float rarity = 1.0F, int count = 0)
+        public ItemData(ItemDefinition itemDefinition, float rarity = 1.0F, int value = 0, int count = 0)
         {
             this.itemDefinition = itemDefinition;
             this.Rarity = rarity;
-            this.value = itemDefinition != null ? itemDefinition.Value : 0;
+            this.value = value;
             this.Count = count;
+        }
+
+        public ItemData Clone()
+        {
+            return new ItemData(this.itemDefinition, this.rarity, this.count);
         }
 
         /// <summary>

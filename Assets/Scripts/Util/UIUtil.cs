@@ -58,6 +58,8 @@ namespace Util
                 break;
             }
 
+            UnityEngine.Debug.LogWarning($"GameObject（Name: {parent.name}）に子GameObject（Name: {name}）は存在しません…");
+
             return null;
         }
     }
