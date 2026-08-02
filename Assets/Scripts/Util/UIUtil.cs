@@ -23,6 +23,7 @@ namespace Util
             Transform targetChild;
             int childCount;
 
+            Main:
             while (true)
             {
                 childCount = targetParent.transform.childCount;
@@ -42,6 +43,8 @@ namespace Util
                                 // さらに下の階層を探す
                                 targetParent = targetChild;
                                 targetChild = null;
+
+                                goto Main;
                             }
                             else
                             {

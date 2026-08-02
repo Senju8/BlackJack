@@ -11,6 +11,10 @@ namespace System
     {
         private GameObject canvasObject;
 
+        private GameObject itemDisplayObject;
+
+        private GameObject buyObject;
+
         public ShopPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour) { }
 
         protected override void Init()
@@ -20,7 +24,7 @@ namespace System
 
             this.canvasObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.ShopCanvas);
 
-            UnityEngine.Debug.Log(UIUtil.GetChild(this.canvasObject, "Item Cart Display/Buy Display/Buy"));
+            this.buyObject = UIUtil.GetChild(this.canvasObject, "Item Cart Display/Buy Display/Buy");
 
             this.canvasObject.SetActive(false);
         }
@@ -57,6 +61,14 @@ namespace System
         {
             if (gameObject == null)
                 return;
+
+            switch (gameObject.name)
+            {
+                case "Buy":
+                    this.gameManager.Call("blackjack");
+
+                    break;
+            }
         }
     }
 }
