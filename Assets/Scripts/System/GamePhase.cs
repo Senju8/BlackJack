@@ -14,6 +14,11 @@ namespace System
 
         private PhaseState phaseState = PhaseState.PRE_INIT;
 
+        private bool isInitializing = false;
+        private bool isStarting = false;
+        private bool isFinishing = false;
+        private bool isDestroying = false;
+
         public GamePhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour)
         {
             this.gameManager = gameManager;
@@ -51,10 +56,23 @@ namespace System
             if (this.phaseState != PhaseState.PRE_INIT)
                 return false;
 
+            if (this.isInitializing)
+            {
+                this.Warn();
+
+                return false;
+            }
+
+            // フラグ：オン
+            this.isInitializing = true;
+
             this.Init();
 
             // PhaseStateをPRE_STARTに遷移する
             this.phaseState = PhaseState.PRE_START;
+
+            // フラグ：オフ
+            this.isInitializing = false;
 
             return true;
         }
@@ -65,10 +83,23 @@ namespace System
             if (this.phaseState != PhaseState.PRE_START)
                 return false;
 
+            if (this.isStarting)
+            {
+                this.Warn();
+
+                return false;
+            }
+
+            // フラグ：オン
+            this.isStarting = true;
+
             this.Start();
 
             // PhaseStateをPOST_STARTに遷移する
             this.phaseState = PhaseState.POST_START;
+
+            // フラグ：オフ
+            this.isStarting = false;
 
             return true;
         }
@@ -90,10 +121,23 @@ namespace System
             if (this.phaseState != PhaseState.POST_START)
                 return false;
 
+            if (this.isFinishing)
+            {
+                this.Warn();
+
+                return false;
+            }
+
+            // フラグ：オン
+            this.isFinishing = true;
+
             this.Finish();
 
             // PhaseStateをPRE_STARTに遷移する
             this.phaseState = PhaseState.PRE_START;
+
+            // フラグ：オフ
+            this.isFinishing = false;
 
             return true;
         }
@@ -104,11 +148,24 @@ namespace System
             if (this.phaseState == PhaseState.PRE_INIT)
                 return false;
 
+            if (this.isDestroying)
+            {
+                this.Warn();
+
+                return false;
+            }
+
+            // フラグ：オン
+            this.isDestroying = true;
+
             this.Finish();
             this.Destroy();
 
             // PhaseStateをPOST_DESTROYに遷移する
             this.phaseState = PhaseState.POST_DESTROY;
+
+            // フラグ：オフ
+            this.isDestroying = false;
 
             return true;
         }
@@ -130,6 +187,14 @@ namespace System
         /// <para>GamePhaseのイベントを定義する</para>
         /// </summary>
         public virtual void Invoke(GameObject gameObject, params object[] contexts) { }
+
+        /// <summary>
+        /// GamePhaseへの無効な操作の検知を警告する
+        /// </summary>
+        private void Warn()
+        {
+            UnityEngine.Debug.LogWarning("GamePhaseへの無効な操作を検知しました…");
+        }
 
         /// <summary>
         /// GamePhaseの状態を定義する

@@ -149,7 +149,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item.ItemImageRegistryBehaviour
   itemImageHolders:
-  - name: Devilcall
+  - name: Devil Call
+    itemImage: {fileID: 0}
+    itemColor: {r: 1, g: 1, b: 1, a: 1}
+    descriptionImage: {fileID: 0}
+    descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+  - name: Contract
+    itemImage: {fileID: 0}
+    itemColor: {r: 1, g: 1, b: 1, a: 1}
+    descriptionImage: {fileID: 0}
+    descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+  - name: Dice
+    itemImage: {fileID: 0}
+    itemColor: {r: 1, g: 1, b: 1, a: 1}
+    descriptionImage: {fileID: 0}
+    descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+  - name: Tip
     itemImage: {fileID: 0}
     itemColor: {r: 1, g: 1, b: 1, a: 1}
     descriptionImage: {fileID: 0}

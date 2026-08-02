@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.System;
 using Item;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,9 @@ namespace System
 
         private GameObject itemDisplayObject;
         private GameObject itemCartObject;
+        private GameObject itemName;
+        private GameObject itemDescription;
+        private GameObject noItemDescription;
         private GameObject itemTotalValue;
         private GameObject playerMoney;
         private GameObject buyObject;
@@ -42,6 +46,9 @@ namespace System
             // 子GameObjectの取得
             this.itemDisplayObject = UIUtil.GetChild(this.canvasObject, "Item Display");
             this.itemCartObject = UIUtil.GetChild(this.canvasObject, "Item Cart Display/Item Cart View/Item Cart");
+            this.itemName = UIUtil.GetChild(this.canvasObject, "Item Description/Name Display/Name");
+            this.itemDescription = UIUtil.GetChild(this.canvasObject, "Item Description/Description Display/Description");
+            this.noItemDescription = UIUtil.GetChild(this.canvasObject, "Item Description/Description Display/No Description");
             this.itemTotalValue = UIUtil.GetChild(this.canvasObject, "Item Cart Display/Item Total Value View/Item Total Value Display/Item Total Value");
             this.playerMoney = UIUtil.GetChild(this.canvasObject, "Item Cart Display/Player Money View/Player Money Display/Player Money");
             this.buyObject = UIUtil.GetChild(this.canvasObject, "Item Cart Display/Buy Display/Buy");
@@ -125,7 +132,7 @@ namespace System
 
                             if (image != null && value != null)
                             {
-                                ItemImageHolder itemImageHolder = this.gameManager.GetItemImageHolder(itemDefinition.Name);
+                                ItemImageHolder itemImageHolder = this.gameManager.GetItemImageHolder(itemData.Name, itemData.Rarity);
 
                                 image.sprite = itemImageHolder.ItemImage?.sprite;
                                 image.color = image.sprite != null ? itemImageHolder.ItemColor : new Color(0.0F, 0.0F, 0.0F, 0.0F);
@@ -149,6 +156,7 @@ namespace System
             this.itemCartSlots = new List<GameObject>();
             this.itemCartData = new Dictionary<GameObject, ItemData>();
 
+            this.SetItemDescription(null);
             this.canvasObject.SetActive(true);
         }
 
@@ -201,12 +209,33 @@ namespace System
             switch (gameObject.name)
             {
                 case "Buy":
-                    if (this.itemTotalValueBuffer < this.playerMoneyBuffer)
+                    if (this.gameManager.InfiniteMoneyMode || this.itemTotalValueBuffer < this.playerMoneyBuffer)
                     {
+                        // プレイヤーにアイテムを追加
+                        this.gameManager.AddPlayerItemData(this.itemCartData.Values.ToArray());
+
+                        // プレイヤーの所持金を減らす
+                        this.gameManager.playerData.SetValues(Mathf.Max(0, this.playerMoneyBuffer - this.itemTotalValueBuffer));
+
+                        // 次のGamePhaseを呼び出す
                         this.gameManager.Call("blackjack");
                     }
 
                     return;
+            }
+        }
+
+        public override void Invoke(GameObject gameObject, params object[] contexts)
+        {
+            // アイテムスロットにカーソルが乗ったかどうか検知する
+            if (gameObject != null && contexts != null && contexts.Length >= 1 && contexts[0] is string type && type == "Pointer Enter")
+            {
+                Transform parent = gameObject.transform.parent;
+
+                if (parent != null)
+                {
+                    this.SetItemDescription(parent.gameObject);
+                }
             }
         }
 
@@ -362,6 +391,50 @@ namespace System
         }
 
         /// <summary>
+        /// <para>アイテムの説明を設定する</para>
+        /// </summary>
+        private void SetItemDescription(GameObject itemDisplaySlotObject)
+        {
+            if (this.itemName == null || this.itemDescription == null)
+                return;
+
+            TextMeshProUGUI textMeshProUGUI = this.itemName.GetComponent<TextMeshProUGUI>();
+            Image image = this.itemDescription.GetComponent<Image>();
+
+            if (textMeshProUGUI == null || image == null)
+                return;
+            
+            // アイテムの説明を空にする
+            if (itemDisplaySlotObject == null)
+            {
+                textMeshProUGUI.text = "";
+                image.sprite = null;
+                image.color = new Color(0.0F, 0.0F, 0.0F, 0.0F);
+
+                this.noItemDescription.SetActive(true);
+
+                return;
+            }
+
+            // アイテムの説明を設定する
+            if (this.itemDisplayData.ContainsKey(itemDisplaySlotObject))
+            {
+                ItemData itemData = this.itemDisplayData[itemDisplaySlotObject];
+
+                if (itemData == null)
+                    return;
+
+                ItemImageHolder itemImageHolder = this.gameManager.GetItemImageHolder(itemData.Name, itemData.Rarity);
+
+                textMeshProUGUI.text = itemData.Name;
+                image.sprite = itemImageHolder.DescriptionImage != null ? itemImageHolder.DescriptionImage.sprite : null;
+                image.color = itemImageHolder.DescriptionImage != null ? itemImageHolder.DescriptionImage.color : new Color(0.0F, 0.0F, 0.0F, 0.0F);
+
+                this.noItemDescription.SetActive(itemImageHolder.DescriptionImage == null);
+            }
+        }
+
+        /// <summary>
         /// <para>カートスロットのアイテムの合計金額を出力する</para>
         /// </summary>
         private void UpdateItemTotalValue()
@@ -384,7 +457,7 @@ namespace System
                 }
 
                 textMeshProUGUI.text = this.itemTotalValueBuffer.ToString("N0");
-                textMeshProUGUI.color = this.itemTotalValueBuffer >= this.playerMoneyBuffer ? Color.red : Color.white;
+                textMeshProUGUI.color = this.playerMoneyBuffer > 0 && this.itemTotalValueBuffer >= this.playerMoneyBuffer ? Color.red : Color.white;
             }
         }
 
