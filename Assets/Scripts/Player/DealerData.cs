@@ -37,6 +37,11 @@ namespace Player
             return dealerCards;
         }
 
+        /// <summary>
+        /// スコアの変更があった際に発火するイベント
+        /// </summary>
+        public event Action<int> OnScoreChanded;
+
         // デモ:ディーラーの札をセット
         public void SetCard(List<CardsManager.Card> cards)
         {
@@ -52,6 +57,7 @@ namespace Player
         public void SetScore(int score)
         {
             dealerScore = score;
+            OnScoreChanded?.Invoke(dealerScore);
         }
 
         // ディーラーがプレイ中かどうか

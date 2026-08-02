@@ -186,18 +186,20 @@ namespace System
                 // 引き分け
                 Debug.Log("ひきわけ");
             }
-
-            Finish();
         }   
 
         protected override void Finish()
         {
-            Debug.Log("リザルトフェーズへ移行");
-            GameManager.INSTANCE.Call("result");
         }
 
         protected override void Destroy()
         {
+            deck = null;
+            playerCards = null;
+            dealerCards = null;
+            playerScoreView = null;
+            playerData = null;
+            dealerData = null;
         }
 
         /// <summary>
