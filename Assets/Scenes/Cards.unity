@@ -821,7 +821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.System.GameManagerBehaviour
   startCanvas: {fileID: 0}
   selectCanvas: {fileID: 0}
-  buyCanvas: {fileID: 0}
+  shopCanvas: {fileID: 0}
   buyCanvasItemDisplaySlot: {fileID: 0}
   blackjackCanvas: {fileID: 1122688412}
   resultCanvas: {fileID: 0}
