@@ -12,7 +12,7 @@ namespace Assets.Scripts.System
         [SerializeField] private GameObject selectCanvas;
 
         [Header("アイテム購入画面")]
-        [SerializeField] private GameObject buyCanvas;
+        [SerializeField] private GameObject shopCanvas;
 
         [Header("アイテム購入画面のアイテムスロット")]
         [SerializeField] private GameObject buyCanvasItemDisplaySlot;
@@ -40,9 +40,9 @@ namespace Assets.Scripts.System
             get { return this.selectCanvas; }
         }
 
-        public GameObject BuyCanvas
+        public GameObject ShopCanvas
         {
-            get { return this.buyCanvas; }
+            get { return this.shopCanvas; }
         }
 
         public GameObject BuyCanvasItemDisplaySlot

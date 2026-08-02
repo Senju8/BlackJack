@@ -104,6 +104,14 @@ namespace System
         }
 
         /// <summary>
+        /// GamePhaseを強制的に破棄する
+        /// </summary>
+        public void DoDiscard()
+        {
+            this.phaseState = PhaseState.POST_DESTROY;
+        }
+
+        /// <summary>
         /// <para>GamePhaseのイベントを定義する</para>
         /// </summary>
         public virtual void Invoke(GameObject gameObject) { }

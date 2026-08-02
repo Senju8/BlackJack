@@ -187,13 +187,12 @@ namespace System
                 Debug.Log("ひきわけ");
             }
 
-            Finish();
+            GameManager.INSTANCE.Call("result");
         }   
 
         protected override void Finish()
         {
             Debug.Log("リザルトフェーズへ移行");
-            GameManager.INSTANCE.Call("result");
         }
 
         protected override void Destroy()
