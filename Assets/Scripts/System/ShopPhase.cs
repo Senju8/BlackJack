@@ -15,12 +15,12 @@ namespace System
 
         protected override void Init()
         {
-            if (this.gameManagerBehaviour.BuyCanvas == null)
+            if (this.gameManagerBehaviour.ShopCanvas == null)
                 return;
 
-            this.canvasObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.BuyCanvas);
+            this.canvasObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.ShopCanvas);
 
-            //UnityEngine.Debug.Log(UIUtil.GetChild(this.canvasObject, "Item Cart Display/Buy Display/Buy"));
+            UnityEngine.Debug.Log(UIUtil.GetChild(this.canvasObject, "Item Cart Display/Buy Display/Buy"));
 
             this.canvasObject.SetActive(false);
         }

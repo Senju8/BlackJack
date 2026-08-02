@@ -105,9 +105,20 @@ namespace System
             this.gamePhases[id] = gamePhase;
 
             // GamePhaseの初期化
-            gamePhase.DoInit();
+            try
+            {
+                gamePhase.DoInit();
+            }
+            catch (Exception e)
+            {
+                UnityEngine.Debug.LogError($"GamePhase（ID: {id}）の初期化に失敗しました…");
+                UnityEngine.Debug.LogError(e.StackTrace);
+
+                gamePhase.DoDiscard();
+            }
 
             // デバッグ
+            UnityEngine.Debug.LogError($"GamePhase（ID: {id}）を初期化しました！");
             UnityEngine.Debug.Log($"GamePhase（ID: {id}）が登録されました！");
 
             return true;

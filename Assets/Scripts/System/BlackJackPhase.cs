@@ -186,10 +186,13 @@ namespace System
                 // 引き分け
                 Debug.Log("ひきわけ");
             }
+
+            GameManager.INSTANCE.Call("result");
         }   
 
         protected override void Finish()
         {
+            Debug.Log("リザルトフェーズへ移行");
         }
 
         protected override void Destroy()

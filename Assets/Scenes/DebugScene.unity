@@ -119,6 +119,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &137996604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 137996606}
+  - component: {fileID: 137996605}
+  m_Layer: 0
+  m_Name: ItemImageRegistryBehaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &137996605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137996604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a2c354493def741872adc9641b5c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item.ItemImageRegistryBehaviour
+  itemImageHolders:
+  - name: Devilcall
+    itemImage: {fileID: 0}
+    itemColor: {r: 1, g: 1, b: 1, a: 1}
+    descriptionImage: {fileID: 0}
+    descriptionColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &137996606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137996604}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 801.898, y: 248.88342, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455399636
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596168983}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -344,31 +394,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 728189446}
-  - component: {fileID: 728189445}
+  - component: {fileID: 728189447}
   m_Layer: 0
-  m_Name: GameManagerProvider
+  m_Name: GameManagerBehaviour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &728189445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728189444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bfecc9f2aed7404290ff34b49a0d285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  startCanvas: {fileID: 418820664125836675, guid: 5deeb84c99b6f4d4195ea2765b2bb2ec, type: 3}
-  selectCanvas: {fileID: 3432728016445908377, guid: 030101af53ad30b42a8b3b8e338c971e, type: 3}
-  buyCanvas: {fileID: 8134117890614274037, guid: 9ab10d6b9a153844a865145dd7da5f36, type: 3}
-  blackjackCanvas: {fileID: 0}
-  resultCanvas: {fileID: 4573175703843386772, guid: 2d261d40f6ecde5438db14fc7d8586ee, type: 3}
 --- !u!4 &728189446
 Transform:
   m_ObjectHideFlags: 0
@@ -384,10 +417,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &728189447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728189444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bfecc9f2aed7404290ff34b49a0d285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.System.GameManagerBehaviour
+  startCanvas: {fileID: 418820664125836675, guid: 5deeb84c99b6f4d4195ea2765b2bb2ec, type: 3}
+  selectCanvas: {fileID: 3432728016445908377, guid: 030101af53ad30b42a8b3b8e338c971e, type: 3}
+  shopCanvas: {fileID: 8134117890614274037, guid: 9ab10d6b9a153844a865145dd7da5f36, type: 3}
+  buyCanvasItemDisplaySlot: {fileID: 0}
+  blackjackCanvas: {fileID: 0}
+  resultCanvas: {fileID: 4573175703843386772, guid: 2d261d40f6ecde5438db14fc7d8586ee, type: 3}
+  deck: {fileID: 0}
+  playerCards: {fileID: 0}
+  dealerCards: {fileID: 0}
+  playerScoreView: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 455399639}
   - {fileID: 728189446}
+  - {fileID: 137996606}
   - {fileID: 596168986}
