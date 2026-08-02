@@ -1,5 +1,4 @@
 using Cards;
-using Item;
 using System;
 using System.Collections.Generic;
 
@@ -22,7 +21,6 @@ namespace Player
         /// </summary>
         private List<CardsManager.Card> playerCards = new List<CardsManager.Card>();    // プレイヤの札
         private int playerScore = 0;    // プレイヤのスコア
-        private List<ItemData> playerItems = new List<ItemData>();   // プレイヤのアイテム
 
         /// <summary>
         /// プレイヤがゲームを続けられるかの判定変数
@@ -35,6 +33,14 @@ namespace Player
         /// 現在確定しているベット額
         /// </summary>
         private int betAmount = 0;
+
+        /// <summary>
+        /// 勝利時の払い戻し倍率
+        /// 
+        /// ブラックジャック時のボーナス/アイテムの使用処理の
+        /// 倍率変動を計算
+        /// </summary>
+        public readonly PayoutMultiplier PayoutMultiplier = new PayoutMultiplier();
 
 
         public PlayerData(GameManager gameManager)
@@ -51,6 +57,15 @@ namespace Player
         public void SetValues(int value)
         {
             values = value;
+        }
+
+        /// <summary>
+        /// 所持金の加算
+        /// </summary>
+        /// <param name="amount"></param>
+        public void AddValues(int amount)
+        {
+            values += amount;
         }
 
         // プレイヤの札
