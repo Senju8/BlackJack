@@ -47,6 +47,10 @@ namespace Cards
             var card2 = deck.DrawCard();
             dealerCards.Add(card2);
             handView.AddCard(card2, false);
+
+            dealerData.SetCard(dealerCards);
+            int score = ScoreCalclator.CalculateScore(dealerCards);
+            dealerData.SetScore(score);
         }
 
         public void DrawCard(int amount,bool isOpen)

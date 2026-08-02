@@ -20,7 +20,7 @@ namespace Player
 
         private void UpdateScoreText(int score)
         {
-            scoreText.text = "Score" + score;
+            scoreText.text = ""+ score;
         }
 
         private void OnDestroy()

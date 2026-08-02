@@ -46,6 +46,17 @@ namespace System
         /// </summary>
         protected override void Init()
         {
+            deck = gameManagerBehaviour.Deck;
+            playerCards = gameManagerBehaviour.PlayerCards;
+            dealerCards = gameManagerBehaviour.DealerCards;
+            playerScoreView = gameManagerBehaviour.PlayerScoreView;
+
+            playerData = gameManager.playerData;
+            dealerData = gameManager.dealerData;
+
+            playerCards.Setup(playerData, deck);
+            dealerCards.Setup(dealerData, deck);
+            playerScoreView.Setup(playerData);
         }
 
         /// <summary>
@@ -58,6 +69,7 @@ namespace System
 
             playerData.SetIsPlaying(true);
             dealerData.SetIsPlaying(true);
+
             playerData.SetCard(new System.Collections.Generic.List<CardsManager.Card>());
             dealerData.SetCard(new System.Collections.Generic.List<CardsManager.Card>());
 
@@ -77,17 +89,15 @@ namespace System
                     {
                         isInputLocked = true;
                         currentSubPhase = SubPhase.DealerTurn;
-
                     }
                     break;
 
                 case SubPhase.DealerTurn:
-                    if (!dealerData.GetIsPlaying())
+                    if (dealerData.GetIsPlaying())
                     {
                         if (dealerData.GetScore() < 17)
                         {
                             dealerCards.Hit();
-                            //　アニメーションなど
                         }
                         else
                         {
@@ -101,7 +111,7 @@ namespace System
                     break;
 
                 case SubPhase.Judge:
-                    // ジャッジ処理
+                    JudgeResult();
 
                     currentSubPhase = SubPhase.Result;
                     break;
@@ -113,12 +123,29 @@ namespace System
             }
         }
 
-        /// <summary>
-        /// ボタンが押された際の動き
-        /// </summary>
-        public void OnHitBtn()
+        public void TryHit()
         {
-            if (!CanPlayerAct()) return;
+            if (!CanPlayerAct())
+            {
+                return;
+            }
+
+            isInputLocked = true;
+            playerCards.Hit();
+            isInputLocked = false;
+            Debug.Log("ヒット終了");
+        }
+
+        public void TryStand()
+        {
+            if (!CanPlayerAct())
+            {
+                return;
+            }
+
+            isInputLocked = true;
+            playerCards.Stand();
+            isInputLocked = false;
         }
 
         /// <summary>
@@ -137,37 +164,49 @@ namespace System
             bool playerBurst = ScoreCalclator.IsBurst(playerData.GetCard());
             bool dealerBurst = ScoreCalclator.IsBurst(dealerData.GetCard());
             int playerScore = playerData.GetScore();
-            int dealerScore = playerData.GetScore();
+            int dealerScore = dealerData.GetScore();
 
             if(playerBurst)
             {
                 // プレイヤ負け処理
+                Debug.Log("プレイヤの負け");
             }
             else if(dealerBurst || playerScore > dealerScore)
             {
                 // プレイヤ勝ち
+                Debug.Log("プレイヤの勝ち");
             }
             else if(playerScore < dealerScore)
             {
                 // プレイヤ負け
+                Debug.Log("プレイヤの負け");
             }
             else
             {
                 // 引き分け
+                Debug.Log("ひきわけ");
             }
-        }
+
+            Finish();
+        }   
 
         protected override void Finish()
         {
+            Debug.Log("リザルトフェーズへ移行");
+            GameManager.INSTANCE.Call("result");
         }
 
         protected override void Destroy()
         {
         }
 
+        /// <summary>
+        /// UIの表示/非表示を切り替える
+        /// </summary>
+        /// <param name="gameObject"></param>
         public override void Invoke(GameObject gameObject)
         {
-
+            
         }
     }
 }

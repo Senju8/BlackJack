@@ -25,7 +25,11 @@ namespace Cards
             CardsView view = obj.GetComponent<CardsView>();
 
             view.Setup(card, cardsSprite);
+            view.SetSorting("Cards", 100);
             view.SetFaceUp(faceUp);
+
+            // カードのスケールを調整
+            obj.transform.localScale = new Vector3(2f, 2f, 2f);
 
             // カードの位置を調整
             int index = spawnedViews.Count;

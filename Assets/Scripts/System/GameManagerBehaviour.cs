@@ -20,6 +20,13 @@ namespace Assets.Scripts.System
         [Header("リザルト画面")]
         [SerializeField] private GameObject resultCanvas;
 
+        [Header("ブラックジャック関連")]
+        [SerializeField] private Cards.Deck deck;
+        [SerializeField] private Cards.PlayerCards playerCards;
+        [SerializeField] private Cards.DealerCards dealerCards;
+        [SerializeField] private Player.PlayerScoreView playerScoreView;
+
+
         public GameObject StartCanvas
         {
             get { return this.startCanvas; }
@@ -45,6 +52,13 @@ namespace Assets.Scripts.System
             get { return this.resultCanvas; }
         }
 
+
+        public Cards.Deck Deck => deck;
+        public Cards.PlayerCards PlayerCards => playerCards;
+        public Cards.DealerCards DealerCards => dealerCards;
+        public Player.PlayerScoreView PlayerScoreView => playerScoreView;
+
+        
         void Awake()
         {
             GameManager.INSTANCE.Init(this);
