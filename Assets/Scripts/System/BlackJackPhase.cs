@@ -35,6 +35,7 @@ namespace System
         private PlayerCards playerCards;
         private DealerCards dealerCards;
         private PlayerScoreView playerScoreView;
+        private DealerScoreView dealerScoreView;
 
         private PlayerData playerData;
         private DealerData dealerData;
@@ -50,6 +51,7 @@ namespace System
             playerCards = gameManagerBehaviour.PlayerCards;
             dealerCards = gameManagerBehaviour.DealerCards;
             playerScoreView = gameManagerBehaviour.PlayerScoreView;
+            dealerScoreView = gameManagerBehaviour.DealerScoreView;
 
             playerData = gameManager.playerData;
             dealerData = gameManager.dealerData;
@@ -57,6 +59,7 @@ namespace System
             playerCards.Setup(playerData, deck);
             dealerCards.Setup(dealerData, deck);
             playerScoreView.Setup(playerData);
+            dealerScoreView.Setup(dealerData);
         }
 
         /// <summary>
