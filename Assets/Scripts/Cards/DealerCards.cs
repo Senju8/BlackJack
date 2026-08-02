@@ -1,6 +1,7 @@
 using Player;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 namespace Cards
@@ -80,11 +81,14 @@ namespace Cards
         /// <summary>
         /// ディーラーのカードを全て表向きにする
         /// </summary>
-        public void CardsOpen()
+        public IEnumerator CardsOpen(float interval = 0.3f)
         {
             for(int i=0;i<dealerCards.Count;i++)
             {
                 handView.SetCardFaceUp(i, true);
+
+                // 指定した時間待つ
+                yield return new WaitForSeconds(interval);
             }
         }
 

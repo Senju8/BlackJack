@@ -171,6 +171,8 @@ MonoBehaviour:
   playerScoreView: {fileID: 300445047}
   dealerScoreView: {fileID: 702466978}
   blackJackOnlyUIs: {fileID: 1777065369}
+  betOnlyUIs: {fileID: 1860600974}
+  betButtoms: {fileID: 1860600976}
 --- !u!4 &410014902
 Transform:
   m_ObjectHideFlags: 0
@@ -275,7 +277,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6711905937242449782, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
   m_PrefabInstance: {fileID: 1565165329}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1615952018}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 913a7466313116a4bb8163c9d9faae1f, type: 3}
@@ -614,6 +616,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6711905937242449782, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
+      propertyPath: dealerScoreText
+      value: 
+      objectReference: {fileID: 1615952018}
     - target: {fileID: 6982405397658605964, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -627,11 +633,32 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
+--- !u!1 &1615952018 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8150261677756509927, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
+  m_PrefabInstance: {fileID: 1565165329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1777065369 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 365655917096361807, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
   m_PrefabInstance: {fileID: 1565165329}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1860600974 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 464279547741799576, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
+  m_PrefabInstance: {fileID: 1565165329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1860600976 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2625215278261560194, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
+  m_PrefabInstance: {fileID: 1565165329}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860600974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e2a95f44a8a044394b8a36f2aefcc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bet.BetButtoms
 --- !u!1001 &2714338018306185739
 PrefabInstance:
   m_ObjectHideFlags: 0

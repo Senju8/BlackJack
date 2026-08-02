@@ -1,4 +1,5 @@
 using Assets.Scripts.System;
+using Bet;
 using Cards;
 using Player;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace System
         /// </summary>
         private enum SubPhase
         {
+            Bet,        // ベット処理
             Dealing,    // 最初の2枚配り
             PlyaerTurn, // プレイヤターン
             DealerTurn, // ディーラーターン
@@ -42,6 +44,17 @@ namespace System
 
         private GameObject blackJackOnlyUIs;
 
+        private GameObject betOnlyUIs;
+        private BetButtoms betButtoms;
+
+        /// <summary>
+        /// ディーラーのカードめくり処理が進行中か
+        /// 
+        /// Update内でコルーチンを重複しての呼び出しを防ぐために用いる
+        /// </summary>
+        private bool isDealerCardsOpening = false;
+
+
         public BlackjackPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour) { }
 
         /// <summary>
@@ -56,6 +69,9 @@ namespace System
             dealerScoreView = gameManagerBehaviour.DealerScoreView;
             blackJackOnlyUIs = gameManagerBehaviour.BlackJackOnlyUIs;
 
+            betOnlyUIs = gameManagerBehaviour.BetOnlyUIs;
+            betButtoms = gameManagerBehaviour.BetButtoms;
+
             playerData = gameManager.playerData;
             dealerData = gameManager.dealerData;
 
@@ -63,7 +79,11 @@ namespace System
             dealerCards.Setup(dealerData, deck);
             playerScoreView.Setup(playerData);
             dealerScoreView.Setup(dealerData);
+            dealerScoreView.SetActiveText(false);
             blackJackOnlyUIs.SetActive(false);
+            betOnlyUIs.SetActive(false);
+
+            betButtoms.OnBetConfirmed += OnBetConfirmed;
         }
 
         /// <summary>
@@ -71,17 +91,37 @@ namespace System
         /// </summary>
         protected override void Start()
         {
-            blackJackOnlyUIs.SetActive(true);
-            currentSubPhase = SubPhase.Dealing;
+            blackJackOnlyUIs.SetActive(false);
+            betOnlyUIs.SetActive(true);
+            betButtoms.ResetInput();
+
+            currentSubPhase = SubPhase.Bet;
             isInputLocked = true;
 
             playerData.SetIsPlaying(true);
             dealerData.SetIsPlaying(true);
 
+            // デモ:プレイヤの金額をセット
+            playerData.SetValues(10000);
+        }
+
+        private void OnBetConfirmed(int betAmount)
+        {
+            if(currentSubPhase != SubPhase.Bet)
+            {
+                return;
+            }
+
+            betOnlyUIs.SetActive(false);
+            blackJackOnlyUIs.SetActive(true);
+
+            currentSubPhase = SubPhase.Dealing;
+
             deck.InitializeDeck();
+            deck.Shuffle();
 
             playerData.SetCard(new System.Collections.Generic.List<CardsManager.Card>());
-            dealerData.SetCard(new System.Collections.Generic.List<CardsManager.Card>()); 
+            dealerData.SetCard(new System.Collections.Generic.List<CardsManager.Card>());
 
             playerCards.DrawCard(2);
             dealerCards.DrawInitialCards();
@@ -98,28 +138,24 @@ namespace System
                     if(!playerData.GetIsPlaying())
                     {
                         isInputLocked = true;
+                        if(playerData.GetScore() > 21)
+                        {
+                            currentSubPhase = SubPhase.Judge;
+                            break;
+                        }
                         currentSubPhase = SubPhase.DealerTurn;
                     }
+
                     break;
 
                 case SubPhase.DealerTurn:
-                    if (dealerData.GetIsPlaying())
+                    //ディーラーの処理が未開始ならコルーチンをスタートさせる
+                    if(!isDealerCardsOpening)
                     {
-                        if (dealerData.GetScore() < 17)
-                        {
-                            dealerCards.Hit();
-                        }
-                        else
-                        {
-                            dealerData.SetIsPlaying(false);
-                            dealerCards.CardsOpen();
-                        }
+                        isDealerCardsOpening = true;
+                        gameManagerBehaviour.StartCoroutine(DealerTurnRoutine());
                     }
-                    else
-                    {
-                        currentSubPhase = SubPhase.Judge;
-                    }
-                    break;
+                     break;
 
                 case SubPhase.Judge:
                     JudgeResult();
@@ -130,14 +166,42 @@ namespace System
                 case SubPhase.Result:
                     //結果表示処理
 
-                    // blackJackOnlyUIs.SetActive(false);
-                    // playerCards.ClearCards();
-                    // dealerCards.ClearCards();
+                    blackJackOnlyUIs.SetActive(false);
+                    playerCards.ClearCards();
 
-                    // GameManager.INSTANCE.Call("result");
+                    dealerCards.ClearCards();
+
+                    GameManager.INSTANCE.Call("result");
                     break;
             }
         }
+
+        /// <summary>
+        /// ディーラーの思考/カードめくりを行うコルーチン
+        /// </summary>
+        /// <returns></returns>
+        private System.Collections.IEnumerator DealerTurnRoutine()
+        {
+            while(dealerData.GetScore() < 17)
+            {
+                dealerCards.Hit();
+            }
+            
+            dealerData.SetIsPlaying(false);
+
+            // ディーラーのカードを一定時間ごとにめくる
+            yield return gameManagerBehaviour.StartCoroutine(dealerCards.CardsOpen(0.7f));
+
+            yield return new WaitForSeconds(0.5f);
+
+            dealerScoreView.SetActiveText(true);
+
+            yield return new WaitForSeconds(2f);
+
+            currentSubPhase = SubPhase.Judge;
+            isDealerCardsOpening = false;
+        }
+
 
         public void TryHit()
         {
