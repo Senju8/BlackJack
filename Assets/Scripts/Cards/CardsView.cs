@@ -42,5 +42,11 @@ namespace Cards
                 ? cardsSprite.GetSprite(cardData)
                 : cardsSprite.cardBackSprite;
         }
+
+        public void SetSorting(string layerName,int order)
+        {
+            spriteRenderer.sortingLayerName = layerName;
+            spriteRenderer.sortingOrder = order;
+        }
     }
 }
