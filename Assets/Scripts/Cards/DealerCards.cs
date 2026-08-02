@@ -34,13 +34,29 @@ namespace Cards
             
         }
 
-        public void DrawCard(int amount)
+        /// <summary>
+        /// ディーラーが最初に2枚カードを引く際の動き
+        /// </summary>
+        public void DrawInitialCards()
+        {
+            // 一枚目のカードは見える(表向き)
+            var card1 = deck.DrawCard();
+            dealerCards.Add(card1);
+            handView.AddCard(card1, true);
+
+            // 二枚目のカードは見えない(裏向き)
+            var card2 = deck.DrawCard();
+            dealerCards.Add(card2);
+            handView.AddCard(card2, false);
+        }
+
+        public void DrawCard(int amount,bool isOpen)
         {
             for (int i = 0; i < amount; i++)
             {
                 CardsManager.Card card = deck.DrawCard();
                 dealerCards.Add(card);
-                handView.AddCard(card);
+                handView.AddCard(card,isOpen);
             }
 
             // データに適応
@@ -58,7 +74,7 @@ namespace Cards
 
         public void Hit()
         {
-            DrawCard(1);
+            DrawCard(1,false);
         }
 
         public void Stand()
