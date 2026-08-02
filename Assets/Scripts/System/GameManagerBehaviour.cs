@@ -30,6 +30,7 @@ namespace Assets.Scripts.System
         [SerializeField] private Cards.DealerCards dealerCards;
         [SerializeField] private Player.PlayerScoreView playerScoreView;
         [SerializeField] private Player.DealerScoreView dealerScoreView;
+        [SerializeField] private GameObject blackJackOnlyUIs;
 
         public GameObject StartCanvas
         {
@@ -67,7 +68,7 @@ namespace Assets.Scripts.System
         public Cards.DealerCards DealerCards => dealerCards;
         public Player.PlayerScoreView PlayerScoreView => playerScoreView;
         public Player.DealerScoreView DealerScoreView => dealerScoreView;
-
+        public GameObject BlackJackOnlyUIs => blackJackOnlyUIs;
         
         void Awake()
         {

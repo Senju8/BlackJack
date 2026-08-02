@@ -40,6 +40,8 @@ namespace System
         private PlayerData playerData;
         private DealerData dealerData;
 
+        private GameObject blackJackOnlyUIs;
+
         public BlackjackPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour) { }
 
         /// <summary>
@@ -52,6 +54,7 @@ namespace System
             dealerCards = gameManagerBehaviour.DealerCards;
             playerScoreView = gameManagerBehaviour.PlayerScoreView;
             dealerScoreView = gameManagerBehaviour.DealerScoreView;
+            blackJackOnlyUIs = gameManagerBehaviour.BlackJackOnlyUIs;
 
             playerData = gameManager.playerData;
             dealerData = gameManager.dealerData;
@@ -60,6 +63,7 @@ namespace System
             dealerCards.Setup(dealerData, deck);
             playerScoreView.Setup(playerData);
             dealerScoreView.Setup(dealerData);
+            blackJackOnlyUIs.SetActive(false);
         }
 
         /// <summary>
@@ -67,14 +71,17 @@ namespace System
         /// </summary>
         protected override void Start()
         {
+            blackJackOnlyUIs.SetActive(true);
             currentSubPhase = SubPhase.Dealing;
             isInputLocked = true;
 
             playerData.SetIsPlaying(true);
             dealerData.SetIsPlaying(true);
 
+            deck.InitializeDeck();
+
             playerData.SetCard(new System.Collections.Generic.List<CardsManager.Card>());
-            dealerData.SetCard(new System.Collections.Generic.List<CardsManager.Card>());
+            dealerData.SetCard(new System.Collections.Generic.List<CardsManager.Card>()); 
 
             playerCards.DrawCard(2);
             dealerCards.DrawInitialCards();
@@ -105,6 +112,7 @@ namespace System
                         else
                         {
                             dealerData.SetIsPlaying(false);
+                            dealerCards.CardsOpen();
                         }
                     }
                     else
@@ -122,6 +130,11 @@ namespace System
                 case SubPhase.Result:
                     //åãâ ï\é¶èàóù
 
+                    // blackJackOnlyUIs.SetActive(false);
+                    // playerCards.ClearCards();
+                    // dealerCards.ClearCards();
+
+                    // GameManager.INSTANCE.Call("result");
                     break;
             }
         }
@@ -189,8 +202,6 @@ namespace System
                 // à¯Ç´ï™ÇØ
                 Debug.Log("Ç–Ç´ÇÌÇØ");
             }
-
-            GameManager.INSTANCE.Call("result");
         }   
 
         protected override void Finish()
