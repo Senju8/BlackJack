@@ -96,7 +96,7 @@ namespace System
                     // Dice
                     itemDefinition = new DiceDefinition();
                 }
-                else if (posibility < 0.36D)
+                else if (posibility < 0.40D)
                 {
                     // Contract
                     itemDefinition = new ContractDefinition();
