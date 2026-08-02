@@ -35,6 +35,11 @@ namespace Assets.Scripts.System
         [SerializeField] private Player.DealerScoreView dealerScoreView;
         [SerializeField] private GameObject blackJackOnlyUIs;
 
+        [Header("ブラックジャックの結果UI")]
+        [SerializeField] private GameObject resultOnlyUI;
+        [SerializeField] private GameObject winUI;
+        [SerializeField] private GameObject loseUI;
+
         [Header("ベット関連")]
         [SerializeField] private GameObject betOnlyUIs;
         [SerializeField] private Bet.BetButtoms betButtoms;
@@ -81,9 +86,14 @@ namespace Assets.Scripts.System
         public Player.PlayerScoreView PlayerScoreView => playerScoreView;
         public Player.DealerScoreView DealerScoreView => dealerScoreView;
         public GameObject BlackJackOnlyUIs => blackJackOnlyUIs;
-        
+
+        public GameObject ResultOnlyUI => resultOnlyUI;
+        public GameObject WinUI => winUI;
+        public GameObject LoseUI => loseUI;
+
 
         public GameObject BetOnlyUIs => betOnlyUIs;
+
         public Bet.BetButtoms BetButtoms => betButtoms;
 
         void Awake()
