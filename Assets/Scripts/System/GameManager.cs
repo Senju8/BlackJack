@@ -118,7 +118,6 @@ namespace System
             }
 
             // デバッグ
-            UnityEngine.Debug.LogError($"GamePhase（ID: {id}）を初期化しました！");
             UnityEngine.Debug.Log($"GamePhase（ID: {id}）が登録されました！");
 
             return true;
