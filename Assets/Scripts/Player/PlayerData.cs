@@ -31,6 +31,11 @@ namespace Player
         /// </summary>
         private bool isPlaying = true;
 
+        /// <summary>
+        /// 現在確定しているベット額
+        /// </summary>
+        private int betAmount = 0;
+
 
         public PlayerData(GameManager gameManager)
         {
@@ -54,7 +59,7 @@ namespace Player
             return playerCards;
         }
 
-        // デモ:プレイヤの札をセット
+        // プレイヤの札をセット
         public void SetCard(List<CardsManager.Card> cards)
         {
             playerCards = cards;
@@ -75,6 +80,38 @@ namespace Player
         {
             playerScore = score;
             OnScoreChanded?.Invoke(playerScore);    //イベント発火
+        }
+
+        public int GetBet()
+        {
+            return betAmount;
+        }
+
+        /// <summary>
+        /// ベット額を確定する
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public bool TryConfirmBet(int amount)
+        {
+            if(amount <= 0 || amount > values)
+            {
+                return false;
+            }
+
+            values -= amount;
+            betAmount = amount;
+
+            return true;
+        }
+
+        /// <summary>
+        /// ベット額のリセット
+        /// </summary>
+        public void ResetBet()
+        {
+            betAmount = 0;
         }
 
         // プレイヤのプレイ状態

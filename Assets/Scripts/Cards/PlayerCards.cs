@@ -67,5 +67,13 @@ namespace Cards
         {
             playerData.SetIsPlaying(false);
         }
+
+        /// <summary>
+        /// プレイヤのカードを全て削除する
+        /// </summary>
+        public void ClearCards()
+        {
+            handView.ClearHand();
+        }
     }
 }
