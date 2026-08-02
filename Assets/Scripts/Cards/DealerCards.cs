@@ -1,6 +1,7 @@
 using Player;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 namespace Cards
@@ -13,7 +14,6 @@ namespace Cards
         [SerializeField]
         private HandView handView;
 
-        // デモ:一旦ここでDealerDataを生成する
         private DealerData dealerData = GameManager.INSTANCE.dealerData;
 
         private List<CardsManager.Card> dealerCards = new List<CardsManager.Card>();
@@ -24,14 +24,6 @@ namespace Cards
             this.deck = deck;
             dealerCards.Clear();
             dealerCards = dealerData.GetCard();
-        }
-
-        /// <summary>
-        /// ディーラーの更新処理
-        /// </summary>
-        public void OnUpdate()
-        {
-            
         }
 
         /// <summary>
@@ -84,6 +76,28 @@ namespace Cards
         public void Stand()
         {
             dealerData.SetIsPlaying(false);
+        }
+
+        /// <summary>
+        /// ディーラーのカードを全て表向きにする
+        /// </summary>
+        public IEnumerator CardsOpen(float interval = 0.3f)
+        {
+            for(int i=0;i<dealerCards.Count;i++)
+            {
+                handView.SetCardFaceUp(i, true);
+
+                // 指定した時間待つ
+                yield return new WaitForSeconds(interval);
+            }
+        }
+
+        /// <summary>
+        /// ディーラーのカードを全て削除する
+        /// </summary>
+        public void ClearCards()
+        {
+            handView.ClearHand();
         }
     }
 }

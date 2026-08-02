@@ -33,6 +33,11 @@ namespace Assets.Scripts.System
         [SerializeField] private Cards.DealerCards dealerCards;
         [SerializeField] private Player.PlayerScoreView playerScoreView;
         [SerializeField] private Player.DealerScoreView dealerScoreView;
+        [SerializeField] private GameObject blackJackOnlyUIs;
+
+        [Header("ベット関連")]
+        [SerializeField] private GameObject betOnlyUIs;
+        [SerializeField] private Bet.BetButtoms betButtoms;
 
         public GameObject StartCanvas
         {
@@ -75,8 +80,12 @@ namespace Assets.Scripts.System
         public Cards.DealerCards DealerCards => dealerCards;
         public Player.PlayerScoreView PlayerScoreView => playerScoreView;
         public Player.DealerScoreView DealerScoreView => dealerScoreView;
-
+        public GameObject BlackJackOnlyUIs => blackJackOnlyUIs;
         
+
+        public GameObject BetOnlyUIs => betOnlyUIs;
+        public Bet.BetButtoms BetButtoms => betButtoms;
+
         void Awake()
         {
             GameManager.INSTANCE.Init(this);

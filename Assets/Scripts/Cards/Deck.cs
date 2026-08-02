@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static Cards.CardsManager;
 
 namespace Cards
 {
@@ -18,13 +19,7 @@ namespace Cards
         /// </summary>
         private List<CardsManager.Card> usedCards = new List<CardsManager.Card>();
 
-        void Start()
-        {
-            // 山札の初期化
-            InitializeDeck();
-        }
-
-        private void InitializeDeck()
+        public void InitializeDeck()
         {
             deckCards.Clear();
             for (int i = 0; i < 4; i++)
@@ -67,7 +62,7 @@ namespace Cards
         /// <returns></returns>
         public CardsManager.Card DrawCard()
         {
-            if(deckCards.Count == 0)
+            if (deckCards.Count == 0)
             {
                 // 山札が空の場合、使用済みカードを山札に戻してシャッフル
                 Shuffle();

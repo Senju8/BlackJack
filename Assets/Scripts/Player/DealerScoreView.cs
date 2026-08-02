@@ -10,6 +10,8 @@ namespace Player
     {
         [SerializeField]
         private TMP_Text scoreText;
+        [SerializeField]
+        private GameObject dealerScoreText; // 自分自身/テキストをアタッチ
         private DealerData dealerData;
 
         public void Setup(DealerData data)
@@ -29,6 +31,15 @@ namespace Player
             {
                 dealerData.OnScoreChanded -= UpdateScoreText;
             }
+        }
+
+        /// <summary>
+        /// スコアの見た目の表示/非表示を切り替える
+        /// </summary>
+        /// <param name="isActive"></param>
+        public void SetActiveText(bool isActive)
+        {
+            dealerScoreText.SetActive(isActive);
         }
     }
 }
