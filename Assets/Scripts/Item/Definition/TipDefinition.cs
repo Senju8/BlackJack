@@ -1,19 +1,15 @@
-using Player;
+﻿using Player;
+using UnityEngine;
 
 namespace Item
 {
     public class TipDefinition : ItemDefinition
     {
-        public static readonly TipDefinition INSTANCE = new();
-
         public string Name
         {
             get { return "Tip"; }
         }
 
-        /// <summary>
-        /// コモンを基準とする
-        /// </summary>
         public int Value
         {
             get { return 5000; }
@@ -23,6 +19,9 @@ namespace Item
         {
         }
 
-        private TipDefinition() { }
+        public int ComputeValue(float rarity)
+        {
+            return Mathf.RoundToInt(this.Value * rarity);
+        }
     }
 }

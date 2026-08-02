@@ -1,4 +1,4 @@
-using Assets.Scripts.System;
+﻿using Assets.Scripts.System;
 using Item;
 using Player;
 using System.Collections.Generic;
@@ -232,6 +232,17 @@ namespace System
                 return;
 
             this.bindingGamePhase.Invoke(gameObject);
+        }
+
+        /// <summary>
+        /// GamePhaseにイベントを発生させる
+        /// </summary>
+        public void Invoke(GameObject gameObject, params object[] contexts)
+        {
+            if (this.bindingGamePhase == null)
+                return;
+
+            this.bindingGamePhase.Invoke(gameObject, contexts);
         }
     }
 }

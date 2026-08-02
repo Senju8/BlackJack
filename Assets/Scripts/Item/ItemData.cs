@@ -1,4 +1,5 @@
-using Player;
+﻿using Player;
+using System;
 using UnityEngine;
 
 namespace Item
@@ -75,17 +76,42 @@ namespace Item
             set { this.sprite = value; }
         }
 
-        public ItemData(ItemDefinition itemDefinition, float rarity = 1.0F, int value = 0, int count = 0)
+        public ItemData(ItemDefinition itemDefinition, float rarity = 1.0F, int count = 0)
         {
             this.itemDefinition = itemDefinition;
             this.Rarity = rarity;
-            this.value = value;
             this.Count = count;
         }
 
+        /// <summary>
+        /// <para>ItemDataのクローンを返す</para>
+        /// </summary>
         public ItemData Clone()
         {
-            return new ItemData(this.itemDefinition, this.rarity, this.count);
+            ItemData itemData = new ItemData(this.itemDefinition, this.rarity, this.count);
+
+            itemData.Value = this.Value;
+
+            return itemData;
+        }
+
+        public override bool Equals(object target)
+        {
+            if (target == this)
+            {
+                return true;
+            }
+            else if (target is ItemData itemData)
+            {
+                return itemData.Name == this.Name && itemData.rarity == this.rarity;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.Name, this.Rarity);
         }
 
         /// <summary>

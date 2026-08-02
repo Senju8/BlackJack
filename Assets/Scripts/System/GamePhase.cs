@@ -1,4 +1,4 @@
-using Assets.Scripts.System;
+﻿using Assets.Scripts.System;
 using UnityEngine;
 
 namespace System
@@ -125,6 +125,11 @@ namespace System
         /// <para>GamePhaseのイベントを定義する</para>
         /// </summary>
         public virtual void Invoke(GameObject gameObject) { }
+
+        /// <summary>
+        /// <para>GamePhaseのイベントを定義する</para>
+        /// </summary>
+        public virtual void Invoke(GameObject gameObject, params object[] contexts) { }
 
         /// <summary>
         /// GamePhaseの状態を定義する
