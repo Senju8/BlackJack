@@ -60,6 +60,9 @@ namespace Item
             set { this.count = Mathf.Max(0, value); }
         }
 
+        /// <summary>
+        /// <para>アイテムの値段</para>
+        /// </summary>
         public Sprite Sprite
         {
             get { return this.sprite; }

@@ -70,7 +70,7 @@ namespace System
 
                     break;
                 case "OK":
-                    this.gameManager.Call("buy");
+                    this.gameManager.Call("shop");
 
                     break;
             }
