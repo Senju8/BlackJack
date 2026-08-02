@@ -1,5 +1,6 @@
 using Cards;
 using Item;
+using System;
 using System.Collections.Generic;
 
 namespace Player
@@ -54,6 +55,11 @@ namespace Player
             playerCards = cards;
         }
 
+        /// <summary>
+        /// スコアの変更があった際に発火するイベント
+        /// </summary>
+        public event Action<int> OnScoreChanded;
+
         // プレイヤのスコア
         public int GetScore()
         {
@@ -63,6 +69,7 @@ namespace Player
         public void SetScore(int score)
         {
             playerScore = score;
+            OnScoreChanded?.Invoke(playerScore);    //イベント発火
         }
 
         // プレイヤのプレイ状態
