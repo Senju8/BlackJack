@@ -197,6 +197,12 @@ namespace System
 
         protected override void Destroy()
         {
+            deck = null;
+            playerCards = null;
+            dealerCards = null;
+            playerScoreView = null;
+            playerData = null;
+            dealerData = null;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Scripts.System
@@ -28,7 +29,7 @@ namespace Assets.Scripts.System
         [SerializeField] private Cards.PlayerCards playerCards;
         [SerializeField] private Cards.DealerCards dealerCards;
         [SerializeField] private Player.PlayerScoreView playerScoreView;
-
+        [SerializeField] private Player.DealerScoreView dealerScoreView;
 
         public GameObject StartCanvas
         {
@@ -65,6 +66,7 @@ namespace Assets.Scripts.System
         public Cards.PlayerCards PlayerCards => playerCards;
         public Cards.DealerCards DealerCards => dealerCards;
         public Player.PlayerScoreView PlayerScoreView => playerScoreView;
+        public Player.DealerScoreView DealerScoreView => dealerScoreView;
 
         
         void Awake()
