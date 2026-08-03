@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    public void TestA()
+    public void TestA(int index)
     {
-        GameManager.INSTANCE.Invoke(this.gameObject,0);
+        GameManager.INSTANCE.Invoke(this.gameObject,index);
     }
 }
