@@ -246,7 +246,7 @@ namespace System
         /// <summary>
         /// <para>登録されたAudioSourceHolderを再生する</para>
         /// </summary>
-        public bool PlayAudioSourceHolder(string name)
+        public bool Play(string name)
         {
             if (this.audioSourceHolders.ContainsKey(name))
             {
