@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Player
@@ -8,6 +9,8 @@ namespace Player
     public class PayoutMultiplier
     {
         private readonly Dictionary<string, float> bonuses = new();
+
+        public event Action<float> OnMultiplierChanged;
 
         /// <summary>
         /// 倍率ボーナスを設定する
@@ -24,6 +27,7 @@ namespace Player
             }
 
             bonuses[reason] = value;
+            OnMultiplierChanged?.Invoke(Calculate());   // イベント発火
         }
 
         /// <summary>
@@ -36,7 +40,10 @@ namespace Player
                 return;
             }
 
-            bonuses.Remove(reason);
+            if(bonuses.Remove(reason))
+            {
+                OnMultiplierChanged?.Invoke(Calculate());   // イベント発火
+            }
         }
 
         /// <summary>
@@ -47,6 +54,7 @@ namespace Player
         public void Clear()
         {
             bonuses.Clear();
+            OnMultiplierChanged?.Invoke(Calculate());   // イベント発火
         }
 
         /// <summary>
