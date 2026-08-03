@@ -26,7 +26,7 @@ namespace System
 
         private readonly List<ItemData> playerItemData = new();
         private readonly int playerItemCount = 6;
-        
+
         private float difficulty = 1.0F;
         private bool infiniteMoneyMode = true;
 
@@ -57,7 +57,7 @@ namespace System
         /// </summary>
         public int Quata
         {
-            get { return (int) (600000.0D * this.difficulty); }
+            get { return (int)(600000.0D * this.difficulty); }
         }
 
         /// <summary>
@@ -324,7 +324,33 @@ namespace System
         }
 
         /// <summary>
-        /// <para>プレイヤーのItemData使用する</para>
+        /// <para>プレイヤーのItemDataを使用する</para>
+        /// </summary>
+        public void UsePlayerItemData(ItemData itemData, bool isForce = false)
+        {
+            if (this.playerItemData == null || itemData == null || itemData.Equals(ItemData.EMPTY))
+                return;
+
+            // ItemDataを強制的に使用する
+            if (isForce)
+            {
+                itemData.DoUse(this.playerData, this.dealerData);
+
+                return;
+            }
+
+            // プレイヤーが所持するItemDataを使用する
+            foreach (ItemData havingItemData in this.playerItemData)
+            {
+                if (havingItemData != null && !havingItemData.Equals(ItemData.EMPTY) && havingItemData.Equals(itemData) && havingItemData.CanUse(this.playerData, this.dealerData))
+                {
+                    havingItemData.DoUse(this.playerData, this.dealerData);
+                }
+            }
+        }
+
+        /// <summary>
+        /// <para>プレイヤーのItemDataを使用する</para>
         /// </summary>
         public void UsePlayerItemData(int index)
         {
