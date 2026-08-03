@@ -1,7 +1,6 @@
 ﻿using Cards;
 using Player;
 using System;
-using System.Threading;
 using UnityEngine;
 
 namespace Item

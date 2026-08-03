@@ -54,6 +54,11 @@ namespace Player
             return dealerScore;
         }
 
+        public void AddScore(int amount)
+        {
+            dealerScore += amount;
+        }
+
         public void SetScore(int score)
         {
             dealerScore = score;

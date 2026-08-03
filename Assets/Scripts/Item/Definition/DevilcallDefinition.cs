@@ -31,19 +31,19 @@ namespace Item
             switch(rarity)
             {
                 case 1:
-
+                    dealerData.AddScore(1);
                     break;
                 case 2:
-
+                    dealerData.AddScore(2);
                     break;
                 case 3:
-
+                    dealerData.AddScore(3);
                     break;
                 case 4:
-
+                    dealerData.AddScore(4);
                     break;
                 case 5:
-
+                    dealerData.AddScore(5);
                     break;
             }
         }
