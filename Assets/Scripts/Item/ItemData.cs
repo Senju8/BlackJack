@@ -137,6 +137,7 @@ namespace Item
             if (this.itemDefinition == null)
                 return;
 
+
             this.itemDefinition.DoUse(playerData, dealerData, this.rarity);
 
             --this.Count;

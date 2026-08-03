@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.System;
+using Audio;
 using Item;
 using NUnit.Framework.Interfaces;
 using Player;
@@ -24,6 +25,7 @@ namespace System
         private GamePhase bindingGamePhase;
 
         private readonly Dictionary<string, ItemImageHolder> itemImageHolders = new();
+        private readonly Dictionary<string, AudioSourceHolder> audioSourceHolders = new();
 
         private readonly List<ItemData> playerItemData = new();
         private readonly int playerItemCount = 6;
@@ -212,20 +214,6 @@ namespace System
         }
 
         /// <summary>
-        /// <para>ItemImageHolderを削除する</para>
-        /// </summary>
-        public bool DeleteItemImageHolder(string name, float rarity)
-        {
-            if (name == null || !this.itemImageHolders.ContainsKey(ItemImageHolder.GetID(name, rarity)))
-                return false;
-
-            // デバッグ
-            UnityEngine.Debug.Log($"ItemImageHolder（Name: {name}）が削除されました！");
-
-            return this.itemImageHolders.Remove(ItemImageHolder.GetID(name, rarity));
-        }
-
-        /// <summary>
         /// <para>登録されたItemImageHolder</para>
         /// </summary>
         public ItemImageHolder GetItemImageHolder(string name, float rarity)
@@ -236,6 +224,37 @@ namespace System
             }
 
             return ItemImageHolder.EMPTY;
+        }
+
+        /// <summary>
+        /// <para>AudioSourceHolderを登録する</para>
+        /// </summary>
+        public void RegisterAudioSourceHolders(AudioSourceHolder[] audioSourceHolders)
+        {
+            foreach (AudioSourceHolder audioSourceHolder in audioSourceHolders)
+            {
+                if (audioSourceHolder != null && audioSourceHolder.Name != null && audioSourceHolder.AudioSource != null)
+                {
+                    this.audioSourceHolders[audioSourceHolder.Name] = audioSourceHolder;
+
+                    UnityEngine.Debug.Log($"新しいAudioSourceHolder（Name: {audioSourceHolder.Name}）が登録されました！");
+                }
+            }
+        }
+
+        /// <summary>
+        /// <para>登録されたAudioSourceHolderを再生する</para>
+        /// </summary>
+        public bool PlayAudioSourceHolder(string name)
+        {
+            if (this.audioSourceHolders.ContainsKey(name))
+            {
+                this.audioSourceHolders[name].Play();
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
