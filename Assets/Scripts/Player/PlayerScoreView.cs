@@ -9,7 +9,8 @@ namespace Player
     public class PlayerScoreView : MonoBehaviour
     {
         [SerializeField]
-        private TMP_Text scoreText;
+        private TMP_Text scoreText; // スコア
+
         private PlayerData playerData;
 
         public void Setup(PlayerData data)
