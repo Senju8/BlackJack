@@ -1,5 +1,6 @@
 ﻿using Player;
 using System;
+using System.Threading;
 using UnityEngine;
 
 namespace Item
@@ -131,7 +132,7 @@ namespace Item
         /// <summary>
         /// <para>アイテムを使用する</para>
         /// </summary>
-        public virtual void DoUse(PlayerData playerData, DealerData dealerData)
+        public virtual void DoUse(PlayerData playerData, DealerData dealerData, int count = 1)
         {
             if (this.itemDefinition == null)
                 return;
