@@ -334,7 +334,7 @@ namespace System
             // ItemDataを強制的に使用する
             if (isForce)
             {
-                itemData.DoUse(this.playerData, this.dealerData);
+                itemData.DoUse(this.playerData, this.dealerData,this.deck);
 
                 return;
             }
@@ -342,9 +342,9 @@ namespace System
             // プレイヤーが所持するItemDataを使用する
             foreach (ItemData havingItemData in this.playerItemData)
             {
-                if (havingItemData != null && !havingItemData.Equals(ItemData.EMPTY) && havingItemData.Equals(itemData) && havingItemData.CanUse(this.playerData, this.dealerData))
+                if (havingItemData != null && !havingItemData.Equals(ItemData.EMPTY) && havingItemData.Equals(itemData) && havingItemData.CanUse(this.playerData, this.dealerData,this.deck))
                 {
-                    havingItemData.DoUse(this.playerData, this.dealerData);
+                    havingItemData.DoUse(this.playerData, this.dealerData,this.deck);
                 }
             }
         }
