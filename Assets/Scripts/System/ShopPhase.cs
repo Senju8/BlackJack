@@ -230,6 +230,11 @@ namespace System
                     }
 
                     return;
+                case "Reroll":
+                    this.gameManager.Call("shop");
+                    this.gameManager.Play("Reroll");
+
+                    break;
             }
         }
 

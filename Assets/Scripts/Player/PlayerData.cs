@@ -14,7 +14,7 @@ namespace Player
         /// <summary>
         /// プレイ全体用
         /// </summary>
-        private int values = 0; // プレイヤの所持金額
+        private int values = 50000; // プレイヤの所持金額
 
         /// <summary>
         /// ブラックジャック用

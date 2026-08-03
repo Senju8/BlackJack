@@ -171,6 +171,7 @@ MonoBehaviour:
   dealerCards: {fileID: 1037330369}
   playerScoreView: {fileID: 300445047}
   dealerScoreView: {fileID: 702466978}
+  payoutMultiplierView: {fileID: 0}
   blackJackOnlyUIs: {fileID: 1777065369}
   resultOnlyUI: {fileID: 1565165332}
   winUI: {fileID: 1565165331}
@@ -805,89 +806,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e2a95f44a8a044394b8a36f2aefcc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bet.BetButtoms
---- !u!1 &2053483450
-GameObject:
+--- !u!1001 &300527196174800931
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2053483453}
-  - component: {fileID: 2053483452}
-  - component: {fileID: 2053483451}
-  m_Layer: 0
-  m_Name: AudioSourceRegistryBehaviour
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2053483451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053483450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa1a596d4521bdb4ea86dc2fbe66aa43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Audio.AudioSourceRegistryBehaviour
-  audioSourceHolders: []
---- !u!114 &2053483452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053483450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa1a596d4521bdb4ea86dc2fbe66aa43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  audioSourceHolders:
-  - name: Bet
-    audioSource: {fileID: 976260042482428454, guid: d254cd7b66e1b8645a4cc0e35e2bd3e6, type: 3}
-  - name: Buy
-    audioSource: {fileID: 8256518423635206375, guid: b413528ac155f4f4a91eaaa9033c643a, type: 3}
-  - name: Cancel
-    audioSource: {fileID: 976260042482428454, guid: dd785d5743014344eb2da95f52925e08, type: 3}
-  - name: Card
-    audioSource: {fileID: 976260042482428454, guid: ac706b499dc1b0e478ffff4e25bfbae2, type: 3}
-  - name: Cursor
-    audioSource: {fileID: 976260042482428454, guid: 27f17c444326d764596fc2fab01799e7, type: 3}
-  - name: Flip
-    audioSource: {fileID: 976260042482428454, guid: 8a8566b0fe5a4ee4da0653bd2db17a4a, type: 3}
-  - name: Invalid
-    audioSource: {fileID: 6546924934037826997, guid: 0a9dac53e99eef04e9c221dfef04d723, type: 3}
-  - name: Money
-    audioSource: {fileID: 976260042482428454, guid: f98d356beabecbc4f85b9f47f4616b63, type: 3}
-  - name: Reroll
-    audioSource: {fileID: 976260042482428454, guid: 6f8b3ffefb168514f9ca5f16471c7370, type: 3}
-  - name: Second Dealing
-    audioSource: {fileID: 976260042482428454, guid: 726e150f801c7524a976b1f997a75a05, type: 3}
-  - name: Select
-    audioSource: {fileID: 976260042482428454, guid: b25420f731c6b40439e894bcfa848574, type: 3}
-  - name: Shuffle
-    audioSource: {fileID: 976260042482428454, guid: c48397e9152db1c4e9daf69fc1f08c51, type: 3}
---- !u!4 &2053483453
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053483450}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.80699, y: 0.0593, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1456398966543677072, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_Name
+      value: AudioSourceRegistryBehaviour
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.80699
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0593
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556332841304088617, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b50ae76f89736ff479e84057031a7d8a, type: 3}
 --- !u!1001 &2714338018306185739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1054,4 +1029,4 @@ SceneRoots:
   - {fileID: 1037330368}
   - {fileID: 1565165329}
   - {fileID: 694879785}
-  - {fileID: 2053483453}
+  - {fileID: 300527196174800931}
