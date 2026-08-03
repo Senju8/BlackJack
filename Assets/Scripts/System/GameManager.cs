@@ -29,10 +29,20 @@ namespace System
         private readonly List<ItemData> playerItemData = new();
         private readonly int playerItemCount = 6;
 
+        private ResultPhase.Result gameResult = ResultPhase.Result.None;
         private float difficulty = 1.0F;
         private bool infiniteMoneyMode = false;
 
         private Deck deck;
+
+        /// <summary>
+        /// ゲームのリザルト
+        /// </summary>
+        public ResultPhase.Result GameResult
+        {
+            get { return this.gameResult; }
+            set { this.gameResult = value; }
+        }
 
         /// <summary>
         /// ゲームの難易度
