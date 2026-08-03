@@ -23,6 +23,7 @@ namespace Player
         private int playerScore = 0;    // プレイヤのスコア
 
         /// <summary>
+        /// <summary>
         /// プレイヤがゲームを続けられるかの判定変数
         /// 
         /// スタンドを行うとfalseに
@@ -100,6 +101,14 @@ namespace Player
         public int GetBet()
         {
             return betAmount;
+        }
+
+        /// <summary>
+        /// ベット額をセット
+        /// </summary>
+        public void SetBet(int amount)
+        {
+            betAmount = amount;
         }
 
         /// <summary>

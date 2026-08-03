@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Item
 {
+    /// <summary>
+    /// アイテム:チップ
+    /// </summary>
     public class TipDefinition : ItemDefinition
     {
         public string Name
@@ -15,8 +18,15 @@ namespace Item
             get { return 5000; }
         }
 
+        /// <summary>
+        /// 倍率が増える
+        /// </summary>
+        /// <param name="playerData"></param>
+        /// <param name="dealerData"></param>
+        /// <param name="rarity"></param>
         public void DoUse(PlayerData playerData, DealerData dealerData, float rarity)
         {
+
         }
 
         public int ComputeValue(float rarity)
