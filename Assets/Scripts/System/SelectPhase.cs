@@ -59,18 +59,22 @@ namespace System
             {
                 case "Easy":
                     this.gameManager.Difficulty = 1.0F;
+                    this.gameManager.Play("Select");
 
                     break;
                 case "Normal":
                     this.gameManager.Difficulty = 2.0F;
+                    this.gameManager.Play("Select");
 
                     break;
                 case "Hard":
                     this.gameManager.Difficulty = 3.0F;
+                    this.gameManager.Play("Select");
 
                     break;
                 case "OK":
                     this.gameManager.Call("shop");
+                    this.gameManager.Play("Select");
 
                     break;
             }
