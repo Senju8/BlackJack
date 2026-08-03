@@ -220,6 +220,9 @@ namespace System
 
                         // 次のGamePhaseを呼び出す
                         this.gameManager.Call("blackjack");
+
+                        // サウンドを再生
+                        this.gameManager.Play("購入");
                     }
 
                     return;

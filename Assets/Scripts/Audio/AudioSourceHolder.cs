@@ -15,6 +15,8 @@ namespace Audio
         [Header("サウンドのソース（Audio Source）")]
         [SerializeField] private AudioSource audioSource;
 
+        private GameObject audioObject;
+
         public string Name
         {
             get { return this.name; }
@@ -35,10 +37,41 @@ namespace Audio
         /// </summary>
         public void Play()
         {
-            if (this.audioSource != null)
+            if (this.Instantiate())
             {
                 this.audioSource.Play();
+
+                UnityEngine.Debug.Log($"サウンド（Name: {this.name}）が再生されました！");
             }
+        }
+
+        /// <summary>
+        /// <para>サウンドがアタッチされたGameObjectを生成する</para>
+        /// </summary>
+        private bool Instantiate()
+        {
+            if (this.audioSource == null)
+                return false;
+
+            if (this.audioObject != null)
+                return true;
+
+            // GameObjectを生成する
+            this.audioObject = new GameObject($"Audio:{this.Name}");
+
+            if (this.audioObject != null && audioSource != null)
+            {
+                AudioSource audioSource = this.audioObject.AddComponent<AudioSource>();
+                
+                // サウンドを設定
+                audioSource.generator = this.audioSource.generator;
+
+                this.audioSource = audioSource;
+
+                return true;
+            }
+
+            return false;
         }
     }
 }
