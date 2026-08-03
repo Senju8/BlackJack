@@ -97,6 +97,7 @@ namespace Cards
         /// </summary>
         public void ClearCards()
         {
+            dealerCards.Clear();
             handView.ClearHand();
         }
     }

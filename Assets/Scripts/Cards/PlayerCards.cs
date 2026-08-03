@@ -75,6 +75,7 @@ namespace Cards
         /// </summary>
         public void ClearCards()
         {
+        playerCards.Clear();
             handView.ClearHand();
         }
 
