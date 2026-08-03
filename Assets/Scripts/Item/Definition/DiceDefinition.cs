@@ -26,8 +26,9 @@ namespace Item
         /// <param name="playerData"></param>
         /// <param name="dealerData"></param>
         /// <param name="rarity"></param>
-        public void DoUse(PlayerData playerData, DealerData dealerData, float rarity)
+        public void DoUse(PlayerData playerData, DealerData dealerData, Deck deck, float rarity)
         {
+            Debug.Log("ダイスを使用");
             List<CardsManager.Card> playerCopy = new List<CardsManager.Card>(playerData.GetCard());
 
             if(playerCopy.Count == 0)
@@ -37,14 +38,24 @@ namespace Item
 
             // ランダムな一枚を選ぶ
             int targetIndex = Random.Range(0, playerCopy.Count);
-            CardsManager.Card targetCard = playerCopy[targetIndex];
+            CardsManager.Card oldCard = playerCopy[targetIndex];
+
+            CardsManager.Rank targetRank = (CardsManager.Rank)Random.Range(1, 7);
 
             // ランクを1～6のランダムな値に変更
-            targetCard.rank = (CardsManager.Rank)Random.Range(1, 7);
+            targetRank = (CardsManager.Rank)Random.Range(1, 7);
 
-            playerCopy[targetIndex] = targetCard;
+            if(!deck.TryDrawByRank(targetRank,out CardsManager.Card newCard))
+            {
+                // 該当ランクがないなら無視
+                return;
+            }
 
-            playerData.SetCard(playerCopy);
+            // 元のカード山札にもどす
+            deck.ReturnCard(oldCard);
+
+            playerData.ReplaceCard(targetIndex,newCard);
+            Debug.Log("ダイスの使用終了");
         }
 
         public int ComputeValue(float rarity)

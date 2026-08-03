@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using Cards;
+using Player;
 using UnityEngine;
 
 namespace Item
@@ -24,7 +25,7 @@ namespace Item
         /// <param name="playerData"></param>
         /// <param name="dealerData"></param>
         /// <param name="rarity"></param>
-        public void DoUse(PlayerData playerData, DealerData dealerData, float rarity)
+        public void DoUse(PlayerData playerData, DealerData dealerData, Deck deck, float rarity)
         {
 
         }

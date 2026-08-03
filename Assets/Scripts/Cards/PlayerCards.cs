@@ -29,7 +29,9 @@ namespace Cards
             this.playerData = data;
             this.deck = deck;
             playerCards.Clear();
-            playerCards = playerData.GetCard();
+            List<CardsManager.Card> playerCopy = new List<CardsManager.Card>(playerData.GetCard());
+
+            playerData.OnCardReplaced += HandleCardsChanged;
         }
 
         /// <summary>
@@ -74,6 +76,30 @@ namespace Cards
         public void ClearCards()
         {
             handView.ClearHand();
+        }
+
+        public void HandleCardsChanged(int index,CardsManager.Card newCard)
+        {
+            if(index < 0 || index >= playerCards.Count)
+            {
+                return;
+            }
+
+            playerCards[index] = newCard;
+            handView.ReplaceCard(index, newCard);
+
+            if(ScoreCalclator.IsBurst(playerCards))
+            {
+                playerData.SetIsPlaying(false);
+            }
+        }
+
+        public void OnDestroy()
+        {
+            if(playerData != null)
+            {
+                playerData.OnCardReplaced -= HandleCardsChanged;
+            }
         }
     }
 }

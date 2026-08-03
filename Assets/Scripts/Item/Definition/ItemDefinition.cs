@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using Cards;
+using Player;
 
 namespace Item
 {
@@ -17,12 +18,12 @@ namespace Item
         /// <summary>
         /// <para>アイテムを使用できるかどうか</para>
         /// </summary>
-        public bool CanUse(PlayerData playerData, DealerData dealerData, float rarity) { return true; }
+        public bool CanUse(PlayerData playerData, DealerData dealerData, Deck deck, float rarity) { return true; }
 
         /// <summary>
         /// <para>アイテムを使用する</para>
         /// </summary>
-        public void DoUse(PlayerData playerData, DealerData dealerData, float rarity);
+        public void DoUse(PlayerData playerData, DealerData dealerData, Deck deck, float rarity);
 
         /// <summary>
         /// <para>レア度から計算した値段を返す</para>
