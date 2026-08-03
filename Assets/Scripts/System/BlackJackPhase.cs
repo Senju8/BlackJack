@@ -42,6 +42,7 @@ namespace System
         private DealerCards dealerCards;
         private PlayerScoreView playerScoreView;
         private DealerScoreView dealerScoreView;
+        private PayoutMultiplierView payoutMultiplierView;
 
         private PlayerData playerData;
         private DealerData dealerData;
@@ -79,6 +80,11 @@ namespace System
             dealerCards = gameManagerBehaviour.DealerCards;
             playerScoreView = gameManagerBehaviour.PlayerScoreView;
             dealerScoreView = gameManagerBehaviour.DealerScoreView;
+            payoutMultiplierView = gameManagerBehaviour.PayoutMultiplierView;
+            if (payoutMultiplierView != null)
+            {
+                payoutMultiplierView.Setup(playerData);
+            }
             blackJackOnlyUIs = gameManagerBehaviour.BlackJackOnlyUIs;
 
             betOnlyUIs = gameManagerBehaviour.BetOnlyUIs;
@@ -124,90 +130,7 @@ namespace System
 
             //List<ItemData> currentItemData = new List<ItemData>(this.gameManager.GetAllPlayerItemData());
 
-            // アイテムボタンA
-            GameObject slotA = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/A");
-
-            Image imgA = slotA != null ? slotA.GetComponent<Image>() : null;
-
-            if (imgA != null)
-            {
-                ItemData itemA = this.gameManager.GetPlayerItemData(0);
-
-                ItemImageHolder holderA = this.gameManager.GetItemImageHolder(itemA.Name, itemA.Rarity);
-
-                imgA.sprite = holderA.ItemImage?.sprite;
-            }
-
-            // アイテムボタンB
-            GameObject slotB = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/B");
-
-            Image imgB = slotB != null ? slotB.GetComponent<Image>() : null;
-
-            if (imgB != null)
-            {
-                ItemData itemB = this.gameManager.GetPlayerItemData(0);
-
-                ItemImageHolder holderB = this.gameManager.GetItemImageHolder(itemB.Name, itemB.Rarity);
-
-                imgB.sprite = holderB.ItemImage?.sprite;
-            }
-
-            // アイテムボタンC
-            GameObject slotC = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/C");
-
-            Image imgC = slotC != null ? slotC.GetComponent<Image>() : null;
-
-            if (imgC != null)
-            {
-                ItemData itemC = this.gameManager.GetPlayerItemData(0);
-
-                ItemImageHolder holderC = this.gameManager.GetItemImageHolder(itemC.Name, itemC.Rarity);
-
-                imgC.sprite = holderC.ItemImage?.sprite;
-            }
-
-            // アイテムボタンD
-            GameObject slotD = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/D");
-
-            Image imgD = slotD != null ? slotD.GetComponent<Image>() : null;
-
-            if (imgD != null)
-            {
-                ItemData itemD = this.gameManager.GetPlayerItemData(0);
-
-                ItemImageHolder holderD = this.gameManager.GetItemImageHolder(itemD.Name, itemD.Rarity);
-
-                imgD.sprite = holderD.ItemImage?.sprite;
-            }
-
-            // アイテムボタンE
-            GameObject slotE = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/E");
-
-            Image imgE = slotE != null ? slotE.GetComponent<Image>() : null;
-
-            if (imgE != null)
-            {
-                ItemData itemE = this.gameManager.GetPlayerItemData(0);
-
-                ItemImageHolder holderE = this.gameManager.GetItemImageHolder(itemE.Name, itemE.Rarity);
-
-                imgE.sprite = holderE.ItemImage?.sprite;
-            }
-
-            // アイテムボタンF
-            GameObject slotF = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/F");
-
-            Image imgF = slotF != null ? slotF.GetComponent<Image>() : null;
-
-            if (imgF != null)
-            {
-                ItemData itemF = this.gameManager.GetPlayerItemData(0);
-
-                ItemImageHolder holderF = this.gameManager.GetItemImageHolder(itemF.Name, itemF.Rarity);
-
-                imgF.sprite = holderF.ItemImage?.sprite;
-            }
-
+            ItemSlotSetup();
 
 
             //デモ;金額をセット
@@ -333,7 +256,7 @@ namespace System
 
             isInputLocked = true;
             playerCards.Hit();
-            gameManager.PlayAudioSourceHolder("A");
+            // gameManager.Play();
             isInputLocked = false;
             Debug.Log("ヒット終了");
         }
@@ -363,7 +286,7 @@ namespace System
                 return;
             }
             isInputLocked = true;
-            
+
             GameManager.INSTANCE.GetPlayerItemData(index);
             GameManager.INSTANCE.UsePlayerItemData(index);
 
@@ -483,6 +406,94 @@ namespace System
             if (contexts != null && contexts.Length >= 1 && contexts[0] is int index)
             {
                 this.TryItemButtom(index);
+                ItemSlotSetup();
+            }
+        }
+
+        private void ItemSlotSetup()
+        {
+            // アイテムボタンA
+            GameObject slotA = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/A");
+
+            Image imgA = slotA != null ? slotA.GetComponent<Image>() : null;
+
+            if (imgA != null)
+            {
+                ItemData itemA = this.gameManager.GetPlayerItemData(0);
+
+                ItemImageHolder holderA = this.gameManager.GetItemImageHolder(itemA.Name, itemA.Rarity);
+
+                imgA.sprite = holderA.ItemImage?.sprite;
+            }
+
+            // アイテムボタンB
+            GameObject slotB = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/B");
+
+            Image imgB = slotB != null ? slotB.GetComponent<Image>() : null;
+
+            if (imgB != null)
+            {
+                ItemData itemB = this.gameManager.GetPlayerItemData(1);
+
+                ItemImageHolder holderB = this.gameManager.GetItemImageHolder(itemB.Name, itemB.Rarity);
+
+                imgB.sprite = holderB.ItemImage?.sprite;
+            }
+
+            // アイテムボタンC
+            GameObject slotC = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/C");
+
+            Image imgC = slotC != null ? slotC.GetComponent<Image>() : null;
+
+            if (imgC != null)
+            {
+                ItemData itemC = this.gameManager.GetPlayerItemData(2);
+
+                ItemImageHolder holderC = this.gameManager.GetItemImageHolder(itemC.Name, itemC.Rarity);
+
+                imgC.sprite = holderC.ItemImage?.sprite;
+            }
+
+            // アイテムボタンD
+            GameObject slotD = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/D");
+
+            Image imgD = slotD != null ? slotD.GetComponent<Image>() : null;
+
+            if (imgD != null)
+            {
+                ItemData itemD = this.gameManager.GetPlayerItemData(3);
+
+                ItemImageHolder holderD = this.gameManager.GetItemImageHolder(itemD.Name, itemD.Rarity);
+
+                imgD.sprite = holderD.ItemImage?.sprite;
+            }
+
+            // アイテムボタンE
+            GameObject slotE = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/E");
+
+            Image imgE = slotE != null ? slotE.GetComponent<Image>() : null;
+
+            if (imgE != null)
+            {
+                ItemData itemE = this.gameManager.GetPlayerItemData(4);
+
+                ItemImageHolder holderE = this.gameManager.GetItemImageHolder(itemE.Name, itemE.Rarity);
+
+                imgE.sprite = holderE.ItemImage?.sprite;
+            }
+
+            // アイテムボタンF
+            GameObject slotF = UIUtil.GetChild(this.blackJackOnlyUIs, "ItemBtns/F");
+
+            Image imgF = slotF != null ? slotF.GetComponent<Image>() : null;
+
+            if (imgF != null)
+            {
+                ItemData itemF = this.gameManager.GetPlayerItemData(5);
+
+                ItemImageHolder holderF = this.gameManager.GetItemImageHolder(itemF.Name, itemF.Rarity);
+
+                imgF.sprite = holderF.ItemImage?.sprite;
             }
         }
     }

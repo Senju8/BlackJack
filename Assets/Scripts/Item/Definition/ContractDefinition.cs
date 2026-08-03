@@ -20,22 +20,21 @@ namespace Item
         }
 
         /// <summary>
-        /// 負けたとき、ベット額が返ってくる
+        /// ベット額を加算
         /// </summary>
         /// <param name="playerData"></param>
         /// <param name="dealerData"></param>
         /// <param name="rarity"></param>
         public void DoUse(PlayerData playerData, DealerData dealerData, Deck deck, float rarity)
         {
-            // レアリティに応じてフラグをオンにする
             switch (rarity)
             {
                 case 4:
-
+                    playerData.AddValues(playerData.GetBet() / 2);
                     break;
 
                 case 5:
-
+                    playerData.AddValues(playerData.GetBet());
                     break;
             }
         }
