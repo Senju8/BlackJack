@@ -131,8 +131,6 @@ namespace System
             playerData.SetIsPlaying(true);
             dealerData.SetIsPlaying(true);
 
-            playerData.SetValues(100);
-
             ItemSlotSetup();
         }
 
