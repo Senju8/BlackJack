@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4093815916696443633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1432941107479799598}
+  - component: {fileID: 7401019576823608738}
+  - component: {fileID: 4687465903939611775}
+  m_Layer: 0
+  m_Name: ItemImageRegistryBehaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1432941107479799598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093815916696443633}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.57766, y: 0.74693, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7401019576823608738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093815916696443633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a2c354493def741872adc9641b5c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item.ItemImageRegistryBehaviour
+  itemImageHolders:
+  - name: Devil Call
+    rarity: 1
+    itemImage: {fileID: 8365721686596916345, guid: 56d2acb4189572c4281695233dac76cf, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: caf2c65d171608b46a18fa83459d3b36, type: 3}
+  - name: Devil Call
+    rarity: 2
+    itemImage: {fileID: 8365721686596916345, guid: dc3e5c0b78ee0e444b7121ef7c8f23bb, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 482e1e8c86aa3e6408f63aff0b2483df, type: 3}
+  - name: Devil Call
+    rarity: 3
+    itemImage: {fileID: 8365721686596916345, guid: 182799ff45b0a364598974714bf4fe3a, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 7b23a2e1a6f2f8b4aa6f10b530dda2de, type: 3}
+  - name: Devil Call
+    rarity: 4
+    itemImage: {fileID: 8365721686596916345, guid: 9b64bf38fec4ed441bcca3dfdf0b57af, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: bd16f2c19cb6302428591a7b13a6a85f, type: 3}
+  - name: Devil Call
+    rarity: 5
+    itemImage: {fileID: 8365721686596916345, guid: 9fbc9d4e8b5f8d746abc869aebd06bb8, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 6795a76e4d6684b42a26d9bbcbc207b8, type: 3}
+  - name: Tip
+    rarity: 1
+    itemImage: {fileID: 8365721686596916345, guid: e7f0e23fe96d9184484001ae76338f1d, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 37d07b374e289e64a8ed5e40c3c19ebb, type: 3}
+  - name: Tip
+    rarity: 2
+    itemImage: {fileID: 8365721686596916345, guid: 5536f7a506029ad44a623d3eadca78fa, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 80b55dfa17ff5954fa974b73c98384cb, type: 3}
+  - name: Tip
+    rarity: 3
+    itemImage: {fileID: 8365721686596916345, guid: c20c9ede1f41d48409cf430413802890, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 4660729a081b58a41a920019be947147, type: 3}
+  - name: Tip
+    rarity: 4
+    itemImage: {fileID: 8365721686596916345, guid: 90612b4b5125d664594eff1e2407e3d2, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: c3e3936bb6c70a540b4b03dba13d9d78, type: 3}
+  - name: Tip
+    rarity: 5
+    itemImage: {fileID: 8365721686596916345, guid: 9c373e26a1dc25646bd9ef1b5093283f, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 194c07ab606dcd24eb986d7da7923dc5, type: 3}
+  - name: Contract
+    rarity: 4
+    itemImage: {fileID: 8365721686596916345, guid: e55c5d9c3a78fe14489729d683fb2c30, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 68527dcf3933dfe4d922c63639d2c467, type: 3}
+  - name: Contract
+    rarity: 5
+    itemImage: {fileID: 8365721686596916345, guid: bc4f4d18e38678e4c9bcd3bdc6c8dad8, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 6a80d33bd6632c04a8ec87f4577ff86c, type: 3}
+  - name: Dice
+    rarity: 1
+    itemImage: {fileID: 8365721686596916345, guid: af8ce3e33e2c6984fbf533a2af049d7b, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 22fab500a84645d4791ba194479d58a2, type: 3}
+  - name: Dice
+    rarity: 2
+    itemImage: {fileID: 8365721686596916345, guid: f2f7da5f80e7c92468f00d3cffe26f98, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 23782b1318e70e1499c88fee36f54310, type: 3}
+  - name: Dice
+    rarity: 3
+    itemImage: {fileID: 8365721686596916345, guid: 6ea24293ef51381439eb0c8a7264d1de, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 2f9c0753e2a8f244793c96ae907aad2b, type: 3}
+  - name: Dice
+    rarity: 4
+    itemImage: {fileID: 8365721686596916345, guid: 296fd1bcf640ed14bb2d87b82246ba4d, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 4265a0eda82834b4fad62e978c5a92fd, type: 3}
+  - name: Dice
+    rarity: 5
+    itemImage: {fileID: 8365721686596916345, guid: cc5504f28ade1aa408e3d7d85282b726, type: 3}
+    descriptionImage: {fileID: 8365721686596916345, guid: 4265a0eda82834b4fad62e978c5a92fd, type: 3}
+--- !u!114 &4687465903939611775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093815916696443633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a2c354493def741872adc9641b5c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item.ItemImageRegistryBehaviour
+  itemImageHolders: []

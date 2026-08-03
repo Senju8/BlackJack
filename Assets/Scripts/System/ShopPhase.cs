@@ -65,7 +65,7 @@ namespace System
             if (this.itemCartObject == null)
                 return;
 
-            int itemCount = 8;
+            int itemCount = 6;
 
             // アイテムスロットを初期化
             this.itemDIsplaySlots = new List<GameObject>(itemCount);
@@ -100,6 +100,7 @@ namespace System
                 {
                     // Contract
                     itemDefinition = new ContractDefinition();
+                    rarity = random.NextDouble() < 0.6D ? 4 : 5;
                 }
                 else
                 {
@@ -135,7 +136,7 @@ namespace System
                                 ItemImageHolder itemImageHolder = this.gameManager.GetItemImageHolder(itemData.Name, itemData.Rarity);
 
                                 image.sprite = itemImageHolder.ItemImage?.sprite;
-                                image.color = image.sprite != null ? itemImageHolder.ItemColor : new Color(0.0F, 0.0F, 0.0F, 0.0F);
+                                image.color = itemImageHolder.ItemImage != null ? itemImageHolder.ItemImage.color : new Color(0.0F, 0.0F, 0.0F, 0.0F);
                                 textMeshProUGUI.text = itemData.Value.ToString("N0");
                             }
                         }
