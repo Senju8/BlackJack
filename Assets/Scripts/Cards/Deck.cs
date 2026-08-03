@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static Cards.CardsManager;
 
 namespace Cards
 {
@@ -74,6 +73,46 @@ namespace Cards
 
             Debug.Log(drawCard.suit + " " + drawCard.rank + "を引きました");
             return drawCard;
+        }
+
+        /// <summary>
+        /// 山札からランクしていしてランダムに1枚取り出す
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name="drawCard"></param>
+        /// <returns></returns>
+        public bool TryDrawByRank(CardsManager.Rank rank,out CardsManager.Card drawCard)
+        {
+            List<int> candidates = new List<int>();
+            for(int i= 0;i<deckCards.Count;i++)
+            {
+                if (deckCards[i].rank == rank)
+                {
+                    candidates.Add(i);
+                }
+            }
+
+            if(candidates.Count == 0)
+            {
+                drawCard = default;
+                return false;
+            }
+
+            int index = candidates[Random.Range(0, candidates.Count)];
+            drawCard = deckCards[index];
+
+            // 山札から除去
+            deckCards.RemoveAt(index);
+
+            return true;
+        }
+
+        /// <summary>
+        /// カードを山札(未使用状隊)に戻す
+        /// </summary>
+        public void ReturnCard(CardsManager.Card card)
+        {
+            deckCards.Add(card);
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using Assets.Scripts.System;
 using Item;
-using NUnit.Framework.Interfaces;
+using Cards;
 using Player;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace System
@@ -30,6 +29,8 @@ namespace System
         
         private float difficulty = 1.0F;
         private bool infiniteMoneyMode = true;
+
+        private Deck deck;
 
         /// <summary>
         /// ゲームの難易度
@@ -329,9 +330,9 @@ namespace System
         {
             ItemData itemData = this.playerItemData[index];
 
-            if (itemData != null && !itemData.Equals(ItemData.EMPTY) && itemData.CanUse(this.playerData, this.dealerData))
+            if (itemData != null && !itemData.Equals(ItemData.EMPTY) && itemData.CanUse(this.playerData, this.dealerData,this.deck))
             {
-                itemData.DoUse(this.playerData, this.dealerData);
+                itemData.DoUse(this.playerData, this.dealerData,this.deck);
             }
         }
 
@@ -353,6 +354,24 @@ namespace System
         public List<ItemData> GetAllPlayerItemData()
         {
             return new(this.playerItemData);
+        }
+
+
+        /// <summary>
+        /// 使用中の山札
+        /// </summary>
+        public Deck Deck
+        {
+            get { return this.deck; }
+        }
+
+        /// <summary>
+        /// Deckを登録する
+        /// </summary>
+        /// <param name="deck"></param>
+        public void ResisterDeck(Deck deck)
+        {
+            this.deck = deck;
         }
     }
 }

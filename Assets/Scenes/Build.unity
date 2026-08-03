@@ -162,8 +162,8 @@ MonoBehaviour:
   startCanvas: {fileID: 418820664125836675, guid: 5deeb84c99b6f4d4195ea2765b2bb2ec, type: 3}
   selectCanvas: {fileID: 3432728016445908377, guid: 030101af53ad30b42a8b3b8e338c971e, type: 3}
   shopCanvas: {fileID: 8134117890614274037, guid: 9ab10d6b9a153844a865145dd7da5f36, type: 3}
-  itemDisplaySlot: {fileID: 0}
-  itemCartSlot: {fileID: 0}
+  itemDisplaySlot: {fileID: 8905242066037841337, guid: 98fe855389d4a3e48873a9c71e86800b, type: 3}
+  itemCartSlot: {fileID: 2314702115060370744, guid: 916867bca7fa7614f9d9b1e02100a743, type: 3}
   blackjackCanvas: {fileID: 3392580874297325404, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
   resultCanvas: {fileID: 4573175703843386772, guid: 2d261d40f6ecde5438db14fc7d8586ee, type: 3}
   deck: {fileID: 8204663304048662527, guid: ee7eb34ead1918244a30f9181c887dad, type: 3}
@@ -639,6 +639,10 @@ PrefabInstance:
     - target: {fileID: 8799532627495830145, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050421803038604900, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
+      propertyPath: m_Name
+      value: A
       objectReference: {fileID: 0}
     - target: {fileID: 9050421803038604900, guid: bf2bbc266ac57f84492d3f41f7164b82, type: 3}
       propertyPath: m_IsActive

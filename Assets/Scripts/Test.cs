@@ -5,6 +5,6 @@ public class Test : MonoBehaviour
 {
     public void TestA()
     {
-        GameManager.INSTANCE.Call("blackjack");
+        GameManager.INSTANCE.Invoke(this.gameObject,0);
     }
 }

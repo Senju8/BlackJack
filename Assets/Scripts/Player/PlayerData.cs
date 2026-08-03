@@ -43,7 +43,6 @@ namespace Player
         /// </summary>
         public readonly PayoutMultiplier PayoutMultiplier = new PayoutMultiplier();
 
-
         public PlayerData(GameManager gameManager)
         {
             this.gameManager = gameManager;
@@ -70,6 +69,12 @@ namespace Player
         }
 
         // プレイヤの札
+
+        /// <summary>
+        /// カードの変更があった際に発火するイベント
+        /// </summary>
+        public event Action<int, CardsManager.Card> OnCardReplaced;
+
         public List<CardsManager.Card> GetCard()
         {
             return playerCards;
@@ -79,6 +84,21 @@ namespace Player
         public void SetCard(List<CardsManager.Card> cards)
         {
             playerCards = cards;
+        }
+
+        public bool ReplaceCard(int index,CardsManager.Card newCard)
+        {
+            if(index < 0 || index >= playerCards.Count)
+            {
+                return false;
+            }
+
+            playerCards[index] = newCard;
+            OnCardReplaced?.Invoke(index, newCard);
+
+            SetScore(ScoreCalclator.CalculateScore(playerCards));
+
+            return true;
         }
 
         /// <summary>

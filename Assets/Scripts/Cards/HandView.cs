@@ -118,5 +118,36 @@ namespace Cards
                 spawnedViews[index].SetFaceUp(faceUp);
             }
         }
+
+        /// <summary>
+        /// 指定したインデックスのカードを新しいカードに差し替える
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="newCard"></param>
+        /// <param name="faceUp"></param>
+        public void ReplaceCard(int index, CardsManager.Card newCard, bool faceUp = true)
+        {
+            if(index < 0 || index >= spawnedViews.Count)
+            {
+                return;
+            }
+
+            CardsView oldView = spawnedViews[index];
+            Vector3 localPos = oldView.transform.localPosition;
+            Vector3 loclScale = oldView.transform.localScale;
+            Destroy(oldView.gameObject);
+
+            GameObject obj = Instantiate(cardViewPrefab, cardParent);
+            CardsView view = obj.GetComponent<CardsView>();
+
+            view.Setup(newCard, cardsSprite);
+            view.SetSorting("Cards", 100 + index);
+            view.SetFaceUp(faceUp);
+
+            obj.transform.localScale = loclScale;
+            obj.transform.localPosition = localPos;
+
+            spawnedViews[index] = view;
+        }
     }
 }
