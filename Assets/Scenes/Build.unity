@@ -228,6 +228,7 @@ MonoBehaviour:
   dealerCards: {fileID: 1037330369}
   playerScoreView: {fileID: 300445047}
   dealerScoreView: {fileID: 702466978}
+  payoutMultiplierView: {fileID: 0}
   blackJackOnlyUIs: {fileID: 1777065369}
   resultOnlyUI: {fileID: 1565165332}
   winUI: {fileID: 1565165331}

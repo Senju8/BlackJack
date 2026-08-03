@@ -42,6 +42,7 @@ namespace System
         private DealerCards dealerCards;
         private PlayerScoreView playerScoreView;
         private DealerScoreView dealerScoreView;
+        private PayoutMultiplierView payoutMultiplierView;
 
         private PlayerData playerData;
         private DealerData dealerData;
@@ -79,6 +80,11 @@ namespace System
             dealerCards = gameManagerBehaviour.DealerCards;
             playerScoreView = gameManagerBehaviour.PlayerScoreView;
             dealerScoreView = gameManagerBehaviour.DealerScoreView;
+            payoutMultiplierView = gameManagerBehaviour.PayoutMultiplierView;
+            if (payoutMultiplierView != null)
+            {
+                payoutMultiplierView.Setup(playerData);
+            }
             blackJackOnlyUIs = gameManagerBehaviour.BlackJackOnlyUIs;
 
             betOnlyUIs = gameManagerBehaviour.BetOnlyUIs;
