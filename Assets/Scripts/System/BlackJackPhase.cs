@@ -194,7 +194,6 @@ namespace System
                     }
 
                     resultOnlyUI.SetActive(true);
-                    
 
                     GameManager.INSTANCE.Call("result");
                     break;
@@ -227,7 +226,9 @@ namespace System
             isDealerCardsOpening = false;
         }
 
-
+        /// <summary>
+        /// ヒットできるか
+        /// </summary>
         public void TryHit()
         {
             if (!CanPlayerAct())
@@ -241,6 +242,9 @@ namespace System
             Debug.Log("ヒット終了");
         }
 
+        /// <summary>
+        /// スタンドできるか
+        /// </summary>
         public void TryStand()
         {
             if (!CanPlayerAct())
@@ -250,6 +254,20 @@ namespace System
 
             isInputLocked = true;
             playerCards.Stand();
+            isInputLocked = false;
+        }
+
+        /// <summary>
+        /// アイテムボタン押せるか
+        /// </summary>
+        public void TryItemButtom()
+        {
+            if (!CanPlayerAct())
+            {
+                return;
+            }
+            isInputLocked = true;
+            // デモ: GameManager.あああ;
             isInputLocked = false;
         }
 
