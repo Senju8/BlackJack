@@ -42,7 +42,7 @@ namespace System
         private DealerCards dealerCards;
         private PlayerScoreView playerScoreView;
         private DealerScoreView dealerScoreView;
-        private PayoutMultiplierView payoutMultiplierView;
+        // private PayoutMultiplierView payoutMultiplierView;
 
         private PlayerData playerData;
         private DealerData dealerData;
@@ -80,11 +80,11 @@ namespace System
             dealerCards = gameManagerBehaviour.DealerCards;
             playerScoreView = gameManagerBehaviour.PlayerScoreView;
             dealerScoreView = gameManagerBehaviour.DealerScoreView;
-            payoutMultiplierView = gameManagerBehaviour.PayoutMultiplierView;
-            if (payoutMultiplierView != null)
-            {
-                payoutMultiplierView.Setup(playerData);
-            }
+            //payoutMultiplierView = gameManagerBehaviour.PayoutMultiplierView;
+            //if (payoutMultiplierView != null)
+            //{
+            //    payoutMultiplierView.Setup(playerData);
+            //}
             blackJackOnlyUIs = gameManagerBehaviour.BlackJackOnlyUIs;
 
             betOnlyUIs = gameManagerBehaviour.BetOnlyUIs;
@@ -119,6 +119,9 @@ namespace System
             loseUI.SetActive(false);
             isWin = false;
 
+            playerData.SetScore(0);
+            dealerData.SetScore(0);
+
             betOnlyUIs.SetActive(true);
             betButtoms.ResetInput();
 
@@ -128,13 +131,9 @@ namespace System
             playerData.SetIsPlaying(true);
             dealerData.SetIsPlaying(true);
 
-            //List<ItemData> currentItemData = new List<ItemData>(this.gameManager.GetAllPlayerItemData());
+            playerData.SetValues(100);
 
             ItemSlotSetup();
-
-
-            //デモ;金額をセット
-            playerData.SetValues(900000);
         }
 
         private void OnBetConfirmed(int betAmount)
@@ -146,6 +145,13 @@ namespace System
 
             betOnlyUIs.SetActive(false);
             blackJackOnlyUIs.SetActive(true);
+
+            dealerScoreView.SetActiveText(false);
+            playerData.SetScore(0);
+            dealerData.SetScore(0);
+
+            playerCards.ClearCards();
+            dealerCards.ClearCards();
 
             currentSubPhase = SubPhase.Dealing;
 
@@ -205,10 +211,14 @@ namespace System
                     if(isWin)
                     {
                         winUI.SetActive(true);
+
+                        this.gameManager.GameResult = ResultPhase.Result.Win;
                     }
                     else
                     {
                         loseUI.SetActive(true);
+
+                        this.gameManager.GameResult = ResultPhase.Result.Lose;
                     }
 
                     resultOnlyUI.SetActive(true);
@@ -259,6 +269,8 @@ namespace System
             // gameManager.Play();
             isInputLocked = false;
             Debug.Log("ヒット終了");
+
+            this.gameManager.Play("Select");
         }
 
         /// <summary>
@@ -274,6 +286,8 @@ namespace System
             isInputLocked = true;
             playerCards.Stand();
             isInputLocked = false;
+
+            this.gameManager.Play("Select");
         }
 
         /// <summary>
@@ -291,6 +305,8 @@ namespace System
             GameManager.INSTANCE.UsePlayerItemData(index);
 
             isInputLocked = false;
+
+            this.gameManager.Play("Select");
         }
 
         /// <summary>
@@ -375,6 +391,7 @@ namespace System
             winUI.SetActive(false);
             loseUI.SetActive(false);
             isWin = false;
+            currentSubPhase = SubPhase.Bet;
 
             Debug.Log("リザルトフェーズへ移行");
         }

@@ -33,7 +33,7 @@ namespace Assets.Scripts.System
         [SerializeField] private Cards.DealerCards dealerCards;
         [SerializeField] private Player.PlayerScoreView playerScoreView;
         [SerializeField] private Player.DealerScoreView dealerScoreView;
-        [SerializeField] private Player.PayoutMultiplierView payoutMultiplierView;
+        // [SerializeField] private Player.PayoutMultiplierView payoutMultiplierView;
         [SerializeField] private GameObject blackJackOnlyUIs;
 
         [Header("ブラックジャックの結果UI")]
@@ -87,7 +87,7 @@ namespace Assets.Scripts.System
         public Cards.DealerCards DealerCards => dealerCards;
         public Player.PlayerScoreView PlayerScoreView => playerScoreView;
         public Player.DealerScoreView DealerScoreView => dealerScoreView;
-        public Player.PayoutMultiplierView PayoutMultiplierView => payoutMultiplierView;
+        // public Player.PayoutMultiplierView PayoutMultiplierView => payoutMultiplierView;
         public GameObject BlackJackOnlyUIs => blackJackOnlyUIs;
 
         public GameObject ResultOnlyUI => resultOnlyUI;
