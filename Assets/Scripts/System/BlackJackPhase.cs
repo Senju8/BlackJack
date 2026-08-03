@@ -1,6 +1,7 @@
 using Assets.Scripts.System;
 using Bet;
 using Cards;
+using Item;
 using Player;
 using UnityEngine;
 
@@ -67,7 +68,10 @@ namespace System
         /// </summary>
         protected override void Init()
         {
+            
             deck = gameManagerBehaviour.Deck;
+            gameManager.ResisterDeck(deck);
+
             playerCards = gameManagerBehaviour.PlayerCards;
             dealerCards = gameManagerBehaviour.DealerCards;
             playerScoreView = gameManagerBehaviour.PlayerScoreView;
@@ -115,8 +119,8 @@ namespace System
             playerData.SetIsPlaying(true);
             dealerData.SetIsPlaying(true);
 
-            // デモ:プレイヤの金額をセット
-            playerData.SetValues(10000);
+            //デモ;金額をセット
+            playerData.SetValues(900000);
         }
 
         private void OnBetConfirmed(int betAmount)
@@ -194,7 +198,6 @@ namespace System
                     }
 
                     resultOnlyUI.SetActive(true);
-                    
 
                     GameManager.INSTANCE.Call("result");
                     break;
@@ -227,7 +230,9 @@ namespace System
             isDealerCardsOpening = false;
         }
 
-
+        /// <summary>
+        /// ヒットできるか
+        /// </summary>
         public void TryHit()
         {
             if (!CanPlayerAct())
@@ -241,6 +246,9 @@ namespace System
             Debug.Log("ヒット終了");
         }
 
+        /// <summary>
+        /// スタンドできるか
+        /// </summary>
         public void TryStand()
         {
             if (!CanPlayerAct())
@@ -250,6 +258,23 @@ namespace System
 
             isInputLocked = true;
             playerCards.Stand();
+            isInputLocked = false;
+        }
+
+        /// <summary>
+        /// アイテムボタン押せるか
+        /// </summary>
+        public void TryItemButtom(int index)
+        {
+            if (!CanPlayerAct() || GameManager.INSTANCE.GetPlayerItemData(index).Equals(ItemData.EMPTY))
+            {
+                return;
+            }
+            isInputLocked = true;
+            
+            GameManager.INSTANCE.GetPlayerItemData(index);
+            GameManager.INSTANCE.UsePlayerItemData(index);
+
             isInputLocked = false;
         }
 
@@ -353,9 +378,24 @@ namespace System
         /// UIの表示/非表示を切り替える
         /// </summary>
         /// <param name="gameObject"></param>
-        public override void Invoke(GameObject gameObject)
+        public override void Invoke(GameObject gameObject, params object[] contexts)
         {
-            
+            if (gameObject == null)
+                return;
+
+            // デバッグ
+            this.gameManager.AddPlayerItemData(new ItemData(new DiceDefinition(), 1.0F, 1));
+
+            switch (gameObject.name)
+            {
+                case "A":
+                    if (contexts != null && contexts.Length >= 1 && contexts[0] is int index)
+                    { 
+                        this.TryItemButtom(index);
+                    }
+
+                    break;
+            }
         }
     }
 }

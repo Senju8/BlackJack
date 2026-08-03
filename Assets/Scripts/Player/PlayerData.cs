@@ -23,6 +23,7 @@ namespace Player
         private int playerScore = 0;    // プレイヤのスコア
 
         /// <summary>
+        /// <summary>
         /// プレイヤがゲームを続けられるかの判定変数
         /// 
         /// スタンドを行うとfalseに
@@ -41,7 +42,6 @@ namespace Player
         /// 倍率変動を計算
         /// </summary>
         public readonly PayoutMultiplier PayoutMultiplier = new PayoutMultiplier();
-
 
         public PlayerData(GameManager gameManager)
         {
@@ -69,6 +69,12 @@ namespace Player
         }
 
         // プレイヤの札
+
+        /// <summary>
+        /// カードの変更があった際に発火するイベント
+        /// </summary>
+        public event Action<int, CardsManager.Card> OnCardReplaced;
+
         public List<CardsManager.Card> GetCard()
         {
             return playerCards;
@@ -78,6 +84,21 @@ namespace Player
         public void SetCard(List<CardsManager.Card> cards)
         {
             playerCards = cards;
+        }
+
+        public bool ReplaceCard(int index,CardsManager.Card newCard)
+        {
+            if(index < 0 || index >= playerCards.Count)
+            {
+                return false;
+            }
+
+            playerCards[index] = newCard;
+            OnCardReplaced?.Invoke(index, newCard);
+
+            SetScore(ScoreCalclator.CalculateScore(playerCards));
+
+            return true;
         }
 
         /// <summary>
@@ -100,6 +121,14 @@ namespace Player
         public int GetBet()
         {
             return betAmount;
+        }
+
+        /// <summary>
+        /// ベット額をセット
+        /// </summary>
+        public void SetBet(int amount)
+        {
+            betAmount = amount;
         }
 
         /// <summary>

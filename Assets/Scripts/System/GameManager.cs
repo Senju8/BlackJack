@@ -1,10 +1,9 @@
 ﻿using Assets.Scripts.System;
 using Audio;
 using Item;
-using NUnit.Framework.Interfaces;
+using Cards;
 using Player;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace System
@@ -32,6 +31,8 @@ namespace System
 
         private float difficulty = 1.0F;
         private bool infiniteMoneyMode = true;
+
+        private Deck deck;
 
         /// <summary>
         /// ゲームの難易度
@@ -352,7 +353,7 @@ namespace System
             // ItemDataを強制的に使用する
             if (isForce)
             {
-                itemData.DoUse(this.playerData, this.dealerData);
+                itemData.DoUse(this.playerData, this.dealerData,this.deck);
 
                 return;
             }
@@ -360,9 +361,9 @@ namespace System
             // プレイヤーが所持するItemDataを使用する
             foreach (ItemData havingItemData in this.playerItemData)
             {
-                if (havingItemData != null && !havingItemData.Equals(ItemData.EMPTY) && havingItemData.Equals(itemData) && havingItemData.CanUse(this.playerData, this.dealerData))
+                if (havingItemData != null && !havingItemData.Equals(ItemData.EMPTY) && havingItemData.Equals(itemData) && havingItemData.CanUse(this.playerData, this.dealerData,this.deck))
                 {
-                    havingItemData.DoUse(this.playerData, this.dealerData);
+                    havingItemData.DoUse(this.playerData, this.dealerData,this.deck);
                 }
             }
         }
@@ -374,9 +375,9 @@ namespace System
         {
             ItemData itemData = this.playerItemData[index];
 
-            if (itemData != null && !itemData.Equals(ItemData.EMPTY) && itemData.CanUse(this.playerData, this.dealerData))
+            if (itemData != null && !itemData.Equals(ItemData.EMPTY) && itemData.CanUse(this.playerData, this.dealerData,this.deck))
             {
-                itemData.DoUse(this.playerData, this.dealerData);
+                itemData.DoUse(this.playerData, this.dealerData,this.deck);
             }
         }
 
@@ -398,6 +399,24 @@ namespace System
         public List<ItemData> GetAllPlayerItemData()
         {
             return new(this.playerItemData);
+        }
+
+
+        /// <summary>
+        /// 使用中の山札
+        /// </summary>
+        public Deck Deck
+        {
+            get { return this.deck; }
+        }
+
+        /// <summary>
+        /// Deckを登録する
+        /// </summary>
+        /// <param name="deck"></param>
+        public void ResisterDeck(Deck deck)
+        {
+            this.deck = deck;
         }
     }
 }

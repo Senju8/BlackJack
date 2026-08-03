@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using Cards;
+using Player;
 using System;
 using System.Threading;
 using UnityEngine;
@@ -118,9 +119,9 @@ namespace Item
         /// <summary>
         /// <para>アイテムを使用できるかどうか</para>
         /// </summary>
-        public virtual bool CanUse(PlayerData playerData, DealerData dealerData)
+        public virtual bool CanUse(PlayerData playerData, DealerData dealerData,Deck deck)
         {
-            if (this.itemDefinition == null || !this.itemDefinition.CanUse(playerData, dealerData, this.rarity))
+            if (this.itemDefinition == null || !this.itemDefinition.CanUse(playerData, dealerData, deck, this.rarity))
                 return false;
 
             if (this.count <= 0)
@@ -132,13 +133,12 @@ namespace Item
         /// <summary>
         /// <para>アイテムを使用する</para>
         /// </summary>
-        public virtual void DoUse(PlayerData playerData, DealerData dealerData, int count = 1)
+        public virtual void DoUse(PlayerData playerData, DealerData dealerData, Deck deck, int count = 1)
         {
             if (this.itemDefinition == null)
                 return;
 
-
-            this.itemDefinition.DoUse(playerData, dealerData, this.rarity);
+            this.itemDefinition.DoUse(playerData, dealerData, deck, this.rarity);
 
             --this.Count;
         }
