@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2577744406099389871}
   - component: {fileID: 8365721686596916345}
   m_Layer: 5
-  m_Name: DiceRare
+  m_Name: TipLegend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5629414198524928152, guid: 963638edd605d55459f31eba9ce5cdb3, type: 3}
+  m_Sprite: {fileID: 362561367685574292, guid: c84703dce7ccc5846a140d9929c84ba7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

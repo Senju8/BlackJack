@@ -26,6 +26,7 @@ namespace System
         private readonly Dictionary<string, ItemImageHolder> itemImageHolders = new();
 
         private readonly List<ItemData> playerItemData = new();
+        private readonly int playerItemCount = 6;
         
         private float difficulty = 1.0F;
         private bool infiniteMoneyMode = true;
@@ -267,44 +268,54 @@ namespace System
             if (this.playerItemData == null || itemData == null)
                 return;
 
-            int totalCount = 0;
-            bool hasItemData;
+            int itemDataSize = Mathf.Clamp(this.playerItemData.Count, 0, this.playerItemCount);
+
+            int totalCount;
+            int itemDataIndex;
+            bool addFlag = false;
+
+            ItemData havingItemData;
 
             foreach (ItemData itemDataToAdd in itemData)
             {
-                if (itemDataToAdd == null)
+                if (itemDataToAdd == null || itemDataToAdd.Equals(ItemData.EMPTY))
                     continue;
 
-                hasItemData = false;
+                totalCount = 0;
+                itemDataIndex = -1;
+                addFlag = false;
 
-                foreach (ItemData havingItemData in this.playerItemData)
+                for (int i = 0; i < itemDataSize; ++i)
                 {
-                    if (havingItemData == null)
-                        continue;
+                    havingItemData = this.playerItemData[i];
 
-                    // プレイヤーがItemDataを持っているかどうかを確認する
-                    if (itemDataToAdd.Equals(havingItemData))
+                    if (havingItemData == null || havingItemData.Equals(ItemData.EMPTY))
+                    {
+                        // 空のアイテムスロットを記憶する
+                        itemDataIndex = i;
+                    }
+                    else if (itemDataToAdd.Equals(havingItemData))
                     {
                         // ItemData.Countを加算する
                         havingItemData.Count += itemDataToAdd.Count;
-
                         totalCount = havingItemData.Count;
-                        hasItemData = true;
+                        addFlag = true;
 
                         break;
                     }
                 }
 
                 // ItemDataのリストに追加する
-                if (!hasItemData)
+                if (!addFlag && this.playerItemData.Count < this.playerItemCount)
                 {
                     this.playerItemData.Add(itemDataToAdd);
 
                     totalCount = itemDataToAdd.Count;
+                    addFlag = true;
                 }
 
                 // デバッグ
-                if (itemDataToAdd.Count > 0)
+                if (addFlag && itemDataToAdd.Count > 0)
                 {
                     UnityEngine.Debug.Log($"プレイヤーにアイテム（Name: {itemDataToAdd.Name}, Rarity: {itemDataToAdd.Rarity:0.00}）を{itemDataToAdd.Count}コ追加しました！（合計：{totalCount}コ）");
                 }
@@ -312,37 +323,15 @@ namespace System
         }
 
         /// <summary>
-        /// <para>プレイヤーのItemDataを増やす／減らす</para>
+        /// <para>プレイヤーのItemData使用する</para>
         /// </summary>
-        public void IncreasePlayerItemData(ItemData itemData, int count = 1)
+        public void UsePlayerItemData(int index)
         {
-            if (this.playerItemData == null || itemData == null || count <= 0)
-                return;
+            ItemData itemData = this.playerItemData[index];
 
-            List<ItemData> itemDataToRemove = new(this.playerItemData.Count);
-
-            foreach (ItemData havingItemData in this.playerItemData)
+            if (itemData != null && !itemData.Equals(ItemData.EMPTY) && itemData.CanUse(this.playerData, this.dealerData))
             {
-                if (havingItemData != null && havingItemData.Equals(itemData))
-                {
-                    havingItemData.Count -= count;
-
-                    UnityEngine.Debug.Log($"プレイヤーからアイテム（Name: {havingItemData.Name}, Rarity: {havingItemData.Rarity:0.00}）を{count - havingItemData.Count}コ削除しました！（合計：{havingItemData.Count}コ）");
-
-                    if (havingItemData.Count <= 0)
-                    {
-                        // 削除するItemDataをマークする
-                        itemDataToRemove.Add(havingItemData);
-                    }
-
-                    break;
-                }
-            }
-
-            // ItemDataを削除する
-            foreach (ItemData havngItemData in itemDataToRemove)
-            {
-                this.playerItemData.Remove(havngItemData);
+                itemData.DoUse(this.playerData, this.dealerData);
             }
         }
 
@@ -350,28 +339,12 @@ namespace System
         /// <para>プレイヤーからItemDataを取得する</para>
         /// <para>存在しない場合はItemData.EMPTYを返す</para>
         /// </summary>
-        public ItemData GetPlayerItemData(string name, float rarity)
+        public ItemData GetPlayerItemData(int index)
         {
-            if (this.playerItemData != null && name != null)
-            {
-                return this.playerItemData.Find(havingItemData => havingItemData != null && havingItemData.Name == name && havingItemData.Rarity == rarity) ?? ItemData.EMPTY;
-            }
+            if (index < 0 || this.playerItemData == null || index >= this.playerItemData.Count)
+                return ItemData.EMPTY;
 
-            return ItemData.EMPTY;
-        }
-
-        /// <summary>
-        /// <para>プレイヤーからItemDataを取得する</para>
-        /// <para>存在しない場合はItemData.EMPTYを返す</para>
-        /// </summary>
-        public ItemData GetPlayerItemData(ItemData itemData)
-        {
-            if (this.playerItemData != null && itemData != null)
-            {
-                return this.playerItemData.Find(havingItemData => havingItemData != null && havingItemData.Equals(itemData)) ?? ItemData.EMPTY;
-            }
-
-            return ItemData.EMPTY;
+            return this.playerItemData[index] ?? ItemData.EMPTY;
         }
 
         /// <summary>
