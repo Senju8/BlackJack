@@ -210,7 +210,7 @@ namespace System
             switch (gameObject.name)
             {
                 case "Buy":
-                    if (this.gameManager.InfiniteMoneyMode || this.itemTotalValueBuffer < this.playerMoneyBuffer)
+                    if (this.gameManager.InfiniteMoneyMode || this.itemTotalValueBuffer <= this.playerMoneyBuffer)
                     {
                         // プレイヤーにアイテムを追加
                         this.gameManager.AddPlayerItemData(this.itemCartData.Values.ToArray());
@@ -222,7 +222,11 @@ namespace System
                         this.gameManager.Call("blackjack");
 
                         // サウンドを再生
-                        this.gameManager.Play("購入");
+                        this.gameManager.Play("Buy");
+                    }
+                    else
+                    {
+                        this.gameManager.Play("Invalid");
                     }
 
                     return;
@@ -256,6 +260,8 @@ namespace System
                     {
                         this.ClickItemDisplaySlot(itemDisplaySlot);
 
+                        this.gameManager.Play("Select");
+
                         return;
                     }
                 }
@@ -271,6 +277,8 @@ namespace System
                     if (itemCartSlotObject != null && itemCartSlotObject.GetInstanceID() == parent.GetInstanceID())
                     {
                         this.ClickItemCartRemove(itemCartSlotObject);
+
+                        this.gameManager.Play("Select");
 
                         return;
                     }
@@ -461,7 +469,7 @@ namespace System
                 }
 
                 textMeshProUGUI.text = this.itemTotalValueBuffer.ToString("N0");
-                textMeshProUGUI.color = this.playerMoneyBuffer > 0 && this.itemTotalValueBuffer >= this.playerMoneyBuffer ? Color.red : Color.white;
+                textMeshProUGUI.color = this.itemTotalValueBuffer > this.playerMoneyBuffer ? Color.red : Color.white;
             }
         }
 

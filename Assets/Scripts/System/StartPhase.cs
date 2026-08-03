@@ -58,10 +58,12 @@ namespace System
             {
                 case "Start":
                     this.gameManager.Call("select");
+                    this.gameManager.Play("Select");
 
                     break;
                 case "Exit":
                     UnityEngine.Debug.Log("EXIT");
+                    this.gameManager.Play("Invalid");
 
                     break;
 

@@ -30,7 +30,7 @@ namespace System
         private readonly int playerItemCount = 6;
 
         private float difficulty = 1.0F;
-        private bool infiniteMoneyMode = true;
+        private bool infiniteMoneyMode = false;
 
         private Deck deck;
 
