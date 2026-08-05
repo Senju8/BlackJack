@@ -4,7 +4,6 @@ using Cards;
 using Item;
 using Player;
 using UnityEngine;
-using System.Collections.Generic;
 using Util;
 using UnityEngine.UI;
 
