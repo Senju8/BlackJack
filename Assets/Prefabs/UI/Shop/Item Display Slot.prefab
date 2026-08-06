@@ -355,7 +355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4042827597099902303, guid: 4a6afbd83dbef314d9bdaa88ab01569b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -534,7 +534,7 @@ GameObject:
   - component: {fileID: 2948345419434209601}
   - component: {fileID: 7971818034053470943}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Hightlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
