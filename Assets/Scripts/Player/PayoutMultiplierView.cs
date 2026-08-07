@@ -1,39 +1,39 @@
-//using TMPro;
-//using UnityEngine;
+using TMPro;
+using UnityEngine;
 
-//namespace Player
-//{
-    
-//    public class PayoutMultiplierView : MonoBehaviour
-//    {
-//        [SerializeField]
-//        private TMP_Text multiplierText;
+namespace Player
+{
 
-//        private PlayerData playerData;
+    public class PayoutMultiplierView : MonoBehaviour
+    {
+        [SerializeField]
+        private TMP_Text multiplierText;
 
-//        public void Setup(PlayerData data)
-//        {
-//            playerData = data;
+        private PlayerData playerData;
 
-//            playerData.PayoutMultiplier.OnMultiplierChanged += UpdateMultiplierText;
+        public void Setup(PlayerData data)
+        {
+            playerData = data;
 
-//            UpdateMultiplierText(playerData.PayoutMultiplier.Calculate());
-//        }
+            playerData.PayoutMultiplier.OnMultiplierChanged += UpdateMultiplierText;
 
-//        private void UpdateMultiplierText(float multiplier)
-//        {
-//            if (multiplierText != null)
-//            {
-//                multiplierText.text = $"x{multiplier:F1}";
-//            }
-//        }
+            UpdateMultiplierText(playerData.PayoutMultiplier.Calculate());
+        }
 
-//        private void OnDestroy()
-//        {
-//            if (playerData != null && playerData.PayoutMultiplier != null)
-//            {
-//                playerData.PayoutMultiplier.OnMultiplierChanged -= UpdateMultiplierText;
-//            }    
-//        }
-//    }
-//}
+        private void UpdateMultiplierText(float multiplier)
+        {
+            if (multiplierText != null)
+            {
+                multiplierText.text = $"x{multiplier:F1}";
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (playerData != null && playerData.PayoutMultiplier != null)
+            {
+                playerData.PayoutMultiplier.OnMultiplierChanged -= UpdateMultiplierText;
+            }
+        }
+    }
+}
