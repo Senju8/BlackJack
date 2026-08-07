@@ -29,6 +29,41 @@ namespace Item
         }
 
         /// <summary>
+        /// <para>アイテムの情報/para>
+        /// </summary>
+        public string Information
+        {
+            get
+            {
+                string rarity;
+
+                switch ((int) this.Rarity)
+                {
+                    case 1:
+                        rarity = "Common";
+                        break;
+                    case 2:
+                        rarity = "Uncommon";
+                        break;
+                    case 3:
+                        rarity = "Rare";
+                        break;
+                    case 4:
+                        rarity = "Epic";
+                        break;
+                    case 5:
+                        rarity = "Legend";
+                        break;
+                    default:
+                        rarity = this.Rarity.ToString("0.00");
+                        break;
+                }
+
+                return $"[{rarity}] {this.Name}";
+            }
+        }
+
+        /// <summary>
         /// <para>アイテムの名前</para>
         /// </summary>
         public string Name

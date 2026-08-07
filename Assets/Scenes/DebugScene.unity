@@ -152,33 +152,23 @@ MonoBehaviour:
   - name: Devil Call
     rarity: 0
     itemImage: {fileID: 0}
-    itemColor: {r: 1, g: 1, b: 1, a: 1}
     descriptionImage: {fileID: 0}
-    descriptionColor: {r: 1, g: 1, b: 1, a: 1}
   - name: Devil Call
     rarity: 0
     itemImage: {fileID: 0}
-    itemColor: {r: 1, g: 1, b: 1, a: 1}
     descriptionImage: {fileID: 0}
-    descriptionColor: {r: 1, g: 1, b: 1, a: 1}
   - name: Contract
     rarity: 0
     itemImage: {fileID: 0}
-    itemColor: {r: 1, g: 1, b: 1, a: 1}
     descriptionImage: {fileID: 0}
-    descriptionColor: {r: 1, g: 1, b: 1, a: 1}
   - name: Dice
     rarity: 0
     itemImage: {fileID: 0}
-    itemColor: {r: 1, g: 1, b: 1, a: 1}
     descriptionImage: {fileID: 0}
-    descriptionColor: {r: 1, g: 1, b: 1, a: 1}
   - name: Tip
     rarity: 0
     itemImage: {fileID: 0}
-    itemColor: {r: 1, g: 1, b: 1, a: 1}
     descriptionImage: {fileID: 0}
-    descriptionColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &137996606
 Transform:
   m_ObjectHideFlags: 0
@@ -466,6 +456,12 @@ MonoBehaviour:
   dealerCards: {fileID: 0}
   playerScoreView: {fileID: 0}
   dealerScoreView: {fileID: 0}
+  blackJackOnlyUIs: {fileID: 0}
+  resultOnlyUI: {fileID: 0}
+  winUI: {fileID: 0}
+  loseUI: {fileID: 0}
+  betOnlyUIs: {fileID: 0}
+  betButtoms: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

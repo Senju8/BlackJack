@@ -1,8 +1,10 @@
 ﻿using Assets.Scripts.System;
 using Item;
+using NUnit.Framework.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -44,14 +46,14 @@ namespace System
             this.canvasObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.ShopCanvas);
 
             // 子GameObjectの取得
-            this.itemDisplayObject = UIUtil.GetChild(this.canvasObject, "Item Display");
-            this.itemCartObject = UIUtil.GetChild(this.canvasObject, "Item Cart Display/Item Cart View/Item Cart");
-            this.itemName = UIUtil.GetChild(this.canvasObject, "Item Description/Name Display/Name");
-            this.itemDescription = UIUtil.GetChild(this.canvasObject, "Item Description/Description Display/Description");
-            this.noItemDescription = UIUtil.GetChild(this.canvasObject, "Item Description/Description Display/No Description");
-            this.itemTotalValue = UIUtil.GetChild(this.canvasObject, "Item Cart Display/Item Total Value View/Item Total Value Display/Item Total Value");
-            this.playerMoney = UIUtil.GetChild(this.canvasObject, "Item Cart Display/Player Money View/Player Money Display/Player Money");
-            this.buyObject = UIUtil.GetChild(this.canvasObject, "Item Cart Display/Buy Display/Buy");
+            this.itemDisplayObject = UIUtil.GetChild(this.canvasObject, "./Item Display View/Item Display Mask/Item Display");
+            this.itemCartObject = UIUtil.GetChild(this.canvasObject, "./Item Cart Display/Item Cart View/Item Cart Mask/Item Cart");
+            this.itemName = UIUtil.GetChild(this.canvasObject, "./Item Description/Name Display/Name");
+            this.itemDescription = UIUtil.GetChild(this.canvasObject, "./Item Description/Description Display/Description");
+            this.noItemDescription = UIUtil.GetChild(this.canvasObject, "./Item Description/Description Display/No Description");
+            this.itemTotalValue = UIUtil.GetChild(this.canvasObject, "./Item Cart Display/Item Total Value View/Item Total Value Display/Item Total Value");
+            this.playerMoney = UIUtil.GetChild(this.canvasObject, "./Item Cart Display/Player Money View/Player Money Display/Player Money");
+            this.buyObject = UIUtil.GetChild(this.canvasObject, "./Item Cart Display/Buy Display/Buy");
 
             this.canvasObject.SetActive(false);
         }
@@ -65,7 +67,7 @@ namespace System
             if (this.itemCartObject == null)
                 return;
 
-            int itemCount = 6;
+            int itemCount = 16;
 
             // アイテムスロットを初期化
             this.itemDIsplaySlots = new List<GameObject>(itemCount);
@@ -122,24 +124,9 @@ namespace System
 
                     if (itemDisplaySlotObject != null)
                     {
-                        GameObject item = UIUtil.GetChild(itemDisplaySlotObject, "Display/Item");
-                        GameObject value = UIUtil.GetChild(itemDisplaySlotObject, "Information/Value");
-
                         // アイテムの画像と値段を設定する
-                        if (item != null && value != null)
-                        {
-                            Image image = item.GetComponent<Image>();
-                            TextMeshProUGUI textMeshProUGUI = value.GetComponent<TextMeshProUGUI>();
-
-                            if (image != null && value != null)
-                            {
-                                ItemImageHolder itemImageHolder = this.gameManager.GetItemImageHolder(itemData.Name, itemData.Rarity);
-
-                                image.sprite = itemImageHolder.ItemImage?.sprite;
-                                image.color = itemImageHolder.ItemImage != null ? itemImageHolder.ItemImage.color : new Color(0.0F, 0.0F, 0.0F, 0.0F);
-                                textMeshProUGUI.text = itemData.Value.ToString("N0");
-                            }
-                        }
+                        UIUtil.ApplyItemDataToImage(UIUtil.GetChild(itemDisplaySlotObject, "./Display/Item"), itemData);
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(itemDisplaySlotObject, "./Information/Value"), textMeshProUGUI => textMeshProUGUI.text = itemData.Value.ToString("N0"));
 
                         // アイテムスロットUIとして追加する
                         itemDisplaySlotObject.transform.SetParent(this.itemDisplayObject.transform, false);
@@ -158,6 +145,8 @@ namespace System
             this.itemCartData = new Dictionary<GameObject, ItemData>();
 
             this.SetItemDescription(null);
+            this.UpdatePlayerMoney();
+            this.UpdateItemTotalValue();
             this.canvasObject.SetActive(true);
         }
 
@@ -231,8 +220,19 @@ namespace System
 
                     return;
                 case "Reroll":
+                    // GameManager.CallによりItemCartDataがリセットされるのでクローンを生成する
+                    List<ItemData> itemCartData = new(this.itemCartData.Values);
+
                     this.gameManager.Call("shop");
                     this.gameManager.Play("Reroll");
+
+                    // ItemCartDataのクローンを追加する
+                    foreach (ItemData itemData in itemCartData)
+                    {
+                        this.AddItemData(itemData);
+                    }
+
+                    this.UpdateItemTotalValue();
 
                     break;
             }
@@ -243,11 +243,22 @@ namespace System
             // アイテムスロットにカーソルが乗ったかどうか検知する
             if (gameObject != null && contexts != null && contexts.Length >= 1 && contexts[0] is string type && type == "Pointer Enter")
             {
-                Transform parent = gameObject.transform.parent;
+                Transform parentTransform = gameObject.transform.parent;
 
-                if (parent != null)
+                if (parentTransform != null && parentTransform.gameObject != null)
                 {
-                    this.SetItemDescription(parent.gameObject);
+                    if (this.itemDisplayData.ContainsKey(parentTransform.gameObject))
+                    {
+                        this.SetItemDescription(this.itemDisplayData[parentTransform.gameObject]);
+                    }
+                    else if (this.itemCartData.ContainsKey(parentTransform.gameObject))
+                    {
+                        this.SetItemDescription(this.itemCartData[parentTransform.gameObject]);
+                    }
+                    else
+                    {
+                        this.SetItemDescription(ItemData.EMPTY);
+                    }
                 }
             }
         }
@@ -255,15 +266,15 @@ namespace System
         private void ClickShopCanvasUI(GameObject gameObject)
         {
             // アイテムスロットが押されたかどうか検知する
-            GameObject parent = gameObject.transform.parent?.gameObject;
+            GameObject parentObject = gameObject.transform.parent?.gameObject;
 
-            if (parent != null)
+            if (parentObject != null)
             {
                 foreach (GameObject itemDisplaySlot in this.itemDIsplaySlots)
                 {
-                    if (itemDisplaySlot == parent)
+                    if (itemDisplaySlot == parentObject)
                     {
-                        this.ClickItemDisplaySlot(itemDisplaySlot);
+                        this.AddItemData(itemDisplaySlot);
 
                         this.gameManager.Play("Select");
 
@@ -273,15 +284,16 @@ namespace System
             }
 
             // カートスロットが押されたかどうか検知する
-            parent = gameObject.transform.parent?.gameObject.transform.parent?.gameObject.transform.parent?.gameObject;
+            parentObject = UIUtil.GetParent(gameObject, "Item Cart Control");
+            parentObject = parentObject != null && parentObject.transform.parent != null ? parentObject.transform.parent.gameObject : null;
 
-            if (parent != null)
+            if (parentObject != null)
             {
                 foreach (GameObject itemCartSlotObject in this.itemCartSlots)
                 {
-                    if (itemCartSlotObject != null && itemCartSlotObject.GetInstanceID() == parent.GetInstanceID())
+                    if (itemCartSlotObject != null && itemCartSlotObject.GetInstanceID() == parentObject.GetInstanceID())
                     {
-                        this.ClickItemCartRemove(itemCartSlotObject);
+                        this.RemoveItemCart(itemCartSlotObject);
 
                         this.gameManager.Play("Select");
 
@@ -292,79 +304,74 @@ namespace System
         }
 
         /// <summary>
-        /// <para>クリックされたアイテムをカートスロットに追加する</para>
+        /// <para>アイテムスロットのアイテムをカートスロットに追加する</para>
         /// </summary>
-        private void ClickItemDisplaySlot(GameObject itemDisplaySlotObject)
-        {
+        private void AddItemData(GameObject itemDisplaySlotObject) {
             if (itemDisplaySlotObject == null)
                 return;
 
-            if (this.itemDisplayData.ContainsKey(itemDisplaySlotObject))
+            if (itemDisplaySlotObject != null && this.itemDisplayData.ContainsKey(itemDisplaySlotObject))
             {
-                ItemData itemData = this.itemDisplayData[itemDisplaySlotObject]?.Clone();
+                this.AddItemData(this.itemDisplayData[itemDisplaySlotObject]);
+            }
+        }
 
-                // ItemDataがすでにカートスロットに存在するか確認する
-                bool hasItemData = itemData != null && this.itemCartData.ContainsValue(itemData);
+        private void AddItemData(ItemData sourceItemData)
+        {
+            if (sourceItemData == null)
+                return;
 
-                GameObject itemCartSlotObject = null;
+            // ItemDataをクローンする
+            ItemData itemData = sourceItemData.Clone();
 
-                if (itemData != null)
+            // ItemDataがすでにカートスロットに存在するか確認する
+            bool hasItemData = this.itemCartData.ContainsValue(itemData);
+
+            // 変更されるアイテムカートスロット
+            GameObject itemCartSlotObject = null;
+
+            if (itemData != null)
+            {
+                if (hasItemData)
                 {
-                    if (hasItemData)
+                    foreach (var (key, value) in this.itemCartData)
                     {
-                        foreach (var (key, value) in this.itemCartData)
+                        if (value != null && itemData.Equals(value))
                         {
-                            if (value != null && itemData.Equals(value))
-                            {
-                                itemCartSlotObject = key;
+                            itemCartSlotObject = key;
 
-                                // ItemDataの個数を増やす
-                                value.Count += itemData.Count;
-                                itemData = value;
+                            // ItemDataの個数を増やす
+                            value.Count += itemData.Count;
+                            itemData = value;
 
-                                break;
-                            }
+                            break;
                         }
-                    }
-                    else
-                    {
-                        // カートスロットを生成する
-                        itemCartSlotObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.ItemCartSlot);
                     }
                 }
-
-                if (itemCartSlotObject != null)
+                else
                 {
-                    // 個数、名前、値段を設定する
-                    GameObject count = UIUtil.GetChild(itemCartSlotObject, "Item Cart Display/Count");
-                    GameObject name = UIUtil.GetChild(itemCartSlotObject, "Item Cart Display/Name");
-                    GameObject value = UIUtil.GetChild(itemCartSlotObject, "Item Cart Display/Value");
+                    // カートスロットを生成する
+                    itemCartSlotObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.ItemCartSlot);
+                }
+            }
 
-                    if (count != null && name != null && value != null)
-                    {
-                        TextMeshProUGUI countTextMeshProUGUI = count.GetComponent<TextMeshProUGUI>();
-                        TextMeshProUGUI nameTextMeshProUGUI = name.GetComponent<TextMeshProUGUI>();
-                        TextMeshProUGUI valueTextMeshProUGUI = value.GetComponent<TextMeshProUGUI>();
+            if (itemCartSlotObject != null)
+            {
+                // 個数、名前、値段を設定する
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(itemCartSlotObject, "./Item Cart Display/Count Display/Count"), textMeshProUGUI => textMeshProUGUI.text = $"x{itemData.Count}");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(itemCartSlotObject, "./Item Cart Display/Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = itemData.Information);
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(itemCartSlotObject, "./Item Cart Display/Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{itemData.Value:N0}$");
 
-                        if (countTextMeshProUGUI != null && nameTextMeshProUGUI != null && valueTextMeshProUGUI != null)
-                        {
-                            countTextMeshProUGUI.text = $"x{itemData.Count}";
-                            nameTextMeshProUGUI.text = itemData.Name;
-                            valueTextMeshProUGUI.text = $"{itemData.Value:N0}$";
-                        }
-                    }
+                if (!hasItemData)
+                {
+                    // カートスロットUIとして追加する
+                    itemCartSlotObject.transform.SetParent(this.itemCartObject.transform, false);
 
-                    if (!hasItemData)
-                    {
-                        // カートスロットUIとして追加する
-                        itemCartSlotObject.transform.SetParent(this.itemCartObject.transform, false);
+                    // カートスロットとアイテムデータを紐づけする
+                    this.itemCartData[itemCartSlotObject] = itemData;
 
-                        // カートスロットとアイテムデータを紐づけする
-                        this.itemCartData[itemCartSlotObject] = itemData;
-
-                        // カートスロットを登録する
-                        this.itemCartSlots.Add(itemCartSlotObject);
-                    }
+                    // カートスロットを登録する
+                    this.itemCartSlots.Add(itemCartSlotObject);
                 }
             }
         }
@@ -372,28 +379,22 @@ namespace System
         /// <summary>
         /// <para>カートスロットのアイテムを1コ減らす</para>
         /// </summary>
-        private void ClickItemCartRemove(GameObject itemCartSlotObject)
+        private void RemoveItemCart(GameObject itemCartSlotObject)
         {
             if (itemCartSlotObject == null)
                 return;
 
             // ItemDataの個数を減らす
             ItemData itemData = this.itemCartData.ContainsKey(itemCartSlotObject) ? this.itemCartData[itemCartSlotObject] : null;
-            GameObject count = UIUtil.GetChild(itemCartSlotObject, "Item Cart Display/Count");
 
-            if (itemData != null && count != null)
+            if (itemData != null)
             {
                 --itemData.Count;
 
                 if (itemData.Count > 0)
                 {
                     // カートスロットUIに反映する
-                    TextMeshProUGUI countTextMeshProUGUI = count.GetComponent<TextMeshProUGUI>();
-
-                    if (countTextMeshProUGUI != null)
-                    {
-                        countTextMeshProUGUI.text = $"x{itemData.Count}";
-                    }
+                    UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(itemCartSlotObject, "./Item Cart Display/Count Display/Count"), textMeshProUGUI => textMeshProUGUI.text = $"x{itemData.Count}");
                 }
                 else
                 {
@@ -410,44 +411,34 @@ namespace System
         /// <summary>
         /// <para>アイテムの説明を設定する</para>
         /// </summary>
-        private void SetItemDescription(GameObject itemDisplaySlotObject)
+        private void SetItemDescription(ItemData itemData)
         {
-            if (this.itemName == null || this.itemDescription == null)
-                return;
-
-            TextMeshProUGUI textMeshProUGUI = this.itemName.GetComponent<TextMeshProUGUI>();
-            Image image = this.itemDescription.GetComponent<Image>();
-
-            if (textMeshProUGUI == null || image == null)
-                return;
-            
-            // アイテムの説明を空にする
-            if (itemDisplaySlotObject == null)
+            if (itemData != null && !itemData.Equals(ItemData.EMPTY))
             {
-                textMeshProUGUI.text = "";
-                image.sprite = null;
-                image.color = new Color(0.0F, 0.0F, 0.0F, 0.0F);
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(this.itemName, textMeshProUGUI => textMeshProUGUI.text = itemData.Information);
 
-                this.noItemDescription.SetActive(true);
+                // アイテムの説明を設定する
+                UIUtil.InvokeIfPresent<Image>(this.itemDescription, image =>
+                {
+                    ItemImageHolder itemImageHolder = this.gameManager.GetItemImageHolder(itemData.Name, itemData.Rarity);
 
-                return;
+                    image.sprite = itemImageHolder.DescriptionImage != null ? itemImageHolder.DescriptionImage.sprite : null;
+                    image.color = itemImageHolder.DescriptionImage != null ? itemImageHolder.DescriptionImage.color : new Color(1.0F, 1.0F, 1.0F, 0.0F);
+
+                    this.noItemDescription.SetActive(itemImageHolder.DescriptionImage == null);
+                });
             }
-
-            // アイテムの説明を設定する
-            if (this.itemDisplayData.ContainsKey(itemDisplaySlotObject))
+            else
             {
-                ItemData itemData = this.itemDisplayData[itemDisplaySlotObject];
+                // アイテムの説明を空にする
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(this.itemName, textMeshProUGUI => textMeshProUGUI.text = "");
+                UIUtil.InvokeIfPresent<Image>(this.itemName, image =>
+                {
+                    image.sprite = null;
+                    image.color = new Color(1.0F, 1.0F, 1.0F, 0.0F);
 
-                if (itemData == null)
-                    return;
-
-                ItemImageHolder itemImageHolder = this.gameManager.GetItemImageHolder(itemData.Name, itemData.Rarity);
-
-                textMeshProUGUI.text = itemData.Name;
-                image.sprite = itemImageHolder.DescriptionImage != null ? itemImageHolder.DescriptionImage.sprite : null;
-                image.color = itemImageHolder.DescriptionImage != null ? itemImageHolder.DescriptionImage.color : new Color(0.0F, 0.0F, 0.0F, 0.0F);
-
-                this.noItemDescription.SetActive(itemImageHolder.DescriptionImage == null);
+                    this.noItemDescription.SetActive(true);
+                });
             }
         }
 
@@ -456,12 +447,7 @@ namespace System
         /// </summary>
         private void UpdateItemTotalValue()
         {
-            if (this.itemTotalValue == null)
-                return;
-
-            TextMeshProUGUI textMeshProUGUI = this.itemTotalValue.GetComponent<TextMeshProUGUI>();
-
-            if (textMeshProUGUI)
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(this.itemTotalValue, textMeshProUGUI =>
             {
                 this.itemTotalValueBuffer = 0;
 
@@ -475,7 +461,7 @@ namespace System
 
                 textMeshProUGUI.text = this.itemTotalValueBuffer.ToString("N0");
                 textMeshProUGUI.color = this.itemTotalValueBuffer > this.playerMoneyBuffer ? Color.red : Color.white;
-            }
+            });
         }
 
         /// <summary>
@@ -483,17 +469,12 @@ namespace System
         /// </summary>
         private void UpdatePlayerMoney()
         {
-            if (this.playerMoney == null)
-                return;
-
-            TextMeshProUGUI textMeshProUGUI = this.playerMoney.GetComponent<TextMeshProUGUI>();
-
-            if (textMeshProUGUI)
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(this.playerMoney, textMeshProUGUI =>
             {
                 this.playerMoneyBuffer = this.gameManager.playerData.GetValues();
 
                 textMeshProUGUI.text = this.playerMoneyBuffer.ToString("N0");
-            }
+            });
         }
     }
 }

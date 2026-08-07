@@ -26,7 +26,7 @@ namespace Item
         public void DoUse(PlayerData playerData, DealerData dealerData, Deck deck, float rarity);
 
         /// <summary>
-        /// <para>レア度から計算した値段を返す</para>
+        /// <para>レア度に応じた値段を計算する</para>
         /// </summary>
         public int ComputeValue(float rarity)
         {

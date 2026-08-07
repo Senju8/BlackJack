@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Audio
@@ -46,9 +46,22 @@ namespace Audio
         }
 
         /// <summary>
+        /// <para>サウンドを停止する</para>
+        /// </summary>
+        public void Stop()
+        {
+            if (this.Instantiate() && this.audioSource.isPlaying)
+            {
+                this.audioSource.Stop();
+
+                UnityEngine.Debug.Log($"サウンド（Name: {this.name}）が停止されました！");
+            }
+        }
+
+        /// <summary>
         /// <para>サウンドがアタッチされたGameObjectを生成する</para>
         /// </summary>
-        private bool Instantiate()
+        public bool Instantiate()
         {
             if (this.audioSource == null)
                 return false;
@@ -57,21 +70,38 @@ namespace Audio
                 return true;
 
             // GameObjectを生成する
-            this.audioObject = new GameObject($"Audio:{this.Name}");
+            this.audioObject = new GameObject($"{this.Name}(Audio)");
 
             if (this.audioObject != null && audioSource != null)
             {
                 AudioSource audioSource = this.audioObject.AddComponent<AudioSource>();
-                
-                // サウンドを設定
-                audioSource.generator = this.audioSource.generator;
 
-                this.audioSource = audioSource;
+                if (audioSource != null)
+                {
+                    // サウンドを設定する
+                    audioSource.generator = this.audioSource.generator;
 
-                return true;
+                    // インスタンスを入れ替える
+                    this.audioSource = audioSource;
+
+                    return true;
+                }
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// <para>サウンドがアタッチされたGameObjectを破棄する</para>
+        /// </summary>
+        public bool Destroy()
+        {
+            if (this.audioObject == null)
+                return false;
+
+            UnityEngine.Object.Destroy(this.audioObject);
+
+            return true;
         }
     }
 }
