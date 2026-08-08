@@ -1,4 +1,6 @@
-using Assets.Scripts.System;
+﻿using Assets.Scripts.System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Util;
 
@@ -11,11 +13,72 @@ namespace System
     {
         private GameObject canvasObject;
 
-        private GameObject noneDisplayObject;
-        private GameObject winDisplayObject;
-        private GameObject loseDisplayObject;
+        private readonly List<Action<GameObject>> itemBarDefinitions = new();
 
-        public ResultPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour) { }
+        private TextMeshProUGUI messageTexts;
+        
+        private GameObject resultContents;
+
+        private GameObject controlGrid;
+        private GameObject finishButton;
+        private GameObject nextButton;
+        private GameObject exitButton;
+
+        private List<GameObject> itemBars;
+
+        public ResultPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour)
+        {
+            // 難易度を追加
+            this.itemBarDefinitions.Add(gameObject =>
+            {
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Difficulty");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI =>
+                {
+                    float difficulty = this.gameManager.Difficulty;
+
+                    if (difficulty >= 5.0F)
+                    {
+                        textMeshProUGUI.text = "Hard";
+                    }
+                    else if (difficulty >= 3.0F)
+                    {
+                        textMeshProUGUI.text = "Normal";
+                    }
+                    else
+                    {
+                        textMeshProUGUI.text = "Easy";
+                    }
+                });
+            });
+
+            // ノルマを追加
+            this.itemBarDefinitions.Add(gameObject =>
+            {
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Quota");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.Quata} $");
+            });
+
+            // ベットを追加
+            this.itemBarDefinitions.Add(gameObject =>
+            {
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Bet");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.playerData.GetBet()} $");
+            });
+
+            // 所持金を追加
+            this.itemBarDefinitions.Add(gameObject =>
+            {
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Money");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.playerData.GetValues()} $");
+            });
+
+            // スコアを追加
+            this.itemBarDefinitions.Add(gameObject =>
+            {
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Score");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.playerData.GetScore()}");
+            });
+        }
 
         protected override void Init()
         {
@@ -26,18 +89,51 @@ namespace System
 
             if (this.canvasObject != null)
             {
-                this.noneDisplayObject = UIUtil.GetChild(this.canvasObject, "None Display");
-                this.winDisplayObject = UIUtil.GetChild(this.canvasObject, "Win Display");
-                this.loseDisplayObject = UIUtil.GetChild(this.canvasObject, "Lose Display");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Message Display/Message"), textMeshProUGUI => this.messageTexts = textMeshProUGUI);
 
-                if (this.noneDisplayObject != null)
-                    this.noneDisplayObject.SetActive(false);
+                this.resultContents = UIUtil.GetChild(this.canvasObject, "Result Display/Result Mask/Result Contents");
+                this.controlGrid = UIUtil.GetChild(this.canvasObject, "Control Display/Control Grid");
 
-                if (this.winDisplayObject != null)
-                    this.winDisplayObject.SetActive(false);
+                // コントロールボタンを定義する
+                if (this.gameManagerBehaviour.ResultControlButton != null && this.controlGrid != null)
+                {
+                    this.finishButton = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.ResultControlButton);
+                    this.nextButton = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.ResultControlButton);
+                    this.exitButton = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.ResultControlButton);
 
-                if (this.loseDisplayObject != null)
-                    this.loseDisplayObject.SetActive(false);
+                    if (this.finishButton != null)
+                    {
+                        this.finishButton.name = "Finish";
+                        this.finishButton.transform.SetParent(this.controlGrid.transform);
+                        this.finishButton.transform.localScale = Vector3.one;
+
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.finishButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = "Finish");
+
+                        this.finishButton.SetActive(false);
+                    }
+
+                    if (this.nextButton != null)
+                    {
+                        this.nextButton.name = "Next";
+                        this.nextButton.transform.SetParent(this.controlGrid.transform);
+                        this.nextButton.transform.localScale = Vector3.one;
+
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.nextButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = "Next");
+
+                        this.nextButton.SetActive(false);
+                    }
+
+                    if (this.exitButton != null)
+                    {
+                        this.exitButton.name = "Exit";
+                        this.exitButton.transform.SetParent(this.controlGrid.transform);
+                        this.exitButton.transform.localScale = Vector3.one;
+
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.exitButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = "Exit");
+
+                        this.exitButton.SetActive(false);
+                    }
+                }
             }
 
             this.canvasObject.SetActive(false);
@@ -48,26 +144,77 @@ namespace System
             if (this.canvasObject == null)
                 return;
 
+            // 項目バーを生成する
+            this.itemBars = new();
+
+            if (this.resultContents != null)
+            {
+                if (this.itemBarDefinitions != null)
+                {
+                    GameObject itemBar;
+
+                    foreach (Action<GameObject> action in this.itemBarDefinitions)
+                    {
+                        if (action == null)
+                            continue;
+
+                        // リザルト項目を生成する
+                        itemBar = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.ResultItemBar);
+
+                        if (itemBar != null)
+                        {
+                            action.Invoke(itemBar);
+
+                            itemBar.transform.SetParent(this.resultContents.transform);
+                            itemBar.transform.localScale = Vector3.one;
+
+                            this.itemBars.Add(itemBar);
+                        }
+                    }
+                }
+            }
+
+            // リザルト画面を生成する
+            bool hasFinish = false;
+            bool hasNext = false;
+            bool hasExit = false;
+
             switch (this.gameManager.GameResult)
             {
-                case ResultPhase.Result.None:
-                    if (this.noneDisplayObject != null)
-                        this.noneDisplayObject.SetActive(true);
+                case Result.None:
+                    if (this.messageTexts != null)
+                        this.messageTexts.text = "No results...";
 
+                    hasFinish = true;
                     break;
+                case Result.Win:
+                    if (this.messageTexts != null)
+                        this.messageTexts.text = "You win!";
 
-                case ResultPhase.Result.Win:
-                    if (this.winDisplayObject != null)
-                        this.winDisplayObject.SetActive(true);
-
+                    hasNext = hasFinish = true;
                     break;
+                case Result.Draw:
+                    if (this.messageTexts != null)
+                        this.messageTexts.text = "It's a draw.";
 
-                case ResultPhase.Result.Lose:
-                    if (this.loseDisplayObject != null)
-                        this.loseDisplayObject.SetActive(true);
+                    hasNext = hasFinish = true;
+                    break;
+                case Result.Lose:
+                    if (this.messageTexts != null)
+                        this.messageTexts.text = "You lose...";
 
+                    hasFinish = true;
                     break;
             }
+
+            if (hasFinish && this.finishButton != null)
+                this.finishButton.SetActive(true);
+
+            if (hasNext && this.nextButton != null)
+                this.nextButton.SetActive(true);
+
+            if (hasExit && this.exitButton != null)
+                this.exitButton.SetActive(true);
 
             this.canvasObject.SetActive(true);
         }
@@ -81,14 +228,16 @@ namespace System
             if (this.canvasObject == null)
                 return;
 
-            if (this.noneDisplayObject != null)
-                this.noneDisplayObject.SetActive(false);
+            UIUtil.DestoryAll(this.itemBars);
 
-            if (this.winDisplayObject != null)
-                this.winDisplayObject.SetActive(false);
+            if (this.finishButton != null)
+                this.finishButton.SetActive(false);
 
-            if (this.loseDisplayObject != null)
-                this.loseDisplayObject.SetActive(false);
+            if (this.nextButton != null)
+                this.nextButton.SetActive(false);
+
+            if (this.exitButton != null)
+                this.exitButton.SetActive(false);
 
             this.canvasObject.SetActive(false);
         }
@@ -108,14 +257,19 @@ namespace System
 
             switch (gameObject.name)
             {
-                case "Start":
+                case "Finish":
                     this.gameManager.Call("start");
                     this.gameManager.Play("Select");
 
                     break;
                 case "Next":
-                    this.gameManager.Call("shop");
+                    this.gameManager.Call("bet");
                     this.gameManager.Play("Select");
+
+                    break;
+                case "Exit":
+                    this.gameManager.Exit();
+                    this.gameManager.Play("Invalid");
 
                     break;
             }
@@ -125,6 +279,7 @@ namespace System
         {
             None,
             Win,
+            Draw,
             Lose
         }
     }

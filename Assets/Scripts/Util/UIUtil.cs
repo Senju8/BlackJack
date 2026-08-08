@@ -1,5 +1,6 @@
 ﻿using Item;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,7 @@ namespace Util
                 {
                     ItemImageHolder itemImageHolder = GameManager.INSTANCE.GetItemImageHolder(itemData.Name, itemData.Rarity);
 
-                    image.sprite = itemImageHolder.ItemImage.sprite;
+                    image.sprite = itemImageHolder.ItemImage != null ? itemImageHolder.ItemImage.sprite : null;
                     image.color = itemImageHolder.ItemImage != null && itemData.Count > 0 ? itemImageHolder.ItemImage.color : new(1.0F, 1.0F, 1.0F, 0.0F);
 
                     return itemImageHolder;
@@ -45,7 +46,7 @@ namespace Util
                 {
                     ItemImageHolder itemImageHolder = GameManager.INSTANCE.GetItemImageHolder(itemData.Name, itemData.Rarity);
 
-                    spriteRenderer.sprite = itemImageHolder.ItemImage.sprite;
+                    spriteRenderer.sprite = itemImageHolder.ItemImage != null ? itemImageHolder.ItemImage.sprite : null;
                     spriteRenderer.color = itemImageHolder.ItemImage != null && itemData.Count > 0 ? itemImageHolder.ItemImage.color : new(1.0F, 1.0F, 1.0F, 0.0F);
 
                     return itemImageHolder;
@@ -172,6 +173,40 @@ namespace Util
             UnityEngine.Debug.LogWarning($"GameObject（Name: {parentObject.name}）に子GameObject（Path: {path}）は存在しません…");
 
             return null;
+        }
+
+        public static void DestoryAll(params GameObject[] gameObjects)
+        {
+            GameObject gameObject;
+            int length = gameObjects.Length;
+
+            for (int i = 0; i < length; ++i)
+            {
+                gameObject = gameObjects[i];
+
+                if (gameObject != null)
+                {
+                    UnityEngine.Object.Destroy(gameObject);
+
+                    gameObjects[i] = null;
+                }
+            }
+        }
+
+        public static void DestoryAll(List<GameObject> gameObjects)
+        {
+            if (gameObjects == null)
+                return;
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                if (gameObject != null)
+                {
+                    UnityEngine.Object.Destroy(gameObject);
+                }
+            }
+
+            gameObjects.Clear();
         }
     }
 }
