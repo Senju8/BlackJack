@@ -42,6 +42,7 @@ namespace System
         private PlayerScoreView playerScoreView;
         private DealerScoreView dealerScoreView;
         // private PayoutMultiplierView payoutMultiplierView;
+        private PlayerValueView playerValueView;
 
         private PlayerData playerData;
         private DealerData dealerData;
@@ -79,6 +80,7 @@ namespace System
             dealerCards = gameManagerBehaviour.DealerCards;
             playerScoreView = gameManagerBehaviour.PlayerScoreView;
             dealerScoreView = gameManagerBehaviour.DealerScoreView;
+            playerValueView = gameManagerBehaviour.PlayerValueView;
             //payoutMultiplierView = gameManagerBehaviour.PayoutMultiplierView;
             //if (payoutMultiplierView != null)
             //{
@@ -100,6 +102,7 @@ namespace System
             dealerCards.Setup(dealerData, deck);
             playerScoreView.Setup(playerData);
             dealerScoreView.Setup(dealerData);
+            playerValueView.Setup(playerData);
             dealerScoreView.SetActiveText(false);
             blackJackOnlyUIs.SetActive(false);
             betOnlyUIs.SetActive(false);
@@ -356,6 +359,10 @@ namespace System
             }
         }
 
+        /// <summary>
+        /// ”{—¦ŒvŽZ
+        /// </summary>
+        /// <returns></returns>
         private float CalcultePayoutMultiplier()
         {
             const string BlackjackBonus = "blackjack";

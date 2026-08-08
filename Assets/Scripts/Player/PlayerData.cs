@@ -57,6 +57,7 @@ namespace Player
         public void SetValues(int value)
         {
             values = value;
+            OnValueChanged?.Invoke(values);
         }
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace Player
         public void AddValues(int amount)
         {
             values += amount;
+            OnValueChanged?.Invoke(values);
         }
 
         // プレイヤの札
@@ -105,6 +107,11 @@ namespace Player
         /// スコアの変更があった際に発火するイベント
         /// </summary>
         public event Action<int> OnScoreChanded;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public event Action<int> OnValueChanged;
 
         // プレイヤのスコア
         public int GetScore()
@@ -146,6 +153,7 @@ namespace Player
 
             values -= amount;
             betAmount = amount;
+            OnValueChanged?.Invoke(values);
 
             return true;
         }

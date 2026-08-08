@@ -138,9 +138,9 @@ namespace System
             {
                 gamePhase.DoInit();
             }
-            catch
+            catch(System.Exception e)
             {
-                UnityEngine.Debug.LogError($"GamePhase（ID: {id}）の初期化に失敗しました…");
+                UnityEngine.Debug.LogError($"GamePhase（ID: {id}）の初期化に失敗しました…\n{e}");
 
                 gamePhase.DoDiscard();
             }
