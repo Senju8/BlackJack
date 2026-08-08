@@ -95,6 +95,7 @@ namespace System
         {
             // フェーズの登録
             this.RegisterGamePhase("start", new StartPhase(this, gameManagerBehaviour));
+            this.RegisterGamePhase("bet", new BetPhase(this, gameManagerBehaviour));
             this.RegisterGamePhase("select", new SelectPhase(this, gameManagerBehaviour));
             this.RegisterGamePhase("shop", new ShopPhase(this, gameManagerBehaviour));
             this.RegisterGamePhase("blackjack", new BlackjackPhase(this, gameManagerBehaviour));
@@ -206,6 +207,14 @@ namespace System
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// <para>ゲームを終了する</para>
+        /// </summary>
+        public void Exit()
+        {
+            UnityEngine.Debug.Log("ゲームを終了しました！");
         }
 
         /// <summary>
@@ -347,7 +356,7 @@ namespace System
                 // デバッグ
                 if (addFlag && itemDataToAdd.Count > 0)
                 {
-                    UnityEngine.Debug.Log($"プレイヤーにアイテム（Name: {itemDataToAdd.Name}, Rarity: {itemDataToAdd.Rarity:0.00}）を{itemDataToAdd.Count}コ追加しました！（合計：{totalCount}コ）");
+                    UnityEngine.Debug.Log($"プレイヤーにアイテム（Name: {itemDataToAdd.Information}）を{itemDataToAdd.Count}コ追加しました！（合計：{totalCount}コ）");
                 }
             }
         }

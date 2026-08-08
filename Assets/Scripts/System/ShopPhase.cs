@@ -81,7 +81,6 @@ namespace System
             int rarity;
 
             GameObject itemDisplaySlotObject;
-            GameObject itemCartSlotObject;
 
             for (int i = 0; i < itemCount; ++i)
             {
@@ -163,19 +162,8 @@ namespace System
             if (this.itemCartObject == null)
                 return;
 
-            // アイテムスロットをクリア
-            foreach (GameObject gameObject in this.itemDIsplaySlots)
-            {
-                if (gameObject != null)
-                    UnityEngine.Object.Destroy(gameObject);
-            }
-
-            // カートスロットをクリア
-            foreach (GameObject gameObject in this.itemCartSlots)
-            {
-                if (gameObject != null)
-                    UnityEngine.Object.Destroy(gameObject);
-            }
+            UIUtil.DestoryAll(this.itemDIsplaySlots);
+            UIUtil.DestoryAll(this.itemCartSlots);
 
             this.canvasObject.SetActive(false);
         }
@@ -190,11 +178,6 @@ namespace System
         {
             if (gameObject == null)
                 return;
-
-            // Shop Canvas UIの更新をする
-            this.ClickShopCanvasUI(gameObject);
-            this.UpdatePlayerMoney();
-            this.UpdateItemTotalValue();
 
             switch (gameObject.name)
             {
@@ -236,6 +219,11 @@ namespace System
 
                     break;
             }
+
+            // Shop Canvas UIの更新をする
+            this.ClickShopCanvasUI(gameObject);
+            this.UpdatePlayerMoney();
+            this.UpdateItemTotalValue();
         }
 
         public override void Invoke(GameObject gameObject, params object[] contexts)

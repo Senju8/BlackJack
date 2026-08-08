@@ -1,4 +1,4 @@
-using Assets.Scripts.System;
+﻿using Assets.Scripts.System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -73,7 +73,7 @@ namespace System
 
                     break;
                 case "OK":
-                    this.gameManager.Call("shop");
+                    this.gameManager.Call("bet");
                     this.gameManager.Play("Select");
 
                     break;

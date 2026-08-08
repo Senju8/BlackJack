@@ -1,4 +1,4 @@
-using Assets.Scripts.System;
+﻿using Assets.Scripts.System;
 using UnityEngine;
 
 namespace System
@@ -62,7 +62,7 @@ namespace System
 
                     break;
                 case "Exit":
-                    UnityEngine.Debug.Log("EXIT");
+                    this.gameManager.Exit();
                     this.gameManager.Play("Invalid");
 
                     break;

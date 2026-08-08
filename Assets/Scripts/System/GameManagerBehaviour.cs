@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,6 +11,9 @@ namespace Assets.Scripts.System
 
         [Header("難易度セレクト画面")]
         [SerializeField] private GameObject selectCanvas;
+
+        [Header("ベット画面")]
+        [SerializeField] private GameObject betCanvas;
 
         [Header("アイテム購入画面")]
         [SerializeField] private GameObject shopCanvas;
@@ -26,6 +29,12 @@ namespace Assets.Scripts.System
 
         [Header("リザルト画面")]
         [SerializeField] private GameObject resultCanvas;
+
+        [Header("リザルト画面の項目バー")]
+        [SerializeField] private GameObject resultItemBar;
+
+        [Header("リザルト画面のコントロールボタン")]
+        [SerializeField] private GameObject resultControlButton;
 
         [Header("ブラックジャック関連")]
         [SerializeField] private Cards.Deck deck;
@@ -57,6 +66,11 @@ namespace Assets.Scripts.System
             get { return this.selectCanvas; }
         }
 
+        public GameObject BetCanvas
+        {
+            get { return this.betCanvas; }
+        }
+
         public GameObject ShopCanvas
         {
             get { return this.shopCanvas; }
@@ -82,6 +96,15 @@ namespace Assets.Scripts.System
             get { return this.resultCanvas; }
         }
 
+        public GameObject ResultItemBar
+        {
+            get { return this.resultItemBar; }
+        }
+
+        public GameObject ResultControlButton
+        {
+            get { return this.resultControlButton; }
+        }
 
         public Cards.Deck Deck => deck;
         public Cards.PlayerCards PlayerCards => playerCards;
