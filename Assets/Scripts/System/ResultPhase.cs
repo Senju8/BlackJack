@@ -36,11 +36,11 @@ namespace System
                 {
                     float difficulty = this.gameManager.Difficulty;
 
-                    if (difficulty >= 5.0F)
+                    if (difficulty >= 0.5F)
                     {
                         textMeshProUGUI.text = "Hard";
                     }
-                    else if (difficulty >= 3.0F)
+                    else if (difficulty >= 0.1F)
                     {
                         textMeshProUGUI.text = "Normal";
                     }
