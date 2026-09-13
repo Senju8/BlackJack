@@ -31,22 +31,22 @@ namespace System
             // 難易度を追加
             this.itemBarDefinitions.Add(gameObject =>
             {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Difficulty");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.difficulty"));
                 UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI =>
                 {
                     float difficulty = this.gameManager.Difficulty;
 
                     if (difficulty >= 0.5F)
                     {
-                        textMeshProUGUI.text = "Hard";
+                        textMeshProUGUI.text = T.Get("difficulty.hard");
                     }
                     else if (difficulty >= 0.1F)
                     {
-                        textMeshProUGUI.text = "Normal";
+                        textMeshProUGUI.text = T.Get("difficulty.normal");
                     }
                     else
                     {
-                        textMeshProUGUI.text = "Easy";
+                        textMeshProUGUI.text = T.Get("difficulty.easy");
                     }
                 });
             });
@@ -54,28 +54,28 @@ namespace System
             // ノルマを追加
             this.itemBarDefinitions.Add(gameObject =>
             {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Quota");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.quota"));
                 UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.Quata} $");
             });
 
             // ベットを追加
             this.itemBarDefinitions.Add(gameObject =>
             {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Bet");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.bet"));
                 UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.playerData.GetBet()} $");
             });
 
             // 所持金を追加
             this.itemBarDefinitions.Add(gameObject =>
             {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Money");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.money"));
                 UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.playerData.GetValues()} $");
             });
 
             // スコアを追加
             this.itemBarDefinitions.Add(gameObject =>
             {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = "Score");
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.score"));
                 UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.playerData.GetScore()}");
             });
         }
@@ -107,7 +107,7 @@ namespace System
                         this.nextButton.transform.SetParent(this.controlGrid.transform);
                         this.nextButton.transform.localScale = Vector3.one;
 
-                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.nextButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = "Next");
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.nextButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.next"));
 
                         this.nextButton.SetActive(false);
                     }
@@ -118,7 +118,7 @@ namespace System
                         this.finishButton.transform.SetParent(this.controlGrid.transform);
                         this.finishButton.transform.localScale = Vector3.one;
 
-                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.finishButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = "Finish");
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.finishButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.finish"));
 
                         this.finishButton.SetActive(false);
                     }
@@ -129,7 +129,7 @@ namespace System
                         this.exitButton.transform.SetParent(this.controlGrid.transform);
                         this.exitButton.transform.localScale = Vector3.one;
 
-                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.exitButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = "Exit");
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.exitButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.next"));
 
                         this.exitButton.SetActive(false);
                     }
@@ -183,25 +183,25 @@ namespace System
             {
                 case Result.None:
                     if (this.messageTexts != null)
-                        this.messageTexts.text = "No results...";
+                        this.messageTexts.text = T.Get("result.none");
 
                     hasFinish = true;
                     break;
                 case Result.Win:
                     if (this.messageTexts != null)
-                        this.messageTexts.text = "You win!";
+                        this.messageTexts.text = T.Get("result.win");
 
                     hasNext = hasFinish = true;
                     break;
                 case Result.Draw:
                     if (this.messageTexts != null)
-                        this.messageTexts.text = "It's a draw.";
+                        this.messageTexts.text = T.Get("result.draw");
 
                     hasNext = hasFinish = true;
                     break;
                 case Result.Lose:
                     if (this.messageTexts != null)
-                        this.messageTexts.text = "You lose...";
+                        this.messageTexts.text = T.Get("result.lose");
 
                     hasFinish = true;
                     break;

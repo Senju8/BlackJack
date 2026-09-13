@@ -1,5 +1,7 @@
 ﻿using Assets.Scripts.System;
+using TMPro;
 using UnityEngine;
+using Util;
 
 namespace System
 {
@@ -25,6 +27,10 @@ namespace System
         {
             if (this.canvasObject == null)
                 return;
+
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Title"), textMeshProUGUI => textMeshProUGUI.text = T.Get("start.title"));
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Start/Texts"), textMeshProUGUI => textMeshProUGUI.text = T.Get("start.start"));
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Exit/Texts"), textMeshProUGUI => textMeshProUGUI.text = T.Get("start.exit"));
 
             this.canvasObject.SetActive(true);
         }
