@@ -108,6 +108,8 @@ namespace System
         /// </summary>
         protected override void Start()
         {
+            playerValueView.SetQuota(this.gameManager.Quata);
+
             blackJackOnlyUIs.SetActive(false);
             resultOnlyUI.SetActive(false);
             winUI.SetActive(false);
@@ -128,7 +130,7 @@ namespace System
             playerData.SetIsPlaying(true);
             dealerData.SetIsPlaying(true);
 
-            ItemSlotSetup();
+            /* ItemSlotSetup(); */
 
             deck.InitializeDeck();
             deck.Shuffle();
@@ -179,7 +181,12 @@ namespace System
                     }
                     else
                     {
-                        currentSubPhase = SubPhase.Result;
+                        blackJackOnlyUIs.SetActive(false);
+                        playerCards.ClearCards();
+                        dealerCards.ClearCards();
+                        SetResult(isWin);
+                        GameManager.INSTANCE.Call("result");
+                        // currentSubPhase = SubPhase.Result;
                     }
                     
                     break;
@@ -195,7 +202,14 @@ namespace System
                     SetPayout();
                     Debug.Log(playerData.GetValues());
 
-                    currentSubPhase = SubPhase.Result;
+
+                    blackJackOnlyUIs.SetActive(false);
+                    playerCards.ClearCards();
+                    dealerCards.ClearCards();
+
+                    SetResult(isWin);
+                    GameManager.INSTANCE.Call("result");
+                    // currentSubPhase = SubPhase.Result;
 
                     break;
 
@@ -484,17 +498,27 @@ namespace System
             if (isWin)
             {
                 winUI.SetActive(true);
-
-                this.gameManager.GameResult = ResultPhase.Result.Win;
+                SetResult(isWin);
             }
             else
             {
                 loseUI.SetActive(true);
-
-                this.gameManager.GameResult = ResultPhase.Result.Lose;
+                SetResult(isWin);
             }
 
             resultOnlyUI.SetActive(true);
+        }
+
+        private void SetResult(bool isWin)
+        {
+            if(isWin)
+            {
+                this.gameManager.GameResult = ResultPhase.Result.Win;
+            }
+            else
+            {
+                this.gameManager.GameResult = ResultPhase.Result.Lose;
+            }
         }
 
         /// <summary>
@@ -523,6 +547,7 @@ namespace System
         /// </summary>
         private void SetPayout()
         {
+            playerData.SetOldValues();
             playerData.AddValues(payout);
         }
 

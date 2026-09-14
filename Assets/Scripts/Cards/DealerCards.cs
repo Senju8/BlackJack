@@ -36,14 +36,15 @@ namespace Cards
             dealerCards.Add(card1);
             handView.AddCard(card1, true);
 
+            int score = ScoreCalclator.CalculateScore(dealerCards);
+            dealerData.SetScore(score);
+
             // 二枚目のカードは見えない(裏向き)
             var card2 = deck.DrawCard();
             dealerCards.Add(card2);
             handView.AddCard(card2, false);
 
             dealerData.SetCard(dealerCards);
-            int score = ScoreCalclator.CalculateScore(dealerCards);
-            dealerData.SetScore(score);
         }
 
         public void DrawCard(int amount,bool isOpen)
