@@ -101,6 +101,9 @@ namespace System
         /// </summary>
         public void Init(GameManagerBehaviour gameManagerBehaviour)
         {
+            // UIで使用するテキストの登録
+            T.Initialize();
+
             // フェーズの登録
             this.RegisterGamePhase("start", new StartPhase(this, gameManagerBehaviour));
             this.RegisterGamePhase("bet", new BetPhase(this, gameManagerBehaviour));
