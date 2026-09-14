@@ -102,7 +102,7 @@ namespace System
         public void Init(GameManagerBehaviour gameManagerBehaviour)
         {
             // UIで使用するテキストの登録
-            T.Initialize();
+            GameTexts.Initialize();
 
             // フェーズの登録
             this.RegisterGamePhase("start", new StartPhase(this, gameManagerBehaviour));

@@ -29,21 +29,21 @@ namespace System
             if (this.canvasObject == null)
                 return;
 
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Message"), textMeshProUGUI => textMeshProUGUI.text = T.Get("difficulty.select"));
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Message/Money"), textMeshProUGUI => textMeshProUGUI.text = T.Get("difficulty.money"));
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Message"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("difficulty.select"));
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Message/Money"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("difficulty.money"));
 
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Easy/Texts"), textMeshProUGUI => textMeshProUGUI.text = T.Get("difficulty.easy"));
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Easy/Quota"), textMeshProUGUI => textMeshProUGUI.text = $" ... {T.Get("difficulty.quota")} : {this.gameManager.CalculateQuota(0.05F):N0} $");
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Easy/Texts"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("difficulty.easy"));
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Easy/Quota"), textMeshProUGUI => textMeshProUGUI.text = $" ... {GameTexts.Get("difficulty.quota")} : {this.gameManager.CalculateQuota(0.05F):N0} $");
 
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Normal/Texts"), textMeshProUGUI => textMeshProUGUI.text = T.Get("difficulty.normal"));
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Normal/Quota"), textMeshProUGUI => textMeshProUGUI.text = $" ... {T.Get("difficulty.quota")} : {this.gameManager.CalculateQuota(0.1F):N0} $");
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Normal/Texts"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("difficulty.normal"));
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Normal/Quota"), textMeshProUGUI => textMeshProUGUI.text = $" ... {GameTexts.Get("difficulty.quota")} : {this.gameManager.CalculateQuota(0.1F):N0} $");
 
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Hard/Texts"), textMeshProUGUI => textMeshProUGUI.text = T.Get("difficulty.hard"));
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Hard/Quota"), textMeshProUGUI => textMeshProUGUI.text = $" ... {T.Get("difficulty.quota")} : {this.gameManager.CalculateQuota(0.5F):N0} $");
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Hard/Texts"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("difficulty.hard"));
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Hard/Quota"), textMeshProUGUI => textMeshProUGUI.text = $" ... {GameTexts.Get("difficulty.quota")} : {this.gameManager.CalculateQuota(0.5F):N0} $");
             
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Message/Money"), textMeshProUGUI => textMeshProUGUI.text = $"{T.Get("difficulty.money")} : {this.gameManager.playerData.GetValues():N0} $");
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "Message/Money"), textMeshProUGUI => textMeshProUGUI.text = $"{GameTexts.Get("difficulty.money")} : {this.gameManager.playerData.GetValues():N0} $");
 
-            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "OK/Texts"), textMeshProUGUI => textMeshProUGUI.text = T.Get("difficulty.ok"));
+            UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.canvasObject, "OK/Texts"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("difficulty.ok"));
 
             this.canvasObject.SetActive(true);
         }
