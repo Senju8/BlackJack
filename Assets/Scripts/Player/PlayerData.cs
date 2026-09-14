@@ -15,6 +15,7 @@ namespace Player
         /// プレイ全体用
         /// </summary>
         private int values = 50000; // プレイヤの所持金額
+        private int oldValues = 0;
 
         /// <summary>
         /// ブラックジャック用
@@ -58,6 +59,16 @@ namespace Player
         {
             values = value;
             OnValueChanged?.Invoke(values);
+        }
+
+        public int GetOldValues()
+        {
+            return oldValues;
+        }
+
+        public void SetOldValues()
+        {
+            oldValues = values;
         }
 
         /// <summary>
