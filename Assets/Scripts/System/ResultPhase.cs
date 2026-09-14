@@ -11,6 +11,11 @@ namespace System
     /// </summary>
     public class ResultPhase : GamePhase
     {
+        public static readonly Color MAGENTA_COLOR = new(1.0F, 0.0F, 0.75F);
+        public static readonly Color YELLOW_COLOR = new(1.0F, 0.75F, 0.0F);
+        public static readonly Color CYAN_COLOR = new(0.0F, 0.75F, 1.0F);
+        public static readonly Color WHITE_COLOR = new(1.0F, 1.0F, 1.0F);
+
         private GameObject canvasObject;
 
         private readonly List<Action<GameObject>> itemBarDefinitions = new();
@@ -29,55 +34,72 @@ namespace System
         public ResultPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour)
         {
             // 難易度を追加
-            this.itemBarDefinitions.Add(gameObject =>
+            this.AddItemBar(resultPhase => GameTexts.Get("result.difficulty"), resultPhase =>
             {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.difficulty"));
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI =>
+                float difficulty = resultPhase.gameManager.Difficulty;
+
+                if (difficulty >= 0.5F)
                 {
-                    float difficulty = this.gameManager.Difficulty;
+                    return GameTexts.Get("difficulty.hard");
+                }
+                else if (difficulty >= 0.1F)
+                {
+                    return GameTexts.Get("difficulty.normal");
+                }
+                else
+                {
+                    return GameTexts.Get("difficulty.easy");
+                }
+            },
+                resultPhase => Color.white,
+                resultPhase =>
+                {
+                    float difficulty = resultPhase.gameManager.Difficulty;
 
                     if (difficulty >= 0.5F)
                     {
-                        textMeshProUGUI.text = T.Get("difficulty.hard");
+                        return MAGENTA_COLOR;
                     }
                     else if (difficulty >= 0.1F)
                     {
-                        textMeshProUGUI.text = T.Get("difficulty.normal");
+                        return YELLOW_COLOR;
                     }
                     else
                     {
-                        textMeshProUGUI.text = T.Get("difficulty.easy");
+                        return CYAN_COLOR;
                     }
-                });
-            });
-
-            // ノルマを追加
-            this.itemBarDefinitions.Add(gameObject =>
-            {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.quota"));
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.Quata} $");
-            });
-
-            // ベットを追加
-            this.itemBarDefinitions.Add(gameObject =>
-            {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.bet"));
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.playerData.GetBet()} $");
-            });
-
-            // 所持金を追加
-            this.itemBarDefinitions.Add(gameObject =>
-            {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.money"));
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.playerData.GetValues()} $");
-            });
+                }
+            );
 
             // スコアを追加
-            this.itemBarDefinitions.Add(gameObject =>
-            {
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.score"));
-                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, "Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.playerData.GetScore()}");
-            });
+            this.AddItemBar(resultPhase => GameTexts.Get("result.score"), resultPhase => $"{resultPhase.gameManager.playerData.GetScore()}",
+                resultPhase => Color.white,
+                resultPhase => resultPhase.gameManager.playerData.GetScore() == 21 ? MAGENTA_COLOR : WHITE_COLOR
+            );
+
+            // ノルマを追加
+            this.AddItemBar(resultPhase => GameTexts.Get("result.quota"), resultPhase => $"{resultPhase.gameManager.Quata} $",
+                resultPhase => Color.white,
+                resultPhase => Color.white
+            );
+
+            // ベットを追加
+            this.AddItemBar(resultPhase => GameTexts.Get("result.bet"), resultPhase => $"{resultPhase.gameManager.playerData.GetBet()} $",
+                resultPhase => Color.white,
+                resultPhase => Color.white
+            );
+
+            // 倍率を追加
+            this.AddItemBar(resultPhase => GameTexts.Get("result.ratio"), resultPhase => $"{resultPhase.gameManager.playerData.PayoutMultiplier.Calculate():0.00} $",
+                resultPhase => Color.white,
+                resultPhase => Color.white
+            );
+
+            // 所持金を追加
+            this.AddItemBar(resultPhase => GameTexts.Get("result.money"), resultPhase => $"{resultPhase.gameManager.playerData.GetValues()} $",
+                resultPhase => Color.white,
+                resultPhase => Color.white
+            );
         }
 
         protected override void Init()
@@ -107,7 +129,7 @@ namespace System
                         this.nextButton.transform.SetParent(this.controlGrid.transform);
                         this.nextButton.transform.localScale = Vector3.one;
 
-                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.nextButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.next"));
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.nextButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("result.next"));
 
                         this.nextButton.SetActive(false);
                     }
@@ -118,7 +140,7 @@ namespace System
                         this.finishButton.transform.SetParent(this.controlGrid.transform);
                         this.finishButton.transform.localScale = Vector3.one;
 
-                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.finishButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.finish"));
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.finishButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("result.finish"));
 
                         this.finishButton.SetActive(false);
                     }
@@ -129,7 +151,7 @@ namespace System
                         this.exitButton.transform.SetParent(this.controlGrid.transform);
                         this.exitButton.transform.localScale = Vector3.one;
 
-                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.exitButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = T.Get("result.next"));
+                        UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.exitButton, "Title"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("result.next"));
 
                         this.exitButton.SetActive(false);
                     }
@@ -179,29 +201,36 @@ namespace System
             bool hasFinish = false;
             bool hasExit = false;
 
+            // ノルマ金額に到達していなければ敗北する
+            if (this.gameManager.playerData.GetValues() < this.gameManager.Quata)
+            {
+                this.gameManager.GameResult = ResultPhase.Result.Lose;
+            }
+
+            // リザルトに応じた画面の切り替え
             switch (this.gameManager.GameResult)
             {
                 case Result.None:
                     if (this.messageTexts != null)
-                        this.messageTexts.text = T.Get("result.none");
+                        this.messageTexts.text = GameTexts.Get("result.none");
 
                     hasFinish = true;
                     break;
                 case Result.Win:
                     if (this.messageTexts != null)
-                        this.messageTexts.text = T.Get("result.win");
+                        this.messageTexts.text = GameTexts.Get("result.win");
 
                     hasNext = hasFinish = true;
                     break;
                 case Result.Draw:
                     if (this.messageTexts != null)
-                        this.messageTexts.text = T.Get("result.draw");
+                        this.messageTexts.text = GameTexts.Get("result.draw");
 
                     hasNext = hasFinish = true;
                     break;
                 case Result.Lose:
                     if (this.messageTexts != null)
-                        this.messageTexts.text = T.Get("result.lose");
+                        this.messageTexts.text = GameTexts.Get("result.lose");
 
                     hasFinish = true;
                     break;
@@ -281,6 +310,47 @@ namespace System
 
                     break;
             }
+        }
+
+        public void AddItemBar(
+            Func<ResultPhase, string> itemNameIdProvider,
+            Func<ResultPhase, string> displayValueProvider,
+            string nameDisplayPath = "Name Display/Name",
+            string valueDisplayPath = "Value Display/Value"
+        )
+        {
+            this.AddItemBar(
+                itemNameIdProvider,
+                displayValueProvider,
+                resultPhase => Color.white,
+                resultPhase => Color.white,
+                nameDisplayPath,
+                valueDisplayPath
+            );
+        }
+
+        private void AddItemBar(
+            Func<ResultPhase, string> itemNameIdProvider,
+            Func<ResultPhase, string> displayValueProvider,
+            Func<ResultPhase, Color> itemNameColorProvider,
+            Func<ResultPhase, Color> displayValueColorProvider,
+            string nameDisplayPath = "Name Display/Name",
+            string valueDisplayPath = "Value Display/Value"
+        )
+        {
+            this.itemBarDefinitions.Add(gameObject =>
+            {
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, nameDisplayPath), textMeshProUGUI =>
+                {
+                    textMeshProUGUI.text = itemNameIdProvider.Invoke(this);
+                    textMeshProUGUI.color = itemNameColorProvider.Invoke(this);
+                });
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(gameObject, valueDisplayPath), textMeshProUGUI =>
+                {
+                    textMeshProUGUI.text = displayValueProvider.Invoke(this);
+                    textMeshProUGUI.color = displayValueColorProvider.Invoke(this);
+                });
+            });
         }
 
         public enum Result

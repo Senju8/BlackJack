@@ -5,7 +5,7 @@ namespace System
     /// <summary>
     /// <para>UIに表示されるテキストを保持する</para>
     /// </summary>
-    public class T
+    public class GameTexts
     {
         public static readonly TextTable INSTANCE = new();
 
@@ -37,10 +37,11 @@ namespace System
             Set("result.finish", "Finish");
             Set("result.exit", "Exit");
             Set("result.difficulty", "Difficulty");
+            Set("result.score", "Score");
             Set("result.quota", "Quota amount");
             Set("result.bet", "Bet");
+            Set("result.ratio", "Ratio");
             Set("result.money", "Your money");
-            Set("result.score", "Score");
 
             // 日本語
             Bind(TextTable.Lang.JP);
@@ -65,10 +66,11 @@ namespace System
             Set("result.finish", "タイトルに戻る");
             Set("result.exit", "ゲームを終了する");
             Set("result.difficulty", "難易度");
+            Set("result.score", "スコア");
             Set("result.quota", "ノルマ金額");
             Set("result.bet", "ベット");
+            Set("result.ratio", "倍率");
             Set("result.money", "所持金");
-            Set("result.score", "スコア");
         }
 
         public static void Bind(TextTable.Lang lang)
