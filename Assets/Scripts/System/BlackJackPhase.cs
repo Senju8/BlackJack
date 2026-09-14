@@ -109,6 +109,7 @@ namespace System
         protected override void Start()
         {
             playerValueView.SetQuota(this.gameManager.Quata);
+            playerValueView.SetBet(playerData.GetBet());
 
             blackJackOnlyUIs.SetActive(false);
             resultOnlyUI.SetActive(false);
@@ -605,7 +606,7 @@ namespace System
 
         protected override void Finish()
         {
-            playerData.ResetBet();
+            // playerData.ResetBet();
 
             resultOnlyUI.SetActive(false);
             winUI.SetActive(false);
