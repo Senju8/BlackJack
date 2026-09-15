@@ -26,7 +26,7 @@ namespace System
             this.canvasObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.BetCanvas);
             
             this.betObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.BetOnlyUIs);
-            this.betDisplayObject = UIUtil.GetChild(this.canvasObject, "Bet Display");
+            this.betDisplayObject = UIUtil.GetChild(this.canvasObject, "Left Display/Bet Display");
 
             // ベットUIをセットする
             if (this.betObject != null && this.betDisplayObject != null && this.betObject.transform is RectTransform rectTransform)
