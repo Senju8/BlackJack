@@ -1,0 +1,45 @@
+using Assets.Scripts.System;
+using System;
+using UnityEngine;
+
+public class PerfectPhase:GamePhase
+{
+
+    private GameObject perfectCanvas;
+
+    public PerfectPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour) { }
+
+    protected override void Init()
+    {
+        if (this.gameManagerBehaviour.PerfectCanvas == null)
+            return;
+
+        this.perfectCanvas = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.PerfectCanvas);
+
+        perfectCanvas.SetActive(false);
+    }
+
+    protected override void Start()
+    {
+        perfectCanvas.SetActive(false);
+    }
+
+    protected override void Update()
+    {
+    }
+    
+    protected override void Finish()
+    {
+        perfectCanvas.SetActive(false);
+    }
+    
+    protected override void Destroy()
+    {
+        perfectCanvas = null;
+    }
+
+    public override void Invoke(GameObject gameObject)
+    {
+        this.gameManager.Call("start");
+    }
+}

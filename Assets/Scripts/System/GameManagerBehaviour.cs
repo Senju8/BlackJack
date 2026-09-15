@@ -57,6 +57,8 @@ namespace Assets.Scripts.System
         [SerializeField] private GameObject betOnlyUIs;
         [SerializeField] private Bet.BetButtoms betButtoms;
 
+        [Header("パーフェクト関連")]
+        [SerializeField] private GameObject perfectCanvas;
 
         public GameObject StartCanvas
         {
@@ -106,6 +108,11 @@ namespace Assets.Scripts.System
         public GameObject ResultControlButton
         {
             get { return this.resultControlButton; }
+        }
+
+        public GameObject PerfectCanvas
+        {
+            get { return this.perfectCanvas; }
         }
 
         public Cards.Deck Deck => deck;
