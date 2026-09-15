@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.System;
+using Player;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -84,7 +85,7 @@ namespace System
             );
 
             // ベットを追加
-            this.AddItemBar(resultPhase => GameTexts.Get("result.bet"), resultPhase => $"{resultPhase.gameManager.playerData.GetBet()} $",
+            this.AddItemBar(resultPhase => GameTexts.Get("result.bet"), resultPhase => $"{resultPhase.gameManager.playerData.GetBet()}",
                 resultPhase => Color.white,
                 resultPhase => Color.white
             );
@@ -96,9 +97,39 @@ namespace System
             );
 
             // 所持金を追加
-            this.AddItemBar(resultPhase => GameTexts.Get("result.money"), resultPhase => $"{resultPhase.gameManager.playerData.GetValues()} $",
+            this.AddItemBar(resultPhase => GameTexts.Get("result.money"), resultPhase =>
+            {
+                int oldVal = resultPhase.gameManager.playerData.GetOldValues();
+                int newVal = resultPhase.gameManager.playerData.GetValues();
+                int betVal = resultPhase.gameManager.playerData.GetBet();
+
+                int dltVal = newVal - (oldVal + betVal);
+                string sign = dltVal >= 0 ? "+" : "-";
+
+                return dltVal == 0 ? dltVal.ToString() : $"{newVal} $ ({sign} {dltVal} $)";
+            },
                 resultPhase => Color.white,
-                resultPhase => Color.white
+                resultPhase =>
+                {
+                    int oldVal = resultPhase.gameManager.playerData.GetOldValues();
+                    int newVal = resultPhase.gameManager.playerData.GetValues();
+                    int betVal = resultPhase.gameManager.playerData.GetBet();
+
+                    int dltVal = newVal - (oldVal + betVal);
+
+                    if (dltVal == 0)
+                    {
+                        return YELLOW_COLOR;
+                    }
+                    else if (dltVal > 0)
+                    {
+                        return MAGENTA_COLOR;
+                    }
+                    else
+                    {
+                        return CYAN_COLOR;
+                    }
+                }
             );
         }
 

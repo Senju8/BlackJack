@@ -76,17 +76,17 @@ namespace System
             switch (gameObject.name)
             {
                 case "Easy":
-                    this.gameManager.Difficulty = 0.05F;
+                    this.gameManager.Difficulty = 0.5F;
                     this.gameManager.Play("Select");
 
                     break;
                 case "Normal":
-                    this.gameManager.Difficulty = 0.1F;
+                    this.gameManager.Difficulty = 1.0F;
                     this.gameManager.Play("Select");
 
                     break;
                 case "Hard":
-                    this.gameManager.Difficulty = 0.5F;
+                    this.gameManager.Difficulty = 1.5F;
                     this.gameManager.Play("Select");
 
                     break;

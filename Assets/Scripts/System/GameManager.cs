@@ -73,11 +73,14 @@ namespace System
         }
 
         /// <summary>
-        /// ゲームのノルマを計算する
+        /// <para>ゲームのノルマを計算する</para>
+        /// <para>イージー : difficulty = 0.5</para>
+        /// <para>ノーマル : difficulty = 1.0</para>
+        /// <para>ハード : difficulty = 1.5</para>
         /// </summary>
         public int CalculateQuota(float difficulty)
         {
-            return (int)(600000.0D * difficulty);
+            return (int)(5000.0D * difficulty);
         }
 
         /// <summary>
