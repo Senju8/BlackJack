@@ -83,5 +83,36 @@ namespace System
             if (gameObject == null)
                 return;
         }
+
+        /// <summary>
+        /// プレイヤーの情報を表示するUIを返す
+        /// </summary>
+        /// <returns></returns>
+        public static GameObject CreateGameDataDisplay()
+        {
+            GameObject gameDataDisplay = GameManager.INSTANCE.GetGameObjectHolder("game_data_display").Instantiate();
+
+            if (gameDataDisplay)
+            {
+                
+            }
+
+            return gameDataDisplay;
+        }
+
+        private static GameObject CreateGameDataItem(string leftValue, string rightValue)
+        {
+            GameObject gameDataDisplay = GameManager.INSTANCE.GetGameObjectHolder("game_data_display").Instantiate();
+
+            if (gameDataDisplay)
+            {
+            }
+
+            return gameDataDisplay;
+        }
+
+        public static void UpdateGameDataDisplay(GameObject gameObject)
+        {
+        }
     }
 }
