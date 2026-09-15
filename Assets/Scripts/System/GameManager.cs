@@ -25,11 +25,13 @@ namespace System
 
         private readonly Dictionary<string, ItemImageHolder> itemImageHolders = new();
         private readonly Dictionary<string, AudioSourceHolder> audioSourceHolders = new();
+        private readonly Dictionary<string, GameObjectHolder> gameObjectHolders = new();
 
         private readonly List<ItemData> playerItemData = new();
         private readonly int playerItemCount = 6;
 
         private ResultPhase.Result gameResult = ResultPhase.Result.None;
+        private int gameCount = 0;
         private float difficulty = 1.0F;
         private bool infiniteMoneyMode = false;
 
@@ -42,6 +44,15 @@ namespace System
         {
             get { return this.gameResult; }
             set { this.gameResult = value; }
+        }
+
+        /// <summary>
+        /// 実行されたゲームの数
+        /// </summary>
+        public int GameCount
+        {
+            get { return this.gameCount; }
+            set { this.gameCount = value; }
         }
 
         /// <summary>
@@ -289,6 +300,36 @@ namespace System
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// <para>GameObjectHolderを登録する</para>
+        /// </summary>
+        public void RegisterGameObjectHolders(GameObjectHolder[] gameObjectHolders)
+        {
+            foreach (GameObjectHolder gameObjectHolder in gameObjectHolders)
+            {
+                if (GameObjectHolder.Validate(gameObjectHolder))
+                {
+                    this.gameObjectHolders[gameObjectHolder.Id] = gameObjectHolder;
+
+                    UnityEngine.Debug.Log($"新しいGameObjectHolder（ID: {gameObjectHolder.Id}）が登録されました！");
+                }
+            }
+        }
+
+        /// <summary>
+        /// <para>登録されたGameObjectHolderを取得する</para>
+        /// <para>存在しない場合は空のGameObjectHolderを返す</para>
+        /// </summary>
+        public GameObjectHolder GetGameObjectHolder(string id)
+        {
+            if (this.gameObjectHolders.ContainsKey(id))
+            {
+                return this.gameObjectHolders[id] ?? GameObjectHolder.EMPTY;
+            }
+
+            return GameObjectHolder.EMPTY;
         }
 
         /// <summary>
