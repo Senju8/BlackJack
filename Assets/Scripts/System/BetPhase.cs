@@ -40,7 +40,7 @@ namespace System
                     // ベットを確定したときにショップフェーズへ遷移する
                     betButtoms.OnBetConfirmed += betAmount =>
                     {
-                        this.gameManager.Call("shop");
+                        this.gameManager.Call("blackjack");
                     };
                 });
 
