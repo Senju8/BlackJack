@@ -232,10 +232,17 @@ namespace System
             bool hasFinish = false;
             bool hasExit = false;
 
-            // ノルマ金額に到達していなければ敗北する
-            if (this.gameManager.playerData.GetValues() < this.gameManager.Quata)
+            // ノルマ金額に到達していないかつゲーム回数が5回より大きいと、完全敗北する
+            /*
+            if (this.gameManager.playerData.GetValues() < this.gameManager.Quata && this.gameManager.playCount > 5)
             {
-                this.gameManager.GameResult = ResultPhase.Result.Lose;
+                this.gameManager.GameResult = ResultPhase.Result.Perfect_Lose;
+            }
+            */
+
+            if(this.gameManager.playerData.GetValues() > this.gameManager.Quata)
+            {
+                this.gameManager.GameResult = ResultPhase.Result.Perfect_Win;
             }
 
             // リザルトに応じた画面の切り替え
@@ -264,6 +271,19 @@ namespace System
                         this.messageTexts.text = GameTexts.Get("result.lose");
 
                     hasFinish = true;
+                    break;
+                case Result.Perfect_Win:
+                    if (this.messageTexts != null)
+                        this.messageTexts.text = GameTexts.Get("result.win");
+
+                    hasExit = true;
+                    break;
+
+                case Result.Perfect_Lose:
+                    if (this.messageTexts != null)
+                        this.messageTexts.text = GameTexts.Get("result.lose");
+
+                    hasExit = true;
                     break;
             }
 
@@ -336,10 +356,11 @@ namespace System
 
                     break;
                 case "Exit":
-                    this.gameManager.Exit();
+                    this.gameManager.Call("perfect");
                     this.gameManager.Play("Invalid");
 
                     break;
+
             }
         }
 
@@ -389,7 +410,9 @@ namespace System
             None,
             Win,
             Draw,
-            Lose
+            Lose,
+            Perfect_Win,
+            Perfect_Lose
         }
     }
 }

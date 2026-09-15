@@ -239,6 +239,7 @@ MonoBehaviour:
   confirmPopupPrefab: {fileID: 6272700627077560457, guid: cd791adc868ecc141b6c031bfb283793, type: 3}
   betOnlyUIs: {fileID: 1860600974}
   betButtoms: {fileID: 1860600976}
+  perfectCanvas: {fileID: 5356217505398902457, guid: f5d59cb2049d14f4e97082174850b130, type: 3}
 --- !u!4 &410014902
 Transform:
   m_ObjectHideFlags: 0

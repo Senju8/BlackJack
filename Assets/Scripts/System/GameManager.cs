@@ -125,6 +125,7 @@ namespace System
             this.RegisterGamePhase("shop", new ShopPhase(this, gameManagerBehaviour));
             this.RegisterGamePhase("blackjack", new BlackjackPhase(this, gameManagerBehaviour));
             this.RegisterGamePhase("result", new ResultPhase(this, gameManagerBehaviour));
+            this.RegisterGamePhase("perfect", new PerfectPhase(this, gameManagerBehaviour));
 
             this.Call("start");
         }
