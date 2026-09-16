@@ -22,6 +22,15 @@ public class PerfectPhase:GamePhase
     protected override void Start()
     {
         perfectCanvas.SetActive(true);
+
+        if (this.gameManager.GameResult == ResultPhase.Result.Perfect_Win)
+        {
+            
+        }
+        else
+        {
+
+        }
     }
 
     protected override void Update()
