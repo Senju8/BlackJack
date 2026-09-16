@@ -57,6 +57,9 @@ namespace System
 
         /// <summary>
         /// ゲームの難易度
+        /// <para>イージー : 0.5</para>
+        /// <para>ノーマル : 1.0</para>
+        /// <para>ハード : 1.5</para>
         /// </summary>
         public float Difficulty
         {
@@ -85,9 +88,6 @@ namespace System
 
         /// <summary>
         /// <para>ゲームのノルマを計算する</para>
-        /// <para>イージー : difficulty = 0.5</para>
-        /// <para>ノーマル : difficulty = 1.0</para>
-        /// <para>ハード : difficulty = 1.5</para>
         /// </summary>
         public int CalculateQuota(float difficulty)
         {
