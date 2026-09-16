@@ -185,7 +185,7 @@ namespace System
                         blackJackOnlyUIs.SetActive(false);
                         playerCards.ClearCards();
                         dealerCards.ClearCards();
-                        SetResult(isWin);
+                        // SetResult(isWin);
                         GameManager.INSTANCE.Call("result");
                         // currentSubPhase = SubPhase.Result;
                     }
@@ -208,7 +208,7 @@ namespace System
                     playerCards.ClearCards();
                     dealerCards.ClearCards();
 
-                    SetResult(isWin);
+                    // SetResult(isWin);
                     GameManager.INSTANCE.Call("result");
                     // currentSubPhase = SubPhase.Result;
 
@@ -458,23 +458,27 @@ namespace System
                 // プレイヤ負け処理
                 Debug.Log("プレイヤの負け");
                 isWin = false;
+                this.gameManager.GameResult = ResultPhase.Result.Lose;
             }
             else if (dealerBurst || playerScore > dealerScore)
             {
                 // プレイヤ勝ち
                 Debug.Log("プレイヤの勝ち");
                 isWin = true;
+                this.gameManager.GameResult = ResultPhase.Result.Win;
             }
             else if (playerScore < dealerScore)
             {
                 // プレイヤ負け
                 Debug.Log("プレイヤの負け");
                 isWin = false;
+                this.gameManager.GameResult = ResultPhase.Result.Lose;
             }
             else
             {
                 // 引き分け
                 Debug.Log("ひきわけ");
+                this.gameManager.GameResult = ResultPhase.Result.Draw;
             }
         }
 

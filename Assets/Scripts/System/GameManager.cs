@@ -34,7 +34,7 @@ namespace System
         private int gameCount = 0;
         private float difficulty = 1.0F;
         private bool infiniteMoneyMode = false;
-
+        
         private Deck deck;
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace System
         /// </summary>
         public int CalculateQuota(float difficulty)
         {
-            return (int)(5000.0D * difficulty);
+            return (int)(50000.0D * difficulty);
         }
 
         /// <summary>
