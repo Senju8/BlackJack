@@ -78,11 +78,11 @@ namespace System
                 {
                     float difficulty = this.gameManager.Difficulty;
 
-                    if (difficulty >= 1.5F)
+                    if (difficulty >= 0.5F)
                     {
                         textMeshProUGUI.text = $"{GameTexts.Get("difficulty.easy")}";
                     }
-                    else if (difficulty >= 1.0F)
+                    else if (difficulty >= 0.1F)
                     {
                         textMeshProUGUI.text = $"{GameTexts.Get("difficulty.normal")}";
                     }
