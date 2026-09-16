@@ -438,6 +438,8 @@ namespace System
         /// <returns></returns>
         private System.Collections.IEnumerator DealerTurnRoutine()
         {
+            dealerCards.CalcScore();
+
             while (dealerData.GetScore() < 17)
             {
                 dealerCards.Hit();
