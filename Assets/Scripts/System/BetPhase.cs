@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.System;
 using Bet;
 using Player;
+using TMPro;
 using UnityEngine;
 using Util;
 
@@ -15,6 +16,7 @@ namespace System
 
         private GameObject betObject;
         private GameObject betDisplayObject;
+        private GameObject playerDataDisplayObject;
 
         public BetPhase(GameManager gameManager, GameManagerBehaviour gameManagerBehaviour) : base(gameManager, gameManagerBehaviour) { }
 
@@ -27,6 +29,7 @@ namespace System
             
             this.betObject = UnityEngine.Object.Instantiate(this.gameManagerBehaviour.BetOnlyUIs);
             this.betDisplayObject = UIUtil.GetChild(this.canvasObject, "Left Display/Bet Display");
+            this.playerDataDisplayObject = UIUtil.GetChild(this.canvasObject, "Right Display/Game Data Display");
 
             // ベットUIをセットする
             if (this.betObject != null && this.betDisplayObject != null && this.betObject.transform is RectTransform rectTransform)
@@ -48,6 +51,17 @@ namespace System
 
                 this.betObject.SetActive(true);
             }
+
+            // プレイヤーUIのセットをする
+            if (this.canvasObject != null && this.playerDataDisplayObject != null)
+            {
+                GameObject rightDisplayObject = UIUtil.GetChild(this.canvasObject, "Right Display");
+
+                if (rightDisplayObject != null)
+                {
+                    this.playerDataDisplayObject.transform.SetParent(this.canvasObject.transform);
+                }
+            }
             
             this.canvasObject.SetActive(false);
         }
@@ -56,6 +70,37 @@ namespace System
         {
             if (this.canvasObject == null)
                 return;
+
+            if (this.playerDataDisplayObject != null)
+            {
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.playerDataDisplayObject, "Difficulty/Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("result.difficulty"));
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.playerDataDisplayObject, "Difficulty/Value Display/Value"), textMeshProUGUI =>
+                {
+                    float difficulty = this.gameManager.Difficulty;
+
+                    if (difficulty >= 0.5F)
+                    {
+                        textMeshProUGUI.text = $"{GameTexts.Get("difficulty.easy")}";
+                    }
+                    else if (difficulty >= 0.1F)
+                    {
+                        textMeshProUGUI.text = $"{GameTexts.Get("difficulty.normal")}";
+                    }
+                    else
+                    {
+                        textMeshProUGUI.text = $"{GameTexts.Get("difficulty.hard")}";
+                    }
+                });
+
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.playerDataDisplayObject, "Quota/Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("result.quota"));
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.playerDataDisplayObject, "Quota/Value Display/Value"), textMeshProUGUI => textMeshProUGUI.text = $"{this.gameManager.Quata} $");
+
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.playerDataDisplayObject, "Money/Name Display/Name"), textMeshProUGUI => textMeshProUGUI.text = GameTexts.Get("result.money"));
+                UIUtil.InvokeIfPresent<TextMeshProUGUI>(UIUtil.GetChild(this.playerDataDisplayObject, "Money/Value Display/Value"), textMeshProUGUI =>
+                {
+                    textMeshProUGUI.text = $"{this.gameManager.playerData.GetValues()} $";
+                });
+            }
 
             this.canvasObject.SetActive(true);
         }
@@ -84,37 +129,6 @@ namespace System
         {
             if (gameObject == null)
                 return;
-        }
-
-        /// <summary>
-        /// プレイヤーの情報を表示するUIを返す
-        /// </summary>
-        /// <returns></returns>
-        public static GameObject CreateGameDataDisplay()
-        {
-            GameObject gameDataDisplay = GameManager.INSTANCE.GetGameObjectHolder("game_data_display").Instantiate();
-
-            if (gameDataDisplay)
-            {
-                
-            }
-
-            return gameDataDisplay;
-        }
-
-        private static GameObject CreateGameDataItem(string leftValue, string rightValue)
-        {
-            GameObject gameDataDisplay = GameManager.INSTANCE.GetGameObjectHolder("game_data_display").Instantiate();
-
-            if (gameDataDisplay)
-            {
-            }
-
-            return gameDataDisplay;
-        }
-
-        public static void UpdateGameDataDisplay(GameObject gameObject)
-        {
         }
     }
 }

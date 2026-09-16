@@ -32,7 +32,7 @@ namespace System
 
         private ResultPhase.Result gameResult = ResultPhase.Result.None;
         private int gameCount = 0;
-        private float difficulty = 1.0F;
+        private float difficulty = 0.1F;
         private bool infiniteMoneyMode = false;
         
         private Deck deck;
@@ -57,6 +57,9 @@ namespace System
 
         /// <summary>
         /// ゲームの難易度
+        /// <para>イージー : 0.05</para>
+        /// <para>ノーマル : 0.1</para>
+        /// <para>ハード : 0.5</para>
         /// </summary>
         public float Difficulty
         {
@@ -85,9 +88,6 @@ namespace System
 
         /// <summary>
         /// <para>ゲームのノルマを計算する</para>
-        /// <para>イージー : difficulty = 0.5</para>
-        /// <para>ノーマル : difficulty = 1.0</para>
-        /// <para>ハード : difficulty = 1.5</para>
         /// </summary>
         public int CalculateQuota(float difficulty)
         {
