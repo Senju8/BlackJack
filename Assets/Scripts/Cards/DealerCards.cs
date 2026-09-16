@@ -101,5 +101,11 @@ namespace Cards
             dealerCards.Clear();
             handView.ClearHand();
         }
+
+        public void CalcScore()
+        {
+            int score = ScoreCalclator.CalculateScore(dealerCards);
+            dealerData.SetScore(score);
+        }
     }
 }
