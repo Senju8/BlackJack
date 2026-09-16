@@ -232,13 +232,13 @@ namespace System
             bool hasFinish = false;
             bool hasExit = false;
 
-            // ノルマ金額に到達していないかつゲーム回数が5回より大きいと、完全敗北する
-            /*
-            if (this.gameManager.playerData.GetValues() < this.gameManager.Quata && this.gameManager.playCount > 5)
+            // ノルマ金額に到達していないかつゲーム回数が5回より大きい、または所持金額が0であると、完全敗北する
+            //      0オリジンなため、4回以上かを判定
+            if (this.gameManager.playerData.GetValues() < this.gameManager.Quata && this.gameManager.GameCount >= 4 || this.gameManager.playerData.GetValues() == 0)
             {
                 this.gameManager.GameResult = ResultPhase.Result.Perfect_Lose;
             }
-            */
+            
 
             if(this.gameManager.playerData.GetValues() > this.gameManager.Quata)
             {
@@ -259,6 +259,7 @@ namespace System
                         this.messageTexts.text = GameTexts.Get("result.win");
 
                     hasNext = hasFinish = true;
+                    this.gameManager.GameCount += 1;
                     break;
                 case Result.Draw:
                     if (this.messageTexts != null)
@@ -270,13 +271,15 @@ namespace System
                     if (this.messageTexts != null)
                         this.messageTexts.text = GameTexts.Get("result.lose");
 
-                    hasFinish = true;
+                    hasNext = hasFinish = true;
+                    this.gameManager.GameCount += 1;
                     break;
                 case Result.Perfect_Win:
                     if (this.messageTexts != null)
                         this.messageTexts.text = GameTexts.Get("result.win");
 
                     hasExit = true;
+                    this.gameManager.GameCount = 0;
                     break;
 
                 case Result.Perfect_Lose:
@@ -284,6 +287,7 @@ namespace System
                         this.messageTexts.text = GameTexts.Get("result.lose");
 
                     hasExit = true;
+                    this.gameManager.GameCount = 0;
                     break;
             }
 

@@ -31,6 +31,7 @@ public class PerfectPhase:GamePhase
     protected override void Finish()
     {
         perfectCanvas.SetActive(false);
+        this.gameManager.playerData.SetValues(50000);
     }
     
     protected override void Destroy()
