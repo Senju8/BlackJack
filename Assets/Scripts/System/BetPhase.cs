@@ -35,6 +35,8 @@ namespace System
                 rectTransform.SetParent(this.betDisplayObject.transform);
                 rectTransform.anchoredPosition = Vector2.zero;
 
+                rectTransform.localScale = Vector3.one;
+
                 UIUtil.InvokeIfPresent<BetButtoms>(this.betObject, betButtoms =>
                 {
                     // ベットを確定したときにショップフェーズへ遷移する

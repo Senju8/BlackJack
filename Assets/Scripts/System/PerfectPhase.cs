@@ -21,7 +21,7 @@ public class PerfectPhase:GamePhase
 
     protected override void Start()
     {
-        perfectCanvas.SetActive(false);
+        perfectCanvas.SetActive(true);
     }
 
     protected override void Update()
