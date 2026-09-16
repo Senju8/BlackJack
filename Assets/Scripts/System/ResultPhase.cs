@@ -104,9 +104,11 @@ namespace System
                 int betVal = resultPhase.gameManager.playerData.GetBet();
 
                 int dltVal = newVal - (oldVal + betVal);
+
                 string sign = dltVal >= 0 ? "+" : "-";
 
-                return dltVal == 0 ? dltVal.ToString() : $"{newVal} $ ({sign} {dltVal} $)";
+                // return dltVal == 0 ? dltVal.ToString() : $"{newVal} $ ({sign} {dltVal} $)";
+                return $"{newVal} $ ({sign} {Mathf.Abs(dltVal)} $)";
             },
                 resultPhase => Color.white,
                 resultPhase =>
@@ -354,6 +356,8 @@ namespace System
 
                         // プレイヤーのアイテムをクリアする
                         this.gameManager.ClearPlayerItemData();
+
+                        this.gameManager.GameCount = 0;
                     }
 
                     this.gameManager.Play("Select");

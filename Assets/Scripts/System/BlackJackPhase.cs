@@ -176,7 +176,22 @@ namespace System
                 case SubPhase.Judge:
                     JudgeResult();
 
-                    if(isWin)
+                    if (this.gameManager.GameResult == ResultPhase.Result.Draw)
+                    {
+                        blackJackOnlyUIs.SetActive(false);
+                        playerCards.ClearCards();
+                        dealerCards.ClearCards();
+
+                        playerData.SetOldValues();
+                        playerData.AddValues(playerData.GetBet());
+
+                        GameManager.INSTANCE.Call("result");
+
+                        break;
+                    }
+
+
+                    if (isWin)
                     {
                         currentSubPhase = SubPhase.Adaptation;
                     }
@@ -186,6 +201,7 @@ namespace System
                         playerCards.ClearCards();
                         dealerCards.ClearCards();
                         // SetResult(isWin);
+                        playerData.SetOldValues();
                         GameManager.INSTANCE.Call("result");
                         // currentSubPhase = SubPhase.Result;
                     }
